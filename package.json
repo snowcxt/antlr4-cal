@@ -4,6 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "build": "java org.antlr.v4.Tool -Dlanguage=JavaScript Expr.g4 -o parsers/expr",
+    "start": "node index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -18,5 +20,8 @@
   "homepage": "https://github.com/snowcxt/antlr4-cal#readme",
   "dependencies": {
     "antlr4": "^4.7.0"
+  },
+  "devDependencies": {
+    "eslint": "^4.6.1"
   }
 }

@@ -4,9 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "java -jar antlr-4.7-complete.jar -visitor -no-listener -Dlanguage=JavaScript Expr.g4 -o parsers",
-    "start1": "node index.js",
-    "start": "babel-node index.js --presets es2015,stage-2",
+    "antlr": "java -jar lib/antlr-4.7-complete.jar -visitor -no-listener -Dlanguage=JavaScript lib/Expr.g4 -o lib/parsers",
+    "build": "babel lib -d dist --presets es2015,stage-2",
+    "start": "babel-node lib/index.js --presets es2015,stage-2",
     "debug": "node --inspect --debug-brk index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },

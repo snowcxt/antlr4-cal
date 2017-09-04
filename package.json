@@ -6,6 +6,7 @@
   "scripts": {
     "build": "java org.antlr.v4.Tool -Dlanguage=JavaScript Expr.g4 -o parsers/expr",
     "start": "node index.js",
+    "debug": "node --inspect --debug-brk index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {

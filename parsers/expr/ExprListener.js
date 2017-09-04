@@ -29,5 +29,23 @@ ExprListener.prototype.exitExpr = function(ctx) {
 };
 
 
+// Enter a parse tree produced by ExprParser#ops.
+ExprListener.prototype.enterOps = function(ctx) {
+};
+
+// Exit a parse tree produced by ExprParser#ops.
+ExprListener.prototype.exitOps = function(ctx) {
+};
+
+
+// Enter a parse tree produced by ExprParser#atom.
+ExprListener.prototype.enterAtom = function(ctx) {
+};
+
+// Exit a parse tree produced by ExprParser#atom.
+ExprListener.prototype.exitAtom = function(ctx) {
+};
+
+
 
 exports.ExprListener = ExprListener;

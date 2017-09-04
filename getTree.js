@@ -1,7 +1,7 @@
 import { InputStream } from 'antlr4/InputStream';
 import { CommonTokenStream } from 'antlr4/CommonTokenStream';
-import ExprLexer from './parsers/expr/ExprLexer';
-import ExprParser from './parsers/expr/ExprParser';
+import ExprLexer from './parsers/ExprLexer';
+import ExprParser from './parsers/ExprParser';
 
 export default function getTree(input) {
     var chars = new InputStream(input);

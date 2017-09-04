@@ -1,4 +1,4 @@
-import { ExprVisitor } from './parsers/expr/ExprVisitor';
+import { ExprVisitor } from './parsers/ExprVisitor';
 
 export default class EvalVisitor extends ExprVisitor {
     visitOpExpr(ctx) {

@@ -3,7 +3,6 @@ var ExprLexer = require.main.require('./parsers/expr/ExprLexer');
 var ExprParser = require.main.require('./parsers/expr/ExprParser');
 var ExprVisitor = require.main.require('./parsers/expr/ExprVisitor').ExprVisitor;
 
-
 const readline = require('readline');
 
 const rl = readline.createInterface({
@@ -28,7 +27,7 @@ EvalVisitor.prototype.visitOpExpr = function (ctx) {
         case '/': return left / right;
         case '+': return left + right;
         case '-': return left - right;
-        default: throw new IllegalArgumentException("Unknown operator " + op);
+        default: throw "Unknown operator " + op;
     }
 };
 

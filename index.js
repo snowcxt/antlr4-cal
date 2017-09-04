@@ -1,7 +1,8 @@
 var antlr4 = require('antlr4/index');
 var ExprLexer = require.main.require('./parsers/expr/ExprLexer');
 var ExprParser = require.main.require('./parsers/expr/ExprParser');
-var ExprListener = require.main.require('./parsers/expr/ExprListener').ExprListener;
+var ExprVisitor = require.main.require('./parsers/expr/ExprVisitor').ExprVisitor;
+
 
 const readline = require('readline');
 
@@ -10,35 +11,41 @@ const rl = readline.createInterface({
     output: process.stdout
 });
 
-function Loader() {
-    ExprListener.call(this);
+function EvalVisitor() {
+    ExprVisitor.call(this);
     return this;
 }
 
-Loader.prototype = Object.create(ExprListener.prototype);
-Loader.prototype.constructor = Loader;
+EvalVisitor.prototype = Object.create(ExprVisitor.prototype);
+EvalVisitor.prototype.constructor = EvalVisitor;
 
-Loader.prototype.enterExpr = function (ctx) {
-    console.log('enterExpr', ctx.getText());
+EvalVisitor.prototype.visitOpExpr = function (ctx) {
+    var left = this.visit(ctx.left);
+    var right = this.visit(ctx.right);
+    var op = ctx.op.text;
+    switch (op.charAt(0)) {
+        case '*': return left * right;
+        case '/': return left / right;
+        case '+': return left + right;
+        case '-': return left - right;
+        default: throw new IllegalArgumentException("Unknown operator " + op);
+    }
 };
 
-Loader.prototype.exitExpr = function (ctx) {
-    console.log('exitExpr', ctx.getText());
+EvalVisitor.prototype.visitStart = function (ctx) {
+    return this.visit(ctx.expr());
 };
 
-// Enter a parse tree produced by ExprParser#atom.
-ExprListener.prototype.exitAtom = function(ctx) {
-    console.log('enterAtom', ctx.getText());
+EvalVisitor.prototype.visitAtomExpr = function (ctx) {
+    return Number(ctx.getText());
 };
 
-// Enter a parse tree produced by ExprParser#ops.
-ExprListener.prototype.exitOps = function(ctx) {
-    console.log('enterOps', ctx.getText());
+EvalVisitor.prototype.visitParenExpr = function (ctx) {
+    return this.visit(ctx.expr());
 };
-
 
 rl.question('Input expr:', (expr) => {
-    var input = '52-(11*2)\r\n';// `${expr}\r\n`;
+    var input = `${expr}\r\n`;
     var chars = new antlr4.InputStream(input);
     var lexer = new ExprLexer.ExprLexer(chars);
     var tokens = new antlr4.CommonTokenStream(lexer);
@@ -46,17 +53,9 @@ rl.question('Input expr:', (expr) => {
     parser.buildParseTrees = true;
     var tree = parser.prog();
 
-    var ParseTreeWalker = antlr4.tree.ParseTreeWalker;
-    var walker = new ParseTreeWalker();
-    var loader = new Loader();
+    var answer = new EvalVisitor().visit(tree);
 
-    walker.walk(loader, tree);
-
-    console.log(`parsed successful:\r\n${input}`);
+    console.log(`parsed successful:\r\n${answer}`);
 
     rl.close();
 });
-
-
-// console.log(tokens)
-// java -jar path/to/antlr/download/antlr-4.1-complete.jar /path/to/antlr/file/Drink.g

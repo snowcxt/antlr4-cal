@@ -1,5 +1,5 @@
 import assert from 'assert';
-import run from '../dist/run';
+import { run } from '../dist';
 
 describe("arithmetic", function () {
     it("simple", function () {

@@ -5,9 +5,8 @@
   "main": "lib/index.js",
   "scripts": {
     "antlr": "java -jar antlr-4.7-complete.jar -visitor -no-listener -Dlanguage=JavaScript lib/Expr.g4 -o lib/parsers",
-    "dev": "nodemon lib/index.js --exec babel-node",
+    "start": "nodemon demo.js --exec babel-node",
     "build": "rimraf -rf dist && babel lib -d dist",
-    "start": "node dist/index.js",
     "debug": "nodemon lib/index.js --inspect --debug-brk --exec babel-node",
     "test": "mocha --compilers js:babel-core/register"
   },

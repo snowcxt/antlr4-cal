@@ -1,7 +1,7 @@
 grammar Expr;
 prog  : stat+ ;
 stat  : expr NEWLINE                      #print
-      | ID '=' INT NEWLINE                #assign
+      | ID '=' expr NEWLINE                #assign
       | NEWLINE                           #blank
       ;
 expr  : left=expr op=('*'|'/') right=expr #opExpr

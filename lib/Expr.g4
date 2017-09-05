@@ -1,10 +1,16 @@
 grammar Expr;
-prog:	(expr NEWLINE)* ;
+prog  : stat+ ;
+stat  : expr NEWLINE                      #print
+      | ID '=' INT NEWLINE                #assign
+      | NEWLINE                           #blank
+      ;
 expr  : left=expr op=('*'|'/') right=expr #opExpr
       | left=expr op=('+'|'-') right=expr #opExpr
       | '(' expr ')'                      #parenExpr
-      | atom=INT                          #atomExpr
+      | INT                               #atomExpr
+      | ID                                #idExpr
       ;
-NEWLINE : [\r\n]+ ;
+NEWLINE : ';' ;
 INT     : [0-9]+ ;
-
+ID      : [a-zA-Z]+;
+WS      : [ \t\n\r]+ -> skip;

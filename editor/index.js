@@ -1,4 +1,5 @@
 import ace from 'ace';
+import debounce from 'lodash/debounce';
 import './my-mode';
 import validate from '../lib/validate';
 import run from '../lib/run';
@@ -10,7 +11,7 @@ var Range = ace.require('ace/range').Range;
 
 var markers = [];
 
-editor.getSession().on('change', function () {
+function validateInput() {
     var errors = validate(editor.getValue());
     var session = editor.getSession();
     markers.forEach(marker => session.removeMarker(marker));
@@ -25,7 +26,10 @@ editor.getSession().on('change', function () {
     errors.forEach((error) => {
         markers.push(session.addMarker(new Range(error.line, error.column, error.line, error.column + error.length), "lint-mark-error", false));
     });
-});
+}
+
+var debounced = debounce(validateInput, 500);
+editor.getSession().on('change', debounced);
 
 document.getElementById('btnRun').onclick = () => {
     alert(run(editor.getValue()));

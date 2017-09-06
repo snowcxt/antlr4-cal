@@ -60,7 +60,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 32);
+/******/ 	return __webpack_require__(__webpack_require__.s = 38);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -2735,7 +2735,7 @@ exports.AbstractPredicateTransition = AbstractPredicateTransition;
  * can be found in the LICENSE.txt file in the project root.
  */
 
-var LL1Analyzer = __webpack_require__(40).LL1Analyzer;
+var LL1Analyzer = __webpack_require__(55).LL1Analyzer;
 var IntervalSet = __webpack_require__(2).IntervalSet;
 
 function ATN(grammarType, maxTokenType) {
@@ -3690,109 +3690,11 @@ exports.PredPrediction = PredPrediction;
  * Use of this file is governed by the BSD 3-clause license that
  * can be found in the LICENSE.txt file in the project root.
  */
-
-// Provides an empty default implementation of {@link ANTLRErrorListener}. The
-// default implementation of each method does nothing, but can be overridden as
-// necessary.
-
-function ErrorListener() {
-  return this;
-}
-
-ErrorListener.prototype.syntaxError = function (recognizer, offendingSymbol, line, column, msg, e) {};
-
-ErrorListener.prototype.reportAmbiguity = function (recognizer, dfa, startIndex, stopIndex, exact, ambigAlts, configs) {};
-
-ErrorListener.prototype.reportAttemptingFullContext = function (recognizer, dfa, startIndex, stopIndex, conflictingAlts, configs) {};
-
-ErrorListener.prototype.reportContextSensitivity = function (recognizer, dfa, startIndex, stopIndex, prediction, configs) {};
-
-function ConsoleErrorListener() {
-  ErrorListener.call(this);
-  return this;
-}
-
-ConsoleErrorListener.prototype = Object.create(ErrorListener.prototype);
-ConsoleErrorListener.prototype.constructor = ConsoleErrorListener;
-
-//
-// Provides a default instance of {@link ConsoleErrorListener}.
-//
-ConsoleErrorListener.INSTANCE = new ConsoleErrorListener();
-
-//
-// {@inheritDoc}
-//
-// <p>
-// This implementation prints messages to {@link System//err} containing the
-// values of {@code line}, {@code charPositionInLine}, and {@code msg} using
-// the following format.</p>
-//
-// <pre>
-// line <em>line</em>:<em>charPositionInLine</em> <em>msg</em>
-// </pre>
-//
-ConsoleErrorListener.prototype.syntaxError = function (recognizer, offendingSymbol, line, column, msg, e) {
-  console.error("line " + line + ":" + column + " " + msg);
-};
-
-function ProxyErrorListener(delegates) {
-  ErrorListener.call(this);
-  if (delegates === null) {
-    throw "delegates";
-  }
-  this.delegates = delegates;
-  return this;
-}
-
-ProxyErrorListener.prototype = Object.create(ErrorListener.prototype);
-ProxyErrorListener.prototype.constructor = ProxyErrorListener;
-
-ProxyErrorListener.prototype.syntaxError = function (recognizer, offendingSymbol, line, column, msg, e) {
-  this.delegates.map(function (d) {
-    d.syntaxError(recognizer, offendingSymbol, line, column, msg, e);
-  });
-};
-
-ProxyErrorListener.prototype.reportAmbiguity = function (recognizer, dfa, startIndex, stopIndex, exact, ambigAlts, configs) {
-  this.delegates.map(function (d) {
-    d.reportAmbiguity(recognizer, dfa, startIndex, stopIndex, exact, ambigAlts, configs);
-  });
-};
-
-ProxyErrorListener.prototype.reportAttemptingFullContext = function (recognizer, dfa, startIndex, stopIndex, conflictingAlts, configs) {
-  this.delegates.map(function (d) {
-    d.reportAttemptingFullContext(recognizer, dfa, startIndex, stopIndex, conflictingAlts, configs);
-  });
-};
-
-ProxyErrorListener.prototype.reportContextSensitivity = function (recognizer, dfa, startIndex, stopIndex, prediction, configs) {
-  this.delegates.map(function (d) {
-    d.reportContextSensitivity(recognizer, dfa, startIndex, stopIndex, prediction, configs);
-  });
-};
-
-exports.ErrorListener = ErrorListener;
-exports.ConsoleErrorListener = ConsoleErrorListener;
-exports.ProxyErrorListener = ProxyErrorListener;
-
-/***/ }),
-/* 13 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-//
-/* Copyright (c) 2012-2017 The ANTLR Project. All rights reserved.
- * Use of this file is governed by the BSD 3-clause license that
- * can be found in the LICENSE.txt file in the project root.
- */
 //
 
 var Token = __webpack_require__(1).Token;
-__webpack_require__(20);
-__webpack_require__(21);
+__webpack_require__(25);
+__webpack_require__(26);
 
 // Vacuum all input from a string and then treat it like a buffer.
 
@@ -3920,6 +3822,104 @@ InputStream.prototype.toString = function () {
 exports.InputStream = InputStream;
 
 /***/ }),
+/* 13 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+//
+/* Copyright (c) 2012-2017 The ANTLR Project. All rights reserved.
+ * Use of this file is governed by the BSD 3-clause license that
+ * can be found in the LICENSE.txt file in the project root.
+ */
+
+// Provides an empty default implementation of {@link ANTLRErrorListener}. The
+// default implementation of each method does nothing, but can be overridden as
+// necessary.
+
+function ErrorListener() {
+  return this;
+}
+
+ErrorListener.prototype.syntaxError = function (recognizer, offendingSymbol, line, column, msg, e) {};
+
+ErrorListener.prototype.reportAmbiguity = function (recognizer, dfa, startIndex, stopIndex, exact, ambigAlts, configs) {};
+
+ErrorListener.prototype.reportAttemptingFullContext = function (recognizer, dfa, startIndex, stopIndex, conflictingAlts, configs) {};
+
+ErrorListener.prototype.reportContextSensitivity = function (recognizer, dfa, startIndex, stopIndex, prediction, configs) {};
+
+function ConsoleErrorListener() {
+  ErrorListener.call(this);
+  return this;
+}
+
+ConsoleErrorListener.prototype = Object.create(ErrorListener.prototype);
+ConsoleErrorListener.prototype.constructor = ConsoleErrorListener;
+
+//
+// Provides a default instance of {@link ConsoleErrorListener}.
+//
+ConsoleErrorListener.INSTANCE = new ConsoleErrorListener();
+
+//
+// {@inheritDoc}
+//
+// <p>
+// This implementation prints messages to {@link System//err} containing the
+// values of {@code line}, {@code charPositionInLine}, and {@code msg} using
+// the following format.</p>
+//
+// <pre>
+// line <em>line</em>:<em>charPositionInLine</em> <em>msg</em>
+// </pre>
+//
+ConsoleErrorListener.prototype.syntaxError = function (recognizer, offendingSymbol, line, column, msg, e) {
+  console.error("line " + line + ":" + column + " " + msg);
+};
+
+function ProxyErrorListener(delegates) {
+  ErrorListener.call(this);
+  if (delegates === null) {
+    throw "delegates";
+  }
+  this.delegates = delegates;
+  return this;
+}
+
+ProxyErrorListener.prototype = Object.create(ErrorListener.prototype);
+ProxyErrorListener.prototype.constructor = ProxyErrorListener;
+
+ProxyErrorListener.prototype.syntaxError = function (recognizer, offendingSymbol, line, column, msg, e) {
+  this.delegates.map(function (d) {
+    d.syntaxError(recognizer, offendingSymbol, line, column, msg, e);
+  });
+};
+
+ProxyErrorListener.prototype.reportAmbiguity = function (recognizer, dfa, startIndex, stopIndex, exact, ambigAlts, configs) {
+  this.delegates.map(function (d) {
+    d.reportAmbiguity(recognizer, dfa, startIndex, stopIndex, exact, ambigAlts, configs);
+  });
+};
+
+ProxyErrorListener.prototype.reportAttemptingFullContext = function (recognizer, dfa, startIndex, stopIndex, conflictingAlts, configs) {
+  this.delegates.map(function (d) {
+    d.reportAttemptingFullContext(recognizer, dfa, startIndex, stopIndex, conflictingAlts, configs);
+  });
+};
+
+ProxyErrorListener.prototype.reportContextSensitivity = function (recognizer, dfa, startIndex, stopIndex, prediction, configs) {
+  this.delegates.map(function (d) {
+    d.reportContextSensitivity(recognizer, dfa, startIndex, stopIndex, prediction, configs);
+  });
+};
+
+exports.ErrorListener = ErrorListener;
+exports.ConsoleErrorListener = ConsoleErrorListener;
+exports.ProxyErrorListener = ProxyErrorListener;
+
+/***/ }),
 /* 14 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -3937,8 +3937,8 @@ exports.InputStream = InputStream;
 //  uses simplified match() and error recovery mechanisms in the interest of speed.
 
 var Token = __webpack_require__(1).Token;
-var Recognizer = __webpack_require__(23).Recognizer;
-var CommonTokenFactory = __webpack_require__(37).CommonTokenFactory;
+var Recognizer = __webpack_require__(27).Recognizer;
+var CommonTokenFactory = __webpack_require__(53).CommonTokenFactory;
 var RecognitionException = __webpack_require__(3).RecognitionException;
 var LexerNoViableAltException = __webpack_require__(3).LexerNoViableAltException;
 
@@ -4577,7 +4577,7 @@ RuleContext.prototype.accept = function (visitor) {
 
 //need to manage circular dependencies, so export now
 exports.RuleContext = RuleContext;
-var Trees = __webpack_require__(24).Trees;
+var Trees = __webpack_require__(29).Trees;
 
 // Print out a whole tree, not just a node, in LISP format
 // (root child1 .. childN). Print just a node if this is a leaf.
@@ -4704,32 +4704,144 @@ exports.LexerDFASerializer = LexerDFASerializer;
 "use strict";
 
 
+//
 /* Copyright (c) 2012-2017 The ANTLR Project. All rights reserved.
  * Use of this file is governed by the BSD 3-clause license that
  * can be found in the LICENSE.txt file in the project root.
  */
-exports.atn = __webpack_require__(39);
-exports.codepointat = __webpack_require__(20);
-exports.dfa = __webpack_require__(45);
-exports.fromcodepoint = __webpack_require__(21);
-exports.tree = __webpack_require__(47);
-exports.error = __webpack_require__(48);
+///
+
+//
+// This class extends {@link BufferedTokenStream} with functionality to filter
+// token streams to tokens on a particular channel (tokens where
+// {@link Token//getChannel} returns a particular value).
+//
+// <p>
+// This token stream provides access to all tokens by index or when calling
+// methods like {@link //getText}. The channel filtering is only used for code
+// accessing tokens via the lookahead methods {@link //LA}, {@link //LT}, and
+// {@link //LB}.</p>
+//
+// <p>
+// By default, tokens are placed on the default channel
+// ({@link Token//DEFAULT_CHANNEL}), but may be reassigned by using the
+// {@code ->channel(HIDDEN)} lexer command, or by using an embedded action to
+// call {@link Lexer//setChannel}.
+// </p>
+//
+// <p>
+// Note: lexer rules which use the {@code ->skip} lexer command or call
+// {@link Lexer//skip} do not produce tokens at all, so input text matched by
+// such a rule will not be available as part of the token stream, regardless of
+// channel.</p>
+///
+
+var Token = __webpack_require__(1).Token;
+var BufferedTokenStream = __webpack_require__(52).BufferedTokenStream;
+
+function CommonTokenStream(lexer, channel) {
+    BufferedTokenStream.call(this, lexer);
+    this.channel = channel === undefined ? Token.DEFAULT_CHANNEL : channel;
+    return this;
+}
+
+CommonTokenStream.prototype = Object.create(BufferedTokenStream.prototype);
+CommonTokenStream.prototype.constructor = CommonTokenStream;
+
+CommonTokenStream.prototype.adjustSeekIndex = function (i) {
+    return this.nextTokenOnChannel(i, this.channel);
+};
+
+CommonTokenStream.prototype.LB = function (k) {
+    if (k === 0 || this.index - k < 0) {
+        return null;
+    }
+    var i = this.index;
+    var n = 1;
+    // find k good tokens looking backwards
+    while (n <= k) {
+        // skip off-channel tokens
+        i = this.previousTokenOnChannel(i - 1, this.channel);
+        n += 1;
+    }
+    if (i < 0) {
+        return null;
+    }
+    return this.tokens[i];
+};
+
+CommonTokenStream.prototype.LT = function (k) {
+    this.lazyInit();
+    if (k === 0) {
+        return null;
+    }
+    if (k < 0) {
+        return this.LB(-k);
+    }
+    var i = this.index;
+    var n = 1; // we know tokens[pos] is a good one
+    // find k good tokens
+    while (n < k) {
+        // skip off-channel tokens, but make sure to not look past EOF
+        if (this.sync(i + 1)) {
+            i = this.nextTokenOnChannel(i + 1, this.channel);
+        }
+        n += 1;
+    }
+    return this.tokens[i];
+};
+
+// Count EOF just once.///
+CommonTokenStream.prototype.getNumberOfOnChannelTokens = function () {
+    var n = 0;
+    this.fill();
+    for (var i = 0; i < this.tokens.length; i++) {
+        var t = this.tokens[i];
+        if (t.channel === this.channel) {
+            n += 1;
+        }
+        if (t.type === Token.EOF) {
+            break;
+        }
+    }
+    return n;
+};
+
+exports.CommonTokenStream = CommonTokenStream;
+
+/***/ }),
+/* 19 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+/* Copyright (c) 2012-2017 The ANTLR Project. All rights reserved.
+ * Use of this file is governed by the BSD 3-clause license that
+ * can be found in the LICENSE.txt file in the project root.
+ */
+exports.atn = __webpack_require__(54);
+exports.codepointat = __webpack_require__(25);
+exports.dfa = __webpack_require__(60);
+exports.fromcodepoint = __webpack_require__(26);
+exports.tree = __webpack_require__(62);
+exports.error = __webpack_require__(63);
 exports.Token = __webpack_require__(1).Token;
-exports.CharStreams = __webpack_require__(50).CharStreams;
+exports.CharStreams = __webpack_require__(65).CharStreams;
 exports.CommonToken = __webpack_require__(1).CommonToken;
-exports.InputStream = __webpack_require__(13).InputStream;
-exports.FileStream = __webpack_require__(51).FileStream;
-exports.CommonTokenStream = __webpack_require__(22).CommonTokenStream;
+exports.InputStream = __webpack_require__(12).InputStream;
+exports.FileStream = __webpack_require__(66).FileStream;
+exports.CommonTokenStream = __webpack_require__(18).CommonTokenStream;
 exports.Lexer = __webpack_require__(14).Lexer;
-exports.Parser = __webpack_require__(52).Parser;
+exports.Parser = __webpack_require__(67).Parser;
 var pc = __webpack_require__(6);
 exports.PredictionContextCache = pc.PredictionContextCache;
-exports.ParserRuleContext = __webpack_require__(19).ParserRuleContext;
+exports.ParserRuleContext = __webpack_require__(20).ParserRuleContext;
 exports.Interval = __webpack_require__(2).Interval;
 exports.Utils = __webpack_require__(0);
 
 /***/ }),
-/* 19 */
+/* 20 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4959,2303 +5071,7 @@ InterpreterRuleContext.prototype.constructor = InterpreterRuleContext;
 exports.ParserRuleContext = ParserRuleContext;
 
 /***/ }),
-/* 20 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-/*! https://mths.be/codepointat v0.2.0 by @mathias */
-if (!String.prototype.codePointAt) {
-	(function () {
-		'use strict'; // needed to support `apply`/`call` with `undefined`/`null`
-
-		var defineProperty = function () {
-			// IE 8 only supports `Object.defineProperty` on DOM elements
-			try {
-				var object = {};
-				var $defineProperty = Object.defineProperty;
-				var result = $defineProperty(object, object, object) && $defineProperty;
-			} catch (error) {}
-			return result;
-		}();
-		var codePointAt = function codePointAt(position) {
-			if (this == null) {
-				throw TypeError();
-			}
-			var string = String(this);
-			var size = string.length;
-			// `ToInteger`
-			var index = position ? Number(position) : 0;
-			if (index != index) {
-				// better `isNaN`
-				index = 0;
-			}
-			// Account for out-of-bounds indices:
-			if (index < 0 || index >= size) {
-				return undefined;
-			}
-			// Get the first code unit
-			var first = string.charCodeAt(index);
-			var second;
-			if ( // check if it’s the start of a surrogate pair
-			first >= 0xD800 && first <= 0xDBFF && // high surrogate
-			size > index + 1 // there is a next code unit
-			) {
-					second = string.charCodeAt(index + 1);
-					if (second >= 0xDC00 && second <= 0xDFFF) {
-						// low surrogate
-						// https://mathiasbynens.be/notes/javascript-encoding#surrogate-formulae
-						return (first - 0xD800) * 0x400 + second - 0xDC00 + 0x10000;
-					}
-				}
-			return first;
-		};
-		if (defineProperty) {
-			defineProperty(String.prototype, 'codePointAt', {
-				'value': codePointAt,
-				'configurable': true,
-				'writable': true
-			});
-		} else {
-			String.prototype.codePointAt = codePointAt;
-		}
-	})();
-}
-
-/***/ }),
 /* 21 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-/*! https://mths.be/fromcodepoint v0.2.1 by @mathias */
-if (!String.fromCodePoint) {
-	(function () {
-		var defineProperty = function () {
-			// IE 8 only supports `Object.defineProperty` on DOM elements
-			try {
-				var object = {};
-				var $defineProperty = Object.defineProperty;
-				var result = $defineProperty(object, object, object) && $defineProperty;
-			} catch (error) {}
-			return result;
-		}();
-		var stringFromCharCode = String.fromCharCode;
-		var floor = Math.floor;
-		var fromCodePoint = function fromCodePoint(_) {
-			var MAX_SIZE = 0x4000;
-			var codeUnits = [];
-			var highSurrogate;
-			var lowSurrogate;
-			var index = -1;
-			var length = arguments.length;
-			if (!length) {
-				return '';
-			}
-			var result = '';
-			while (++index < length) {
-				var codePoint = Number(arguments[index]);
-				if (!isFinite(codePoint) || // `NaN`, `+Infinity`, or `-Infinity`
-				codePoint < 0 || // not a valid Unicode code point
-				codePoint > 0x10FFFF || // not a valid Unicode code point
-				floor(codePoint) != codePoint // not an integer
-				) {
-						throw RangeError('Invalid code point: ' + codePoint);
-					}
-				if (codePoint <= 0xFFFF) {
-					// BMP code point
-					codeUnits.push(codePoint);
-				} else {
-					// Astral code point; split in surrogate halves
-					// https://mathiasbynens.be/notes/javascript-encoding#surrogate-formulae
-					codePoint -= 0x10000;
-					highSurrogate = (codePoint >> 10) + 0xD800;
-					lowSurrogate = codePoint % 0x400 + 0xDC00;
-					codeUnits.push(highSurrogate, lowSurrogate);
-				}
-				if (index + 1 == length || codeUnits.length > MAX_SIZE) {
-					result += stringFromCharCode.apply(null, codeUnits);
-					codeUnits.length = 0;
-				}
-			}
-			return result;
-		};
-		if (defineProperty) {
-			defineProperty(String, 'fromCodePoint', {
-				'value': fromCodePoint,
-				'configurable': true,
-				'writable': true
-			});
-		} else {
-			String.fromCodePoint = fromCodePoint;
-		}
-	})();
-}
-
-/***/ }),
-/* 22 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-//
-/* Copyright (c) 2012-2017 The ANTLR Project. All rights reserved.
- * Use of this file is governed by the BSD 3-clause license that
- * can be found in the LICENSE.txt file in the project root.
- */
-///
-
-//
-// This class extends {@link BufferedTokenStream} with functionality to filter
-// token streams to tokens on a particular channel (tokens where
-// {@link Token//getChannel} returns a particular value).
-//
-// <p>
-// This token stream provides access to all tokens by index or when calling
-// methods like {@link //getText}. The channel filtering is only used for code
-// accessing tokens via the lookahead methods {@link //LA}, {@link //LT}, and
-// {@link //LB}.</p>
-//
-// <p>
-// By default, tokens are placed on the default channel
-// ({@link Token//DEFAULT_CHANNEL}), but may be reassigned by using the
-// {@code ->channel(HIDDEN)} lexer command, or by using an embedded action to
-// call {@link Lexer//setChannel}.
-// </p>
-//
-// <p>
-// Note: lexer rules which use the {@code ->skip} lexer command or call
-// {@link Lexer//skip} do not produce tokens at all, so input text matched by
-// such a rule will not be available as part of the token stream, regardless of
-// channel.</p>
-///
-
-var Token = __webpack_require__(1).Token;
-var BufferedTokenStream = __webpack_require__(36).BufferedTokenStream;
-
-function CommonTokenStream(lexer, channel) {
-    BufferedTokenStream.call(this, lexer);
-    this.channel = channel === undefined ? Token.DEFAULT_CHANNEL : channel;
-    return this;
-}
-
-CommonTokenStream.prototype = Object.create(BufferedTokenStream.prototype);
-CommonTokenStream.prototype.constructor = CommonTokenStream;
-
-CommonTokenStream.prototype.adjustSeekIndex = function (i) {
-    return this.nextTokenOnChannel(i, this.channel);
-};
-
-CommonTokenStream.prototype.LB = function (k) {
-    if (k === 0 || this.index - k < 0) {
-        return null;
-    }
-    var i = this.index;
-    var n = 1;
-    // find k good tokens looking backwards
-    while (n <= k) {
-        // skip off-channel tokens
-        i = this.previousTokenOnChannel(i - 1, this.channel);
-        n += 1;
-    }
-    if (i < 0) {
-        return null;
-    }
-    return this.tokens[i];
-};
-
-CommonTokenStream.prototype.LT = function (k) {
-    this.lazyInit();
-    if (k === 0) {
-        return null;
-    }
-    if (k < 0) {
-        return this.LB(-k);
-    }
-    var i = this.index;
-    var n = 1; // we know tokens[pos] is a good one
-    // find k good tokens
-    while (n < k) {
-        // skip off-channel tokens, but make sure to not look past EOF
-        if (this.sync(i + 1)) {
-            i = this.nextTokenOnChannel(i + 1, this.channel);
-        }
-        n += 1;
-    }
-    return this.tokens[i];
-};
-
-// Count EOF just once.///
-CommonTokenStream.prototype.getNumberOfOnChannelTokens = function () {
-    var n = 0;
-    this.fill();
-    for (var i = 0; i < this.tokens.length; i++) {
-        var t = this.tokens[i];
-        if (t.channel === this.channel) {
-            n += 1;
-        }
-        if (t.type === Token.EOF) {
-            break;
-        }
-    }
-    return n;
-};
-
-exports.CommonTokenStream = CommonTokenStream;
-
-/***/ }),
-/* 23 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-//
-/* Copyright (c) 2012-2017 The ANTLR Project. All rights reserved.
- * Use of this file is governed by the BSD 3-clause license that
- * can be found in the LICENSE.txt file in the project root.
- */
-//
-
-var Token = __webpack_require__(1).Token;
-var ConsoleErrorListener = __webpack_require__(12).ConsoleErrorListener;
-var ProxyErrorListener = __webpack_require__(12).ProxyErrorListener;
-
-function Recognizer() {
-    this._listeners = [ConsoleErrorListener.INSTANCE];
-    this._interp = null;
-    this._stateNumber = -1;
-    return this;
-}
-
-Recognizer.tokenTypeMapCache = {};
-Recognizer.ruleIndexMapCache = {};
-
-Recognizer.prototype.checkVersion = function (toolVersion) {
-    var runtimeVersion = "4.7";
-    if (runtimeVersion !== toolVersion) {
-        console.log("ANTLR runtime and generated code versions disagree: " + runtimeVersion + "!=" + toolVersion);
-    }
-};
-
-Recognizer.prototype.addErrorListener = function (listener) {
-    this._listeners.push(listener);
-};
-
-Recognizer.prototype.removeErrorListeners = function () {
-    this._listeners = [];
-};
-
-Recognizer.prototype.getTokenTypeMap = function () {
-    var tokenNames = this.getTokenNames();
-    if (tokenNames === null) {
-        throw "The current recognizer does not provide a list of token names.";
-    }
-    var result = this.tokenTypeMapCache[tokenNames];
-    if (result === undefined) {
-        result = tokenNames.reduce(function (o, k, i) {
-            o[k] = i;
-        });
-        result.EOF = Token.EOF;
-        this.tokenTypeMapCache[tokenNames] = result;
-    }
-    return result;
-};
-
-// Get a map from rule names to rule indexes.
-//
-// <p>Used for XPath and tree pattern compilation.</p>
-//
-Recognizer.prototype.getRuleIndexMap = function () {
-    var ruleNames = this.ruleNames;
-    if (ruleNames === null) {
-        throw "The current recognizer does not provide a list of rule names.";
-    }
-    var result = this.ruleIndexMapCache[ruleNames];
-    if (result === undefined) {
-        result = ruleNames.reduce(function (o, k, i) {
-            o[k] = i;
-        });
-        this.ruleIndexMapCache[ruleNames] = result;
-    }
-    return result;
-};
-
-Recognizer.prototype.getTokenType = function (tokenName) {
-    var ttype = this.getTokenTypeMap()[tokenName];
-    if (ttype !== undefined) {
-        return ttype;
-    } else {
-        return Token.INVALID_TYPE;
-    }
-};
-
-// What is the error header, normally line/character position information?//
-Recognizer.prototype.getErrorHeader = function (e) {
-    var line = e.getOffendingToken().line;
-    var column = e.getOffendingToken().column;
-    return "line " + line + ":" + column;
-};
-
-// How should a token be displayed in an error message? The default
-//  is to display just the text, but during development you might
-//  want to have a lot of information spit out.  Override in that case
-//  to use t.toString() (which, for CommonToken, dumps everything about
-//  the token). This is better than forcing you to override a method in
-//  your token objects because you don't have to go modify your lexer
-//  so that it creates a new Java type.
-//
-// @deprecated This method is not called by the ANTLR 4 Runtime. Specific
-// implementations of {@link ANTLRErrorStrategy} may provide a similar
-// feature when necessary. For example, see
-// {@link DefaultErrorStrategy//getTokenErrorDisplay}.
-//
-Recognizer.prototype.getTokenErrorDisplay = function (t) {
-    if (t === null) {
-        return "<no token>";
-    }
-    var s = t.text;
-    if (s === null) {
-        if (t.type === Token.EOF) {
-            s = "<EOF>";
-        } else {
-            s = "<" + t.type + ">";
-        }
-    }
-    s = s.replace("\n", "\\n").replace("\r", "\\r").replace("\t", "\\t");
-    return "'" + s + "'";
-};
-
-Recognizer.prototype.getErrorListenerDispatch = function () {
-    return new ProxyErrorListener(this._listeners);
-};
-
-// subclass needs to override these if there are sempreds or actions
-// that the ATN interp needs to execute
-Recognizer.prototype.sempred = function (localctx, ruleIndex, actionIndex) {
-    return true;
-};
-
-Recognizer.prototype.precpred = function (localctx, precedence) {
-    return true;
-};
-
-//Indicate that the recognizer has changed internal state that is
-//consistent with the ATN state passed in.  This way we always know
-//where we are in the ATN as the parser goes along. The rule
-//context objects form a stack that lets us see the stack of
-//invoking rules. Combine this and we have complete ATN
-//configuration information.
-
-Object.defineProperty(Recognizer.prototype, "state", {
-    get: function get() {
-        return this._stateNumber;
-    },
-    set: function set(state) {
-        this._stateNumber = state;
-    }
-});
-
-exports.Recognizer = Recognizer;
-
-/***/ }),
-/* 24 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-/* Copyright (c) 2012-2017 The ANTLR Project. All rights reserved.
- * Use of this file is governed by the BSD 3-clause license that
- * can be found in the LICENSE.txt file in the project root.
- */
-
-var Utils = __webpack_require__(0);
-var Token = __webpack_require__(1).Token;
-var RuleNode = __webpack_require__(5).RuleNode;
-var ErrorNode = __webpack_require__(5).ErrorNode;
-var TerminalNode = __webpack_require__(5).TerminalNode;
-var ParserRuleContext = __webpack_require__(19).ParserRuleContext;
-var RuleContext = __webpack_require__(16).RuleContext;
-var INVALID_ALT_NUMBER = __webpack_require__(8).INVALID_ALT_NUMBER;
-
-/** A set of utility routines useful for all kinds of ANTLR trees. */
-function Trees() {}
-
-// Print out a whole tree in LISP form. {@link //getNodeText} is used on the
-//  node payloads to get the text for the nodes.  Detect
-//  parse trees and extract data appropriately.
-Trees.toStringTree = function (tree, ruleNames, recog) {
-    ruleNames = ruleNames || null;
-    recog = recog || null;
-    if (recog !== null) {
-        ruleNames = recog.ruleNames;
-    }
-    var s = Trees.getNodeText(tree, ruleNames);
-    s = Utils.escapeWhitespace(s, false);
-    var c = tree.getChildCount();
-    if (c === 0) {
-        return s;
-    }
-    var res = "(" + s + ' ';
-    if (c > 0) {
-        s = Trees.toStringTree(tree.getChild(0), ruleNames);
-        res = res.concat(s);
-    }
-    for (var i = 1; i < c; i++) {
-        s = Trees.toStringTree(tree.getChild(i), ruleNames);
-        res = res.concat(' ' + s);
-    }
-    res = res.concat(")");
-    return res;
-};
-
-Trees.getNodeText = function (t, ruleNames, recog) {
-    ruleNames = ruleNames || null;
-    recog = recog || null;
-    if (recog !== null) {
-        ruleNames = recog.ruleNames;
-    }
-    if (ruleNames !== null) {
-        if (t instanceof RuleContext) {
-            var altNumber = t.getAltNumber();
-            if (altNumber != INVALID_ALT_NUMBER) {
-                return ruleNames[t.ruleIndex] + ":" + altNumber;
-            }
-            return ruleNames[t.ruleIndex];
-        } else if (t instanceof ErrorNode) {
-            return t.toString();
-        } else if (t instanceof TerminalNode) {
-            if (t.symbol !== null) {
-                return t.symbol.text;
-            }
-        }
-    }
-    // no recog for rule names
-    var payload = t.getPayload();
-    if (payload instanceof Token) {
-        return payload.text;
-    }
-    return t.getPayload().toString();
-};
-
-// Return ordered list of all children of this node
-Trees.getChildren = function (t) {
-    var list = [];
-    for (var i = 0; i < t.getChildCount(); i++) {
-        list.push(t.getChild(i));
-    }
-    return list;
-};
-
-// Return a list of all ancestors of this node.  The first node of
-//  list is the root and the last is the parent of this node.
-//
-Trees.getAncestors = function (t) {
-    var ancestors = [];
-    t = t.getParent();
-    while (t !== null) {
-        ancestors = [t].concat(ancestors);
-        t = t.getParent();
-    }
-    return ancestors;
-};
-
-Trees.findAllTokenNodes = function (t, ttype) {
-    return Trees.findAllNodes(t, ttype, true);
-};
-
-Trees.findAllRuleNodes = function (t, ruleIndex) {
-    return Trees.findAllNodes(t, ruleIndex, false);
-};
-
-Trees.findAllNodes = function (t, index, findTokens) {
-    var nodes = [];
-    Trees._findAllNodes(t, index, findTokens, nodes);
-    return nodes;
-};
-
-Trees._findAllNodes = function (t, index, findTokens, nodes) {
-    // check this node (the root) first
-    if (findTokens && t instanceof TerminalNode) {
-        if (t.symbol.type === index) {
-            nodes.push(t);
-        }
-    } else if (!findTokens && t instanceof ParserRuleContext) {
-        if (t.ruleIndex === index) {
-            nodes.push(t);
-        }
-    }
-    // check children
-    for (var i = 0; i < t.getChildCount(); i++) {
-        Trees._findAllNodes(t.getChild(i), index, findTokens, nodes);
-    }
-};
-
-Trees.descendants = function (t) {
-    var nodes = [t];
-    for (var i = 0; i < t.getChildCount(); i++) {
-        nodes = nodes.concat(Trees.descendants(t.getChild(i)));
-    }
-    return nodes;
-};
-
-exports.Trees = Trees;
-
-/***/ }),
-/* 25 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-/* Copyright (c) 2012-2017 The ANTLR Project. All rights reserved.
- * Use of this file is governed by the BSD 3-clause license that
- * can be found in the LICENSE.txt file in the project root.
- */
-
-var Token = __webpack_require__(1).Token;
-var ATN = __webpack_require__(8).ATN;
-var ATNType = __webpack_require__(41).ATNType;
-var ATNStates = __webpack_require__(4);
-var ATNState = ATNStates.ATNState;
-var BasicState = ATNStates.BasicState;
-var DecisionState = ATNStates.DecisionState;
-var BlockStartState = ATNStates.BlockStartState;
-var BlockEndState = ATNStates.BlockEndState;
-var LoopEndState = ATNStates.LoopEndState;
-var RuleStartState = ATNStates.RuleStartState;
-var RuleStopState = ATNStates.RuleStopState;
-var TokensStartState = ATNStates.TokensStartState;
-var PlusLoopbackState = ATNStates.PlusLoopbackState;
-var StarLoopbackState = ATNStates.StarLoopbackState;
-var StarLoopEntryState = ATNStates.StarLoopEntryState;
-var PlusBlockStartState = ATNStates.PlusBlockStartState;
-var StarBlockStartState = ATNStates.StarBlockStartState;
-var BasicBlockStartState = ATNStates.BasicBlockStartState;
-var Transitions = __webpack_require__(7);
-var Transition = Transitions.Transition;
-var AtomTransition = Transitions.AtomTransition;
-var SetTransition = Transitions.SetTransition;
-var NotSetTransition = Transitions.NotSetTransition;
-var RuleTransition = Transitions.RuleTransition;
-var RangeTransition = Transitions.RangeTransition;
-var ActionTransition = Transitions.ActionTransition;
-var EpsilonTransition = Transitions.EpsilonTransition;
-var WildcardTransition = Transitions.WildcardTransition;
-var PredicateTransition = Transitions.PredicateTransition;
-var PrecedencePredicateTransition = Transitions.PrecedencePredicateTransition;
-var IntervalSet = __webpack_require__(2).IntervalSet;
-var Interval = __webpack_require__(2).Interval;
-var ATNDeserializationOptions = __webpack_require__(26).ATNDeserializationOptions;
-var LexerActions = __webpack_require__(27);
-var LexerActionType = LexerActions.LexerActionType;
-var LexerSkipAction = LexerActions.LexerSkipAction;
-var LexerChannelAction = LexerActions.LexerChannelAction;
-var LexerCustomAction = LexerActions.LexerCustomAction;
-var LexerMoreAction = LexerActions.LexerMoreAction;
-var LexerTypeAction = LexerActions.LexerTypeAction;
-var LexerPushModeAction = LexerActions.LexerPushModeAction;
-var LexerPopModeAction = LexerActions.LexerPopModeAction;
-var LexerModeAction = LexerActions.LexerModeAction;
-// This is the earliest supported serialized UUID.
-// stick to serialized version for now, we don't need a UUID instance
-var BASE_SERIALIZED_UUID = "AADB8D7E-AEEF-4415-AD2B-8204D6CF042E";
-
-//
-// This UUID indicates the serialized ATN contains two sets of
-// IntervalSets, where the second set's values are encoded as
-// 32-bit integers to support the full Unicode SMP range up to U+10FFFF.
-//
-var ADDED_UNICODE_SMP = "59627784-3BE5-417A-B9EB-8131A7286089";
-
-// This list contains all of the currently supported UUIDs, ordered by when
-// the feature first appeared in this branch.
-var SUPPORTED_UUIDS = [BASE_SERIALIZED_UUID, ADDED_UNICODE_SMP];
-
-var SERIALIZED_VERSION = 3;
-
-// This is the current serialized UUID.
-var SERIALIZED_UUID = ADDED_UNICODE_SMP;
-
-function initArray(length, value) {
-    var tmp = [];
-    tmp[length - 1] = value;
-    return tmp.map(function (i) {
-        return value;
-    });
-}
-
-function ATNDeserializer(options) {
-
-    if (options === undefined || options === null) {
-        options = ATNDeserializationOptions.defaultOptions;
-    }
-    this.deserializationOptions = options;
-    this.stateFactories = null;
-    this.actionFactories = null;
-
-    return this;
-}
-
-// Determines if a particular serialized representation of an ATN supports
-// a particular feature, identified by the {@link UUID} used for serializing
-// the ATN at the time the feature was first introduced.
-//
-// @param feature The {@link UUID} marking the first time the feature was
-// supported in the serialized ATN.
-// @param actualUuid The {@link UUID} of the actual serialized ATN which is
-// currently being deserialized.
-// @return {@code true} if the {@code actualUuid} value represents a
-// serialized ATN at or after the feature identified by {@code feature} was
-// introduced; otherwise, {@code false}.
-
-ATNDeserializer.prototype.isFeatureSupported = function (feature, actualUuid) {
-    var idx1 = SUPPORTED_UUIDS.indexOf(feature);
-    if (idx1 < 0) {
-        return false;
-    }
-    var idx2 = SUPPORTED_UUIDS.indexOf(actualUuid);
-    return idx2 >= idx1;
-};
-
-ATNDeserializer.prototype.deserialize = function (data) {
-    this.reset(data);
-    this.checkVersion();
-    this.checkUUID();
-    var atn = this.readATN();
-    this.readStates(atn);
-    this.readRules(atn);
-    this.readModes(atn);
-    var sets = [];
-    // First, deserialize sets with 16-bit arguments <= U+FFFF.
-    this.readSets(atn, sets, this.readInt.bind(this));
-    // Next, if the ATN was serialized with the Unicode SMP feature,
-    // deserialize sets with 32-bit arguments <= U+10FFFF.
-    if (this.isFeatureSupported(ADDED_UNICODE_SMP, this.uuid)) {
-        this.readSets(atn, sets, this.readInt32.bind(this));
-    }
-    this.readEdges(atn, sets);
-    this.readDecisions(atn);
-    this.readLexerActions(atn);
-    this.markPrecedenceDecisions(atn);
-    this.verifyATN(atn);
-    if (this.deserializationOptions.generateRuleBypassTransitions && atn.grammarType === ATNType.PARSER) {
-        this.generateRuleBypassTransitions(atn);
-        // re-verify after modification
-        this.verifyATN(atn);
-    }
-    return atn;
-};
-
-ATNDeserializer.prototype.reset = function (data) {
-    var adjust = function adjust(c) {
-        var v = c.charCodeAt(0);
-        return v > 1 ? v - 2 : -1;
-    };
-    var temp = data.split("").map(adjust);
-    // don't adjust the first value since that's the version number
-    temp[0] = data.charCodeAt(0);
-    this.data = temp;
-    this.pos = 0;
-};
-
-ATNDeserializer.prototype.checkVersion = function () {
-    var version = this.readInt();
-    if (version !== SERIALIZED_VERSION) {
-        throw "Could not deserialize ATN with version " + version + " (expected " + SERIALIZED_VERSION + ").";
-    }
-};
-
-ATNDeserializer.prototype.checkUUID = function () {
-    var uuid = this.readUUID();
-    if (SUPPORTED_UUIDS.indexOf(uuid) < 0) {
-        throw "Could not deserialize ATN with UUID: " + uuid + " (expected " + SERIALIZED_UUID + " or a legacy UUID).", uuid, SERIALIZED_UUID;
-    }
-    this.uuid = uuid;
-};
-
-ATNDeserializer.prototype.readATN = function () {
-    var grammarType = this.readInt();
-    var maxTokenType = this.readInt();
-    return new ATN(grammarType, maxTokenType);
-};
-
-ATNDeserializer.prototype.readStates = function (atn) {
-    var j, pair, stateNumber;
-    var loopBackStateNumbers = [];
-    var endStateNumbers = [];
-    var nstates = this.readInt();
-    for (var i = 0; i < nstates; i++) {
-        var stype = this.readInt();
-        // ignore bad type of states
-        if (stype === ATNState.INVALID_TYPE) {
-            atn.addState(null);
-            continue;
-        }
-        var ruleIndex = this.readInt();
-        if (ruleIndex === 0xFFFF) {
-            ruleIndex = -1;
-        }
-        var s = this.stateFactory(stype, ruleIndex);
-        if (stype === ATNState.LOOP_END) {
-            // special case
-            var loopBackStateNumber = this.readInt();
-            loopBackStateNumbers.push([s, loopBackStateNumber]);
-        } else if (s instanceof BlockStartState) {
-            var endStateNumber = this.readInt();
-            endStateNumbers.push([s, endStateNumber]);
-        }
-        atn.addState(s);
-    }
-    // delay the assignment of loop back and end states until we know all the
-    // state instances have been initialized
-    for (j = 0; j < loopBackStateNumbers.length; j++) {
-        pair = loopBackStateNumbers[j];
-        pair[0].loopBackState = atn.states[pair[1]];
-    }
-
-    for (j = 0; j < endStateNumbers.length; j++) {
-        pair = endStateNumbers[j];
-        pair[0].endState = atn.states[pair[1]];
-    }
-
-    var numNonGreedyStates = this.readInt();
-    for (j = 0; j < numNonGreedyStates; j++) {
-        stateNumber = this.readInt();
-        atn.states[stateNumber].nonGreedy = true;
-    }
-
-    var numPrecedenceStates = this.readInt();
-    for (j = 0; j < numPrecedenceStates; j++) {
-        stateNumber = this.readInt();
-        atn.states[stateNumber].isPrecedenceRule = true;
-    }
-};
-
-ATNDeserializer.prototype.readRules = function (atn) {
-    var i;
-    var nrules = this.readInt();
-    if (atn.grammarType === ATNType.LEXER) {
-        atn.ruleToTokenType = initArray(nrules, 0);
-    }
-    atn.ruleToStartState = initArray(nrules, 0);
-    for (i = 0; i < nrules; i++) {
-        var s = this.readInt();
-        var startState = atn.states[s];
-        atn.ruleToStartState[i] = startState;
-        if (atn.grammarType === ATNType.LEXER) {
-            var tokenType = this.readInt();
-            if (tokenType === 0xFFFF) {
-                tokenType = Token.EOF;
-            }
-            atn.ruleToTokenType[i] = tokenType;
-        }
-    }
-    atn.ruleToStopState = initArray(nrules, 0);
-    for (i = 0; i < atn.states.length; i++) {
-        var state = atn.states[i];
-        if (!(state instanceof RuleStopState)) {
-            continue;
-        }
-        atn.ruleToStopState[state.ruleIndex] = state;
-        atn.ruleToStartState[state.ruleIndex].stopState = state;
-    }
-};
-
-ATNDeserializer.prototype.readModes = function (atn) {
-    var nmodes = this.readInt();
-    for (var i = 0; i < nmodes; i++) {
-        var s = this.readInt();
-        atn.modeToStartState.push(atn.states[s]);
-    }
-};
-
-ATNDeserializer.prototype.readSets = function (atn, sets, readUnicode) {
-    var m = this.readInt();
-    for (var i = 0; i < m; i++) {
-        var iset = new IntervalSet();
-        sets.push(iset);
-        var n = this.readInt();
-        var containsEof = this.readInt();
-        if (containsEof !== 0) {
-            iset.addOne(-1);
-        }
-        for (var j = 0; j < n; j++) {
-            var i1 = readUnicode();
-            var i2 = readUnicode();
-            iset.addRange(i1, i2);
-        }
-    }
-};
-
-ATNDeserializer.prototype.readEdges = function (atn, sets) {
-    var i, j, state, trans, target;
-    var nedges = this.readInt();
-    for (i = 0; i < nedges; i++) {
-        var src = this.readInt();
-        var trg = this.readInt();
-        var ttype = this.readInt();
-        var arg1 = this.readInt();
-        var arg2 = this.readInt();
-        var arg3 = this.readInt();
-        trans = this.edgeFactory(atn, ttype, src, trg, arg1, arg2, arg3, sets);
-        var srcState = atn.states[src];
-        srcState.addTransition(trans);
-    }
-    // edges for rule stop states can be derived, so they aren't serialized
-    for (i = 0; i < atn.states.length; i++) {
-        state = atn.states[i];
-        for (j = 0; j < state.transitions.length; j++) {
-            var t = state.transitions[j];
-            if (!(t instanceof RuleTransition)) {
-                continue;
-            }
-            var outermostPrecedenceReturn = -1;
-            if (atn.ruleToStartState[t.target.ruleIndex].isPrecedenceRule) {
-                if (t.precedence === 0) {
-                    outermostPrecedenceReturn = t.target.ruleIndex;
-                }
-            }
-
-            trans = new EpsilonTransition(t.followState, outermostPrecedenceReturn);
-            atn.ruleToStopState[t.target.ruleIndex].addTransition(trans);
-        }
-    }
-
-    for (i = 0; i < atn.states.length; i++) {
-        state = atn.states[i];
-        if (state instanceof BlockStartState) {
-            // we need to know the end state to set its start state
-            if (state.endState === null) {
-                throw "IllegalState";
-            }
-            // block end states can only be associated to a single block start
-            // state
-            if (state.endState.startState !== null) {
-                throw "IllegalState";
-            }
-            state.endState.startState = state;
-        }
-        if (state instanceof PlusLoopbackState) {
-            for (j = 0; j < state.transitions.length; j++) {
-                target = state.transitions[j].target;
-                if (target instanceof PlusBlockStartState) {
-                    target.loopBackState = state;
-                }
-            }
-        } else if (state instanceof StarLoopbackState) {
-            for (j = 0; j < state.transitions.length; j++) {
-                target = state.transitions[j].target;
-                if (target instanceof StarLoopEntryState) {
-                    target.loopBackState = state;
-                }
-            }
-        }
-    }
-};
-
-ATNDeserializer.prototype.readDecisions = function (atn) {
-    var ndecisions = this.readInt();
-    for (var i = 0; i < ndecisions; i++) {
-        var s = this.readInt();
-        var decState = atn.states[s];
-        atn.decisionToState.push(decState);
-        decState.decision = i;
-    }
-};
-
-ATNDeserializer.prototype.readLexerActions = function (atn) {
-    if (atn.grammarType === ATNType.LEXER) {
-        var count = this.readInt();
-        atn.lexerActions = initArray(count, null);
-        for (var i = 0; i < count; i++) {
-            var actionType = this.readInt();
-            var data1 = this.readInt();
-            if (data1 === 0xFFFF) {
-                data1 = -1;
-            }
-            var data2 = this.readInt();
-            if (data2 === 0xFFFF) {
-                data2 = -1;
-            }
-            var lexerAction = this.lexerActionFactory(actionType, data1, data2);
-            atn.lexerActions[i] = lexerAction;
-        }
-    }
-};
-
-ATNDeserializer.prototype.generateRuleBypassTransitions = function (atn) {
-    var i;
-    var count = atn.ruleToStartState.length;
-    for (i = 0; i < count; i++) {
-        atn.ruleToTokenType[i] = atn.maxTokenType + i + 1;
-    }
-    for (i = 0; i < count; i++) {
-        this.generateRuleBypassTransition(atn, i);
-    }
-};
-
-ATNDeserializer.prototype.generateRuleBypassTransition = function (atn, idx) {
-    var i, state;
-    var bypassStart = new BasicBlockStartState();
-    bypassStart.ruleIndex = idx;
-    atn.addState(bypassStart);
-
-    var bypassStop = new BlockEndState();
-    bypassStop.ruleIndex = idx;
-    atn.addState(bypassStop);
-
-    bypassStart.endState = bypassStop;
-    atn.defineDecisionState(bypassStart);
-
-    bypassStop.startState = bypassStart;
-
-    var excludeTransition = null;
-    var endState = null;
-
-    if (atn.ruleToStartState[idx].isPrecedenceRule) {
-        // wrap from the beginning of the rule to the StarLoopEntryState
-        endState = null;
-        for (i = 0; i < atn.states.length; i++) {
-            state = atn.states[i];
-            if (this.stateIsEndStateFor(state, idx)) {
-                endState = state;
-                excludeTransition = state.loopBackState.transitions[0];
-                break;
-            }
-        }
-        if (excludeTransition === null) {
-            throw "Couldn't identify final state of the precedence rule prefix section.";
-        }
-    } else {
-        endState = atn.ruleToStopState[idx];
-    }
-
-    // all non-excluded transitions that currently target end state need to
-    // target blockEnd instead
-    for (i = 0; i < atn.states.length; i++) {
-        state = atn.states[i];
-        for (var j = 0; j < state.transitions.length; j++) {
-            var transition = state.transitions[j];
-            if (transition === excludeTransition) {
-                continue;
-            }
-            if (transition.target === endState) {
-                transition.target = bypassStop;
-            }
-        }
-    }
-
-    // all transitions leaving the rule start state need to leave blockStart
-    // instead
-    var ruleToStartState = atn.ruleToStartState[idx];
-    var count = ruleToStartState.transitions.length;
-    while (count > 0) {
-        bypassStart.addTransition(ruleToStartState.transitions[count - 1]);
-        ruleToStartState.transitions = ruleToStartState.transitions.slice(-1);
-    }
-    // link the new states
-    atn.ruleToStartState[idx].addTransition(new EpsilonTransition(bypassStart));
-    bypassStop.addTransition(new EpsilonTransition(endState));
-
-    var matchState = new BasicState();
-    atn.addState(matchState);
-    matchState.addTransition(new AtomTransition(bypassStop, atn.ruleToTokenType[idx]));
-    bypassStart.addTransition(new EpsilonTransition(matchState));
-};
-
-ATNDeserializer.prototype.stateIsEndStateFor = function (state, idx) {
-    if (state.ruleIndex !== idx) {
-        return null;
-    }
-    if (!(state instanceof StarLoopEntryState)) {
-        return null;
-    }
-    var maybeLoopEndState = state.transitions[state.transitions.length - 1].target;
-    if (!(maybeLoopEndState instanceof LoopEndState)) {
-        return null;
-    }
-    if (maybeLoopEndState.epsilonOnlyTransitions && maybeLoopEndState.transitions[0].target instanceof RuleStopState) {
-        return state;
-    } else {
-        return null;
-    }
-};
-
-//
-// Analyze the {@link StarLoopEntryState} states in the specified ATN to set
-// the {@link StarLoopEntryState//isPrecedenceDecision} field to the
-// correct value.
-//
-// @param atn The ATN.
-//
-ATNDeserializer.prototype.markPrecedenceDecisions = function (atn) {
-    for (var i = 0; i < atn.states.length; i++) {
-        var state = atn.states[i];
-        if (!(state instanceof StarLoopEntryState)) {
-            continue;
-        }
-        // We analyze the ATN to determine if this ATN decision state is the
-        // decision for the closure block that determines whether a
-        // precedence rule should continue or complete.
-        //
-        if (atn.ruleToStartState[state.ruleIndex].isPrecedenceRule) {
-            var maybeLoopEndState = state.transitions[state.transitions.length - 1].target;
-            if (maybeLoopEndState instanceof LoopEndState) {
-                if (maybeLoopEndState.epsilonOnlyTransitions && maybeLoopEndState.transitions[0].target instanceof RuleStopState) {
-                    state.isPrecedenceDecision = true;
-                }
-            }
-        }
-    }
-};
-
-ATNDeserializer.prototype.verifyATN = function (atn) {
-    if (!this.deserializationOptions.verifyATN) {
-        return;
-    }
-    // verify assumptions
-    for (var i = 0; i < atn.states.length; i++) {
-        var state = atn.states[i];
-        if (state === null) {
-            continue;
-        }
-        this.checkCondition(state.epsilonOnlyTransitions || state.transitions.length <= 1);
-        if (state instanceof PlusBlockStartState) {
-            this.checkCondition(state.loopBackState !== null);
-        } else if (state instanceof StarLoopEntryState) {
-            this.checkCondition(state.loopBackState !== null);
-            this.checkCondition(state.transitions.length === 2);
-            if (state.transitions[0].target instanceof StarBlockStartState) {
-                this.checkCondition(state.transitions[1].target instanceof LoopEndState);
-                this.checkCondition(!state.nonGreedy);
-            } else if (state.transitions[0].target instanceof LoopEndState) {
-                this.checkCondition(state.transitions[1].target instanceof StarBlockStartState);
-                this.checkCondition(state.nonGreedy);
-            } else {
-                throw "IllegalState";
-            }
-        } else if (state instanceof StarLoopbackState) {
-            this.checkCondition(state.transitions.length === 1);
-            this.checkCondition(state.transitions[0].target instanceof StarLoopEntryState);
-        } else if (state instanceof LoopEndState) {
-            this.checkCondition(state.loopBackState !== null);
-        } else if (state instanceof RuleStartState) {
-            this.checkCondition(state.stopState !== null);
-        } else if (state instanceof BlockStartState) {
-            this.checkCondition(state.endState !== null);
-        } else if (state instanceof BlockEndState) {
-            this.checkCondition(state.startState !== null);
-        } else if (state instanceof DecisionState) {
-            this.checkCondition(state.transitions.length <= 1 || state.decision >= 0);
-        } else {
-            this.checkCondition(state.transitions.length <= 1 || state instanceof RuleStopState);
-        }
-    }
-};
-
-ATNDeserializer.prototype.checkCondition = function (condition, message) {
-    if (!condition) {
-        if (message === undefined || message === null) {
-            message = "IllegalState";
-        }
-        throw message;
-    }
-};
-
-ATNDeserializer.prototype.readInt = function () {
-    return this.data[this.pos++];
-};
-
-ATNDeserializer.prototype.readInt32 = function () {
-    var low = this.readInt();
-    var high = this.readInt();
-    return low | high << 16;
-};
-
-ATNDeserializer.prototype.readLong = function () {
-    var low = this.readInt32();
-    var high = this.readInt32();
-    return low & 0x00000000FFFFFFFF | high << 32;
-};
-
-function createByteToHex() {
-    var bth = [];
-    for (var i = 0; i < 256; i++) {
-        bth[i] = (i + 0x100).toString(16).substr(1).toUpperCase();
-    }
-    return bth;
-}
-
-var byteToHex = createByteToHex();
-
-ATNDeserializer.prototype.readUUID = function () {
-    var bb = [];
-    for (var i = 7; i >= 0; i--) {
-        var int = this.readInt();
-        /* jshint bitwise: false */
-        bb[2 * i + 1] = int & 0xFF;
-        bb[2 * i] = int >> 8 & 0xFF;
-    }
-    return byteToHex[bb[0]] + byteToHex[bb[1]] + byteToHex[bb[2]] + byteToHex[bb[3]] + '-' + byteToHex[bb[4]] + byteToHex[bb[5]] + '-' + byteToHex[bb[6]] + byteToHex[bb[7]] + '-' + byteToHex[bb[8]] + byteToHex[bb[9]] + '-' + byteToHex[bb[10]] + byteToHex[bb[11]] + byteToHex[bb[12]] + byteToHex[bb[13]] + byteToHex[bb[14]] + byteToHex[bb[15]];
-};
-
-ATNDeserializer.prototype.edgeFactory = function (atn, type, src, trg, arg1, arg2, arg3, sets) {
-    var target = atn.states[trg];
-    switch (type) {
-        case Transition.EPSILON:
-            return new EpsilonTransition(target);
-        case Transition.RANGE:
-            return arg3 !== 0 ? new RangeTransition(target, Token.EOF, arg2) : new RangeTransition(target, arg1, arg2);
-        case Transition.RULE:
-            return new RuleTransition(atn.states[arg1], arg2, arg3, target);
-        case Transition.PREDICATE:
-            return new PredicateTransition(target, arg1, arg2, arg3 !== 0);
-        case Transition.PRECEDENCE:
-            return new PrecedencePredicateTransition(target, arg1);
-        case Transition.ATOM:
-            return arg3 !== 0 ? new AtomTransition(target, Token.EOF) : new AtomTransition(target, arg1);
-        case Transition.ACTION:
-            return new ActionTransition(target, arg1, arg2, arg3 !== 0);
-        case Transition.SET:
-            return new SetTransition(target, sets[arg1]);
-        case Transition.NOT_SET:
-            return new NotSetTransition(target, sets[arg1]);
-        case Transition.WILDCARD:
-            return new WildcardTransition(target);
-        default:
-            throw "The specified transition type: " + type + " is not valid.";
-    }
-};
-
-ATNDeserializer.prototype.stateFactory = function (type, ruleIndex) {
-    if (this.stateFactories === null) {
-        var sf = [];
-        sf[ATNState.INVALID_TYPE] = null;
-        sf[ATNState.BASIC] = function () {
-            return new BasicState();
-        };
-        sf[ATNState.RULE_START] = function () {
-            return new RuleStartState();
-        };
-        sf[ATNState.BLOCK_START] = function () {
-            return new BasicBlockStartState();
-        };
-        sf[ATNState.PLUS_BLOCK_START] = function () {
-            return new PlusBlockStartState();
-        };
-        sf[ATNState.STAR_BLOCK_START] = function () {
-            return new StarBlockStartState();
-        };
-        sf[ATNState.TOKEN_START] = function () {
-            return new TokensStartState();
-        };
-        sf[ATNState.RULE_STOP] = function () {
-            return new RuleStopState();
-        };
-        sf[ATNState.BLOCK_END] = function () {
-            return new BlockEndState();
-        };
-        sf[ATNState.STAR_LOOP_BACK] = function () {
-            return new StarLoopbackState();
-        };
-        sf[ATNState.STAR_LOOP_ENTRY] = function () {
-            return new StarLoopEntryState();
-        };
-        sf[ATNState.PLUS_LOOP_BACK] = function () {
-            return new PlusLoopbackState();
-        };
-        sf[ATNState.LOOP_END] = function () {
-            return new LoopEndState();
-        };
-        this.stateFactories = sf;
-    }
-    if (type > this.stateFactories.length || this.stateFactories[type] === null) {
-        throw "The specified state type " + type + " is not valid.";
-    } else {
-        var s = this.stateFactories[type]();
-        if (s !== null) {
-            s.ruleIndex = ruleIndex;
-            return s;
-        }
-    }
-};
-
-ATNDeserializer.prototype.lexerActionFactory = function (type, data1, data2) {
-    if (this.actionFactories === null) {
-        var af = [];
-        af[LexerActionType.CHANNEL] = function (data1, data2) {
-            return new LexerChannelAction(data1);
-        };
-        af[LexerActionType.CUSTOM] = function (data1, data2) {
-            return new LexerCustomAction(data1, data2);
-        };
-        af[LexerActionType.MODE] = function (data1, data2) {
-            return new LexerModeAction(data1);
-        };
-        af[LexerActionType.MORE] = function (data1, data2) {
-            return LexerMoreAction.INSTANCE;
-        };
-        af[LexerActionType.POP_MODE] = function (data1, data2) {
-            return LexerPopModeAction.INSTANCE;
-        };
-        af[LexerActionType.PUSH_MODE] = function (data1, data2) {
-            return new LexerPushModeAction(data1);
-        };
-        af[LexerActionType.SKIP] = function (data1, data2) {
-            return LexerSkipAction.INSTANCE;
-        };
-        af[LexerActionType.TYPE] = function (data1, data2) {
-            return new LexerTypeAction(data1);
-        };
-        this.actionFactories = af;
-    }
-    if (type > this.actionFactories.length || this.actionFactories[type] === null) {
-        throw "The specified lexer action type " + type + " is not valid.";
-    } else {
-        return this.actionFactories[type](data1, data2);
-    }
-};
-
-exports.ATNDeserializer = ATNDeserializer;
-
-/***/ }),
-/* 26 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-/* Copyright (c) 2012-2017 The ANTLR Project. All rights reserved.
- * Use of this file is governed by the BSD 3-clause license that
- * can be found in the LICENSE.txt file in the project root.
- */
-
-function ATNDeserializationOptions(copyFrom) {
-  if (copyFrom === undefined) {
-    copyFrom = null;
-  }
-  this.readOnly = false;
-  this.verifyATN = copyFrom === null ? true : copyFrom.verifyATN;
-  this.generateRuleBypassTransitions = copyFrom === null ? false : copyFrom.generateRuleBypassTransitions;
-
-  return this;
-}
-
-ATNDeserializationOptions.defaultOptions = new ATNDeserializationOptions();
-ATNDeserializationOptions.defaultOptions.readOnly = true;
-
-//    def __setattr__(self, key, value):
-//        if key!="readOnly" and self.readOnly:
-//            raise Exception("The object is read only.")
-//        super(type(self), self).__setattr__(key,value)
-
-exports.ATNDeserializationOptions = ATNDeserializationOptions;
-
-/***/ }),
-/* 27 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-//
-/* Copyright (c) 2012-2017 The ANTLR Project. All rights reserved.
- * Use of this file is governed by the BSD 3-clause license that
- * can be found in the LICENSE.txt file in the project root.
- */
-//
-
-function LexerActionType() {}
-
-LexerActionType.CHANNEL = 0; //The type of a {@link LexerChannelAction} action.
-LexerActionType.CUSTOM = 1; //The type of a {@link LexerCustomAction} action.
-LexerActionType.MODE = 2; //The type of a {@link LexerModeAction} action.
-LexerActionType.MORE = 3; //The type of a {@link LexerMoreAction} action.
-LexerActionType.POP_MODE = 4; //The type of a {@link LexerPopModeAction} action.
-LexerActionType.PUSH_MODE = 5; //The type of a {@link LexerPushModeAction} action.
-LexerActionType.SKIP = 6; //The type of a {@link LexerSkipAction} action.
-LexerActionType.TYPE = 7; //The type of a {@link LexerTypeAction} action.
-
-function LexerAction(action) {
-    this.actionType = action;
-    this.isPositionDependent = false;
-    return this;
-}
-
-LexerAction.prototype.hashCode = function () {
-    var hash = new Hash();
-    this.updateHashCode(hash);
-    return hash.finish();
-};
-
-LexerAction.prototype.updateHashCode = function (hash) {
-    hash.update(this.actionType);
-};
-
-LexerAction.prototype.equals = function (other) {
-    return this === other;
-};
-
-//
-// Implements the {@code skip} lexer action by calling {@link Lexer//skip}.
-//
-// <p>The {@code skip} command does not have any parameters, so this action is
-// implemented as a singleton instance exposed by {@link //INSTANCE}.</p>
-function LexerSkipAction() {
-    LexerAction.call(this, LexerActionType.SKIP);
-    return this;
-}
-
-LexerSkipAction.prototype = Object.create(LexerAction.prototype);
-LexerSkipAction.prototype.constructor = LexerSkipAction;
-
-// Provides a singleton instance of this parameterless lexer action.
-LexerSkipAction.INSTANCE = new LexerSkipAction();
-
-LexerSkipAction.prototype.execute = function (lexer) {
-    lexer.skip();
-};
-
-LexerSkipAction.prototype.toString = function () {
-    return "skip";
-};
-
-//  Implements the {@code type} lexer action by calling {@link Lexer//setType}
-// with the assigned type.
-function LexerTypeAction(type) {
-    LexerAction.call(this, LexerActionType.TYPE);
-    this.type = type;
-    return this;
-}
-
-LexerTypeAction.prototype = Object.create(LexerAction.prototype);
-LexerTypeAction.prototype.constructor = LexerTypeAction;
-
-LexerTypeAction.prototype.execute = function (lexer) {
-    lexer.type = this.type;
-};
-
-LexerTypeAction.prototype.updateHashCode = function (hash) {
-    hash.update(this.actionType, this.type);
-};
-
-LexerTypeAction.prototype.equals = function (other) {
-    if (this === other) {
-        return true;
-    } else if (!(other instanceof LexerTypeAction)) {
-        return false;
-    } else {
-        return this.type === other.type;
-    }
-};
-
-LexerTypeAction.prototype.toString = function () {
-    return "type(" + this.type + ")";
-};
-
-// Implements the {@code pushMode} lexer action by calling
-// {@link Lexer//pushMode} with the assigned mode.
-function LexerPushModeAction(mode) {
-    LexerAction.call(this, LexerActionType.PUSH_MODE);
-    this.mode = mode;
-    return this;
-}
-
-LexerPushModeAction.prototype = Object.create(LexerAction.prototype);
-LexerPushModeAction.prototype.constructor = LexerPushModeAction;
-
-// <p>This action is implemented by calling {@link Lexer//pushMode} with the
-// value provided by {@link //getMode}.</p>
-LexerPushModeAction.prototype.execute = function (lexer) {
-    lexer.pushMode(this.mode);
-};
-
-LexerPushModeAction.prototype.updateHashCode = function (hash) {
-    hash.update(this.actionType, this.mode);
-};
-
-LexerPushModeAction.prototype.equals = function (other) {
-    if (this === other) {
-        return true;
-    } else if (!(other instanceof LexerPushModeAction)) {
-        return false;
-    } else {
-        return this.mode === other.mode;
-    }
-};
-
-LexerPushModeAction.prototype.toString = function () {
-    return "pushMode(" + this.mode + ")";
-};
-
-// Implements the {@code popMode} lexer action by calling {@link Lexer//popMode}.
-//
-// <p>The {@code popMode} command does not have any parameters, so this action is
-// implemented as a singleton instance exposed by {@link //INSTANCE}.</p>
-function LexerPopModeAction() {
-    LexerAction.call(this, LexerActionType.POP_MODE);
-    return this;
-}
-
-LexerPopModeAction.prototype = Object.create(LexerAction.prototype);
-LexerPopModeAction.prototype.constructor = LexerPopModeAction;
-
-LexerPopModeAction.INSTANCE = new LexerPopModeAction();
-
-// <p>This action is implemented by calling {@link Lexer//popMode}.</p>
-LexerPopModeAction.prototype.execute = function (lexer) {
-    lexer.popMode();
-};
-
-LexerPopModeAction.prototype.toString = function () {
-    return "popMode";
-};
-
-// Implements the {@code more} lexer action by calling {@link Lexer//more}.
-//
-// <p>The {@code more} command does not have any parameters, so this action is
-// implemented as a singleton instance exposed by {@link //INSTANCE}.</p>
-function LexerMoreAction() {
-    LexerAction.call(this, LexerActionType.MORE);
-    return this;
-}
-
-LexerMoreAction.prototype = Object.create(LexerAction.prototype);
-LexerMoreAction.prototype.constructor = LexerMoreAction;
-
-LexerMoreAction.INSTANCE = new LexerMoreAction();
-
-// <p>This action is implemented by calling {@link Lexer//popMode}.</p>
-LexerMoreAction.prototype.execute = function (lexer) {
-    lexer.more();
-};
-
-LexerMoreAction.prototype.toString = function () {
-    return "more";
-};
-
-// Implements the {@code mode} lexer action by calling {@link Lexer//mode} with
-// the assigned mode.
-function LexerModeAction(mode) {
-    LexerAction.call(this, LexerActionType.MODE);
-    this.mode = mode;
-    return this;
-}
-
-LexerModeAction.prototype = Object.create(LexerAction.prototype);
-LexerModeAction.prototype.constructor = LexerModeAction;
-
-// <p>This action is implemented by calling {@link Lexer//mode} with the
-// value provided by {@link //getMode}.</p>
-LexerModeAction.prototype.execute = function (lexer) {
-    lexer.mode(this.mode);
-};
-
-LexerModeAction.prototype.updateHashCode = function (hash) {
-    hash.update(this.actionType, this.mode);
-};
-
-LexerModeAction.prototype.equals = function (other) {
-    if (this === other) {
-        return true;
-    } else if (!(other instanceof LexerModeAction)) {
-        return false;
-    } else {
-        return this.mode === other.mode;
-    }
-};
-
-LexerModeAction.prototype.toString = function () {
-    return "mode(" + this.mode + ")";
-};
-
-// Executes a custom lexer action by calling {@link Recognizer//action} with the
-// rule and action indexes assigned to the custom action. The implementation of
-// a custom action is added to the generated code for the lexer in an override
-// of {@link Recognizer//action} when the grammar is compiled.
-//
-// <p>This class may represent embedded actions created with the <code>{...}</code>
-// syntax in ANTLR 4, as well as actions created for lexer commands where the
-// command argument could not be evaluated when the grammar was compiled.</p>
-
-
-// Constructs a custom lexer action with the specified rule and action
-// indexes.
-//
-// @param ruleIndex The rule index to use for calls to
-// {@link Recognizer//action}.
-// @param actionIndex The action index to use for calls to
-// {@link Recognizer//action}.
-
-function LexerCustomAction(ruleIndex, actionIndex) {
-    LexerAction.call(this, LexerActionType.CUSTOM);
-    this.ruleIndex = ruleIndex;
-    this.actionIndex = actionIndex;
-    this.isPositionDependent = true;
-    return this;
-}
-
-LexerCustomAction.prototype = Object.create(LexerAction.prototype);
-LexerCustomAction.prototype.constructor = LexerCustomAction;
-
-// <p>Custom actions are implemented by calling {@link Lexer//action} with the
-// appropriate rule and action indexes.</p>
-LexerCustomAction.prototype.execute = function (lexer) {
-    lexer.action(null, this.ruleIndex, this.actionIndex);
-};
-
-LexerCustomAction.prototype.updateHashCode = function (hash) {
-    hash.update(this.actionType, this.ruleIndex, this.actionIndex);
-};
-
-LexerCustomAction.prototype.equals = function (other) {
-    if (this === other) {
-        return true;
-    } else if (!(other instanceof LexerCustomAction)) {
-        return false;
-    } else {
-        return this.ruleIndex === other.ruleIndex && this.actionIndex === other.actionIndex;
-    }
-};
-
-// Implements the {@code channel} lexer action by calling
-// {@link Lexer//setChannel} with the assigned channel.
-// Constructs a new {@code channel} action with the specified channel value.
-// @param channel The channel value to pass to {@link Lexer//setChannel}.
-function LexerChannelAction(channel) {
-    LexerAction.call(this, LexerActionType.CHANNEL);
-    this.channel = channel;
-    return this;
-}
-
-LexerChannelAction.prototype = Object.create(LexerAction.prototype);
-LexerChannelAction.prototype.constructor = LexerChannelAction;
-
-// <p>This action is implemented by calling {@link Lexer//setChannel} with the
-// value provided by {@link //getChannel}.</p>
-LexerChannelAction.prototype.execute = function (lexer) {
-    lexer._channel = this.channel;
-};
-
-LexerChannelAction.prototype.updateHashCode = function (hash) {
-    hash.update(this.actionType, this.channel);
-};
-
-LexerChannelAction.prototype.equals = function (other) {
-    if (this === other) {
-        return true;
-    } else if (!(other instanceof LexerChannelAction)) {
-        return false;
-    } else {
-        return this.channel === other.channel;
-    }
-};
-
-LexerChannelAction.prototype.toString = function () {
-    return "channel(" + this.channel + ")";
-};
-
-// This implementation of {@link LexerAction} is used for tracking input offsets
-// for position-dependent actions within a {@link LexerActionExecutor}.
-//
-// <p>This action is not serialized as part of the ATN, and is only required for
-// position-dependent lexer actions which appear at a location other than the
-// end of a rule. For more information about DFA optimizations employed for
-// lexer actions, see {@link LexerActionExecutor//append} and
-// {@link LexerActionExecutor//fixOffsetBeforeMatch}.</p>
-
-// Constructs a new indexed custom action by associating a character offset
-// with a {@link LexerAction}.
-//
-// <p>Note: This class is only required for lexer actions for which
-// {@link LexerAction//isPositionDependent} returns {@code true}.</p>
-//
-// @param offset The offset into the input {@link CharStream}, relative to
-// the token start index, at which the specified lexer action should be
-// executed.
-// @param action The lexer action to execute at a particular offset in the
-// input {@link CharStream}.
-function LexerIndexedCustomAction(offset, action) {
-    LexerAction.call(this, action.actionType);
-    this.offset = offset;
-    this.action = action;
-    this.isPositionDependent = true;
-    return this;
-}
-
-LexerIndexedCustomAction.prototype = Object.create(LexerAction.prototype);
-LexerIndexedCustomAction.prototype.constructor = LexerIndexedCustomAction;
-
-// <p>This method calls {@link //execute} on the result of {@link //getAction}
-// using the provided {@code lexer}.</p>
-LexerIndexedCustomAction.prototype.execute = function (lexer) {
-    // assume the input stream position was properly set by the calling code
-    this.action.execute(lexer);
-};
-
-LexerIndexedCustomAction.prototype.updateHashCode = function (hash) {
-    hash.update(this.actionType, this.offset, this.action);
-};
-
-LexerIndexedCustomAction.prototype.equals = function (other) {
-    if (this === other) {
-        return true;
-    } else if (!(other instanceof LexerIndexedCustomAction)) {
-        return false;
-    } else {
-        return this.offset === other.offset && this.action === other.action;
-    }
-};
-
-exports.LexerActionType = LexerActionType;
-exports.LexerSkipAction = LexerSkipAction;
-exports.LexerChannelAction = LexerChannelAction;
-exports.LexerCustomAction = LexerCustomAction;
-exports.LexerIndexedCustomAction = LexerIndexedCustomAction;
-exports.LexerMoreAction = LexerMoreAction;
-exports.LexerTypeAction = LexerTypeAction;
-exports.LexerPushModeAction = LexerPushModeAction;
-exports.LexerPopModeAction = LexerPopModeAction;
-exports.LexerModeAction = LexerModeAction;
-
-/***/ }),
-/* 28 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-//
-/* Copyright (c) 2012-2017 The ANTLR Project. All rights reserved.
- * Use of this file is governed by the BSD 3-clause license that
- * can be found in the LICENSE.txt file in the project root.
- */
-///
-
-var DFAState = __webpack_require__(11).DFAState;
-var ATNConfigSet = __webpack_require__(9).ATNConfigSet;
-var getCachedPredictionContext = __webpack_require__(6).getCachedPredictionContext;
-
-function ATNSimulator(atn, sharedContextCache) {
-
-    // The context cache maps all PredictionContext objects that are ==
-    //  to a single cached copy. This cache is shared across all contexts
-    //  in all ATNConfigs in all DFA states.  We rebuild each ATNConfigSet
-    //  to use only cached nodes/graphs in addDFAState(). We don't want to
-    //  fill this during closure() since there are lots of contexts that
-    //  pop up but are not used ever again. It also greatly slows down closure().
-    //
-    //  <p>This cache makes a huge difference in memory and a little bit in speed.
-    //  For the Java grammar on java.*, it dropped the memory requirements
-    //  at the end from 25M to 16M. We don't store any of the full context
-    //  graphs in the DFA because they are limited to local context only,
-    //  but apparently there's a lot of repetition there as well. We optimize
-    //  the config contexts before storing the config set in the DFA states
-    //  by literally rebuilding them with cached subgraphs only.</p>
-    //
-    //  <p>I tried a cache for use during closure operations, that was
-    //  whacked after each adaptivePredict(). It cost a little bit
-    //  more time I think and doesn't save on the overall footprint
-    //  so it's not worth the complexity.</p>
-    ///
-    this.atn = atn;
-    this.sharedContextCache = sharedContextCache;
-    return this;
-}
-
-// Must distinguish between missing edge and edge we know leads nowhere///
-ATNSimulator.ERROR = new DFAState(0x7FFFFFFF, new ATNConfigSet());
-
-ATNSimulator.prototype.getCachedContext = function (context) {
-    if (this.sharedContextCache === null) {
-        return context;
-    }
-    var visited = {};
-    return getCachedPredictionContext(context, this.sharedContextCache, visited);
-};
-
-exports.ATNSimulator = ATNSimulator;
-
-/***/ }),
-/* 29 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-//
-/* Copyright (c) 2012-2017 The ANTLR Project. All rights reserved.
- * Use of this file is governed by the BSD 3-clause license that
- * can be found in the LICENSE.txt file in the project root.
- */
-//
-//
-// This enumeration defines the prediction modes available in ANTLR 4 along with
-// utility methods for analyzing configuration sets for conflicts and/or
-// ambiguities.
-
-var Set = __webpack_require__(0).Set;
-var Map = __webpack_require__(0).Map;
-var BitSet = __webpack_require__(0).BitSet;
-var AltDict = __webpack_require__(0).AltDict;
-var ATN = __webpack_require__(8).ATN;
-var RuleStopState = __webpack_require__(4).RuleStopState;
-var ATNConfigSet = __webpack_require__(9).ATNConfigSet;
-var ATNConfig = __webpack_require__(15).ATNConfig;
-var SemanticContext = __webpack_require__(10).SemanticContext;
-var Hash = __webpack_require__(0).Hash;
-var hashStuff = __webpack_require__(0).hashStuff;
-var equalArrays = __webpack_require__(0).equalArrays;
-
-function PredictionMode() {
-    return this;
-}
-
-//
-// The SLL(*) prediction mode. This prediction mode ignores the current
-// parser context when making predictions. This is the fastest prediction
-// mode, and provides correct results for many grammars. This prediction
-// mode is more powerful than the prediction mode provided by ANTLR 3, but
-// may result in syntax errors for grammar and input combinations which are
-// not SLL.
-//
-// <p>
-// When using this prediction mode, the parser will either return a correct
-// parse tree (i.e. the same parse tree that would be returned with the
-// {@link //LL} prediction mode), or it will report a syntax error. If a
-// syntax error is encountered when using the {@link //SLL} prediction mode,
-// it may be due to either an actual syntax error in the input or indicate
-// that the particular combination of grammar and input requires the more
-// powerful {@link //LL} prediction abilities to complete successfully.</p>
-//
-// <p>
-// This prediction mode does not provide any guarantees for prediction
-// behavior for syntactically-incorrect inputs.</p>
-//
-PredictionMode.SLL = 0;
-//
-// The LL(*) prediction mode. This prediction mode allows the current parser
-// context to be used for resolving SLL conflicts that occur during
-// prediction. This is the fastest prediction mode that guarantees correct
-// parse results for all combinations of grammars with syntactically correct
-// inputs.
-//
-// <p>
-// When using this prediction mode, the parser will make correct decisions
-// for all syntactically-correct grammar and input combinations. However, in
-// cases where the grammar is truly ambiguous this prediction mode might not
-// report a precise answer for <em>exactly which</em> alternatives are
-// ambiguous.</p>
-//
-// <p>
-// This prediction mode does not provide any guarantees for prediction
-// behavior for syntactically-incorrect inputs.</p>
-//
-PredictionMode.LL = 1;
-//
-// The LL(*) prediction mode with exact ambiguity detection. In addition to
-// the correctness guarantees provided by the {@link //LL} prediction mode,
-// this prediction mode instructs the prediction algorithm to determine the
-// complete and exact set of ambiguous alternatives for every ambiguous
-// decision encountered while parsing.
-//
-// <p>
-// This prediction mode may be used for diagnosing ambiguities during
-// grammar development. Due to the performance overhead of calculating sets
-// of ambiguous alternatives, this prediction mode should be avoided when
-// the exact results are not necessary.</p>
-//
-// <p>
-// This prediction mode does not provide any guarantees for prediction
-// behavior for syntactically-incorrect inputs.</p>
-//
-PredictionMode.LL_EXACT_AMBIG_DETECTION = 2;
-
-//
-// Computes the SLL prediction termination condition.
-//
-// <p>
-// This method computes the SLL prediction termination condition for both of
-// the following cases.</p>
-//
-// <ul>
-// <li>The usual SLL+LL fallback upon SLL conflict</li>
-// <li>Pure SLL without LL fallback</li>
-// </ul>
-//
-// <p><strong>COMBINED SLL+LL PARSING</strong></p>
-//
-// <p>When LL-fallback is enabled upon SLL conflict, correct predictions are
-// ensured regardless of how the termination condition is computed by this
-// method. Due to the substantially higher cost of LL prediction, the
-// prediction should only fall back to LL when the additional lookahead
-// cannot lead to a unique SLL prediction.</p>
-//
-// <p>Assuming combined SLL+LL parsing, an SLL configuration set with only
-// conflicting subsets should fall back to full LL, even if the
-// configuration sets don't resolve to the same alternative (e.g.
-// {@code {1,2}} and {@code {3,4}}. If there is at least one non-conflicting
-// configuration, SLL could continue with the hopes that more lookahead will
-// resolve via one of those non-conflicting configurations.</p>
-//
-// <p>Here's the prediction termination rule them: SLL (for SLL+LL parsing)
-// stops when it sees only conflicting configuration subsets. In contrast,
-// full LL keeps going when there is uncertainty.</p>
-//
-// <p><strong>HEURISTIC</strong></p>
-//
-// <p>As a heuristic, we stop prediction when we see any conflicting subset
-// unless we see a state that only has one alternative associated with it.
-// The single-alt-state thing lets prediction continue upon rules like
-// (otherwise, it would admit defeat too soon):</p>
-//
-// <p>{@code [12|1|[], 6|2|[], 12|2|[]]. s : (ID | ID ID?) ';' ;}</p>
-//
-// <p>When the ATN simulation reaches the state before {@code ';'}, it has a
-// DFA state that looks like: {@code [12|1|[], 6|2|[], 12|2|[]]}. Naturally
-// {@code 12|1|[]} and {@code 12|2|[]} conflict, but we cannot stop
-// processing this node because alternative to has another way to continue,
-// via {@code [6|2|[]]}.</p>
-//
-// <p>It also let's us continue for this rule:</p>
-//
-// <p>{@code [1|1|[], 1|2|[], 8|3|[]] a : A | A | A B ;}</p>
-//
-// <p>After matching input A, we reach the stop state for rule A, state 1.
-// State 8 is the state right before B. Clearly alternatives 1 and 2
-// conflict and no amount of further lookahead will separate the two.
-// However, alternative 3 will be able to continue and so we do not stop
-// working on this state. In the previous example, we're concerned with
-// states associated with the conflicting alternatives. Here alt 3 is not
-// associated with the conflicting configs, but since we can continue
-// looking for input reasonably, don't declare the state done.</p>
-//
-// <p><strong>PURE SLL PARSING</strong></p>
-//
-// <p>To handle pure SLL parsing, all we have to do is make sure that we
-// combine stack contexts for configurations that differ only by semantic
-// predicate. From there, we can do the usual SLL termination heuristic.</p>
-//
-// <p><strong>PREDICATES IN SLL+LL PARSING</strong></p>
-//
-// <p>SLL decisions don't evaluate predicates until after they reach DFA stop
-// states because they need to create the DFA cache that works in all
-// semantic situations. In contrast, full LL evaluates predicates collected
-// during start state computation so it can ignore predicates thereafter.
-// This means that SLL termination detection can totally ignore semantic
-// predicates.</p>
-//
-// <p>Implementation-wise, {@link ATNConfigSet} combines stack contexts but not
-// semantic predicate contexts so we might see two configurations like the
-// following.</p>
-//
-// <p>{@code (s, 1, x, {}), (s, 1, x', {p})}</p>
-//
-// <p>Before testing these configurations against others, we have to merge
-// {@code x} and {@code x'} (without modifying the existing configurations).
-// For example, we test {@code (x+x')==x''} when looking for conflicts in
-// the following configurations.</p>
-//
-// <p>{@code (s, 1, x, {}), (s, 1, x', {p}), (s, 2, x'', {})}</p>
-//
-// <p>If the configuration set has predicates (as indicated by
-// {@link ATNConfigSet//hasSemanticContext}), this algorithm makes a copy of
-// the configurations to strip out all of the predicates so that a standard
-// {@link ATNConfigSet} will merge everything ignoring predicates.</p>
-//
-PredictionMode.hasSLLConflictTerminatingPrediction = function (mode, configs) {
-    // Configs in rule stop states indicate reaching the end of the decision
-    // rule (local context) or end of start rule (full context). If all
-    // configs meet this condition, then none of the configurations is able
-    // to match additional input so we terminate prediction.
-    //
-    if (PredictionMode.allConfigsInRuleStopStates(configs)) {
-        return true;
-    }
-    // pure SLL mode parsing
-    if (mode === PredictionMode.SLL) {
-        // Don't bother with combining configs from different semantic
-        // contexts if we can fail over to full LL; costs more time
-        // since we'll often fail over anyway.
-        if (configs.hasSemanticContext) {
-            // dup configs, tossing out semantic predicates
-            var dup = new ATNConfigSet();
-            for (var i = 0; i < configs.items.length; i++) {
-                var c = configs.items[i];
-                c = new ATNConfig({ semanticContext: SemanticContext.NONE }, c);
-                dup.add(c);
-            }
-            configs = dup;
-        }
-        // now we have combined contexts for configs with dissimilar preds
-    }
-    // pure SLL or combined SLL+LL mode parsing
-    var altsets = PredictionMode.getConflictingAltSubsets(configs);
-    return PredictionMode.hasConflictingAltSet(altsets) && !PredictionMode.hasStateAssociatedWithOneAlt(configs);
-};
-
-// Checks if any configuration in {@code configs} is in a
-// {@link RuleStopState}. Configurations meeting this condition have reached
-// the end of the decision rule (local context) or end of start rule (full
-// context).
-//
-// @param configs the configuration set to test
-// @return {@code true} if any configuration in {@code configs} is in a
-// {@link RuleStopState}, otherwise {@code false}
-PredictionMode.hasConfigInRuleStopState = function (configs) {
-    for (var i = 0; i < configs.items.length; i++) {
-        var c = configs.items[i];
-        if (c.state instanceof RuleStopState) {
-            return true;
-        }
-    }
-    return false;
-};
-
-// Checks if all configurations in {@code configs} are in a
-// {@link RuleStopState}. Configurations meeting this condition have reached
-// the end of the decision rule (local context) or end of start rule (full
-// context).
-//
-// @param configs the configuration set to test
-// @return {@code true} if all configurations in {@code configs} are in a
-// {@link RuleStopState}, otherwise {@code false}
-PredictionMode.allConfigsInRuleStopStates = function (configs) {
-    for (var i = 0; i < configs.items.length; i++) {
-        var c = configs.items[i];
-        if (!(c.state instanceof RuleStopState)) {
-            return false;
-        }
-    }
-    return true;
-};
-
-//
-// Full LL prediction termination.
-//
-// <p>Can we stop looking ahead during ATN simulation or is there some
-// uncertainty as to which alternative we will ultimately pick, after
-// consuming more input? Even if there are partial conflicts, we might know
-// that everything is going to resolve to the same minimum alternative. That
-// means we can stop since no more lookahead will change that fact. On the
-// other hand, there might be multiple conflicts that resolve to different
-// minimums. That means we need more look ahead to decide which of those
-// alternatives we should predict.</p>
-//
-// <p>The basic idea is to split the set of configurations {@code C}, into
-// conflicting subsets {@code (s, _, ctx, _)} and singleton subsets with
-// non-conflicting configurations. Two configurations conflict if they have
-// identical {@link ATNConfig//state} and {@link ATNConfig//context} values
-// but different {@link ATNConfig//alt} value, e.g. {@code (s, i, ctx, _)}
-// and {@code (s, j, ctx, _)} for {@code i!=j}.</p>
-//
-// <p>Reduce these configuration subsets to the set of possible alternatives.
-// You can compute the alternative subsets in one pass as follows:</p>
-//
-// <p>{@code A_s,ctx = {i | (s, i, ctx, _)}} for each configuration in
-// {@code C} holding {@code s} and {@code ctx} fixed.</p>
-//
-// <p>Or in pseudo-code, for each configuration {@code c} in {@code C}:</p>
-//
-// <pre>
-// map[c] U= c.{@link ATNConfig//alt alt} // map hash/equals uses s and x, not
-// alt and not pred
-// </pre>
-//
-// <p>The values in {@code map} are the set of {@code A_s,ctx} sets.</p>
-//
-// <p>If {@code |A_s,ctx|=1} then there is no conflict associated with
-// {@code s} and {@code ctx}.</p>
-//
-// <p>Reduce the subsets to singletons by choosing a minimum of each subset. If
-// the union of these alternative subsets is a singleton, then no amount of
-// more lookahead will help us. We will always pick that alternative. If,
-// however, there is more than one alternative, then we are uncertain which
-// alternative to predict and must continue looking for resolution. We may
-// or may not discover an ambiguity in the future, even if there are no
-// conflicting subsets this round.</p>
-//
-// <p>The biggest sin is to terminate early because it means we've made a
-// decision but were uncertain as to the eventual outcome. We haven't used
-// enough lookahead. On the other hand, announcing a conflict too late is no
-// big deal; you will still have the conflict. It's just inefficient. It
-// might even look until the end of file.</p>
-//
-// <p>No special consideration for semantic predicates is required because
-// predicates are evaluated on-the-fly for full LL prediction, ensuring that
-// no configuration contains a semantic context during the termination
-// check.</p>
-//
-// <p><strong>CONFLICTING CONFIGS</strong></p>
-//
-// <p>Two configurations {@code (s, i, x)} and {@code (s, j, x')}, conflict
-// when {@code i!=j} but {@code x=x'}. Because we merge all
-// {@code (s, i, _)} configurations together, that means that there are at
-// most {@code n} configurations associated with state {@code s} for
-// {@code n} possible alternatives in the decision. The merged stacks
-// complicate the comparison of configuration contexts {@code x} and
-// {@code x'}. Sam checks to see if one is a subset of the other by calling
-// merge and checking to see if the merged result is either {@code x} or
-// {@code x'}. If the {@code x} associated with lowest alternative {@code i}
-// is the superset, then {@code i} is the only possible prediction since the
-// others resolve to {@code min(i)} as well. However, if {@code x} is
-// associated with {@code j>i} then at least one stack configuration for
-// {@code j} is not in conflict with alternative {@code i}. The algorithm
-// should keep going, looking for more lookahead due to the uncertainty.</p>
-//
-// <p>For simplicity, I'm doing a equality check between {@code x} and
-// {@code x'} that lets the algorithm continue to consume lookahead longer
-// than necessary. The reason I like the equality is of course the
-// simplicity but also because that is the test you need to detect the
-// alternatives that are actually in conflict.</p>
-//
-// <p><strong>CONTINUE/STOP RULE</strong></p>
-//
-// <p>Continue if union of resolved alternative sets from non-conflicting and
-// conflicting alternative subsets has more than one alternative. We are
-// uncertain about which alternative to predict.</p>
-//
-// <p>The complete set of alternatives, {@code [i for (_,i,_)]}, tells us which
-// alternatives are still in the running for the amount of input we've
-// consumed at this point. The conflicting sets let us to strip away
-// configurations that won't lead to more states because we resolve
-// conflicts to the configuration with a minimum alternate for the
-// conflicting set.</p>
-//
-// <p><strong>CASES</strong></p>
-//
-// <ul>
-//
-// <li>no conflicts and more than 1 alternative in set =&gt; continue</li>
-//
-// <li> {@code (s, 1, x)}, {@code (s, 2, x)}, {@code (s, 3, z)},
-// {@code (s', 1, y)}, {@code (s', 2, y)} yields non-conflicting set
-// {@code {3}} U conflicting sets {@code min({1,2})} U {@code min({1,2})} =
-// {@code {1,3}} =&gt; continue
-// </li>
-//
-// <li>{@code (s, 1, x)}, {@code (s, 2, x)}, {@code (s', 1, y)},
-// {@code (s', 2, y)}, {@code (s'', 1, z)} yields non-conflicting set
-// {@code {1}} U conflicting sets {@code min({1,2})} U {@code min({1,2})} =
-// {@code {1}} =&gt; stop and predict 1</li>
-//
-// <li>{@code (s, 1, x)}, {@code (s, 2, x)}, {@code (s', 1, y)},
-// {@code (s', 2, y)} yields conflicting, reduced sets {@code {1}} U
-// {@code {1}} = {@code {1}} =&gt; stop and predict 1, can announce
-// ambiguity {@code {1,2}}</li>
-//
-// <li>{@code (s, 1, x)}, {@code (s, 2, x)}, {@code (s', 2, y)},
-// {@code (s', 3, y)} yields conflicting, reduced sets {@code {1}} U
-// {@code {2}} = {@code {1,2}} =&gt; continue</li>
-//
-// <li>{@code (s, 1, x)}, {@code (s, 2, x)}, {@code (s', 3, y)},
-// {@code (s', 4, y)} yields conflicting, reduced sets {@code {1}} U
-// {@code {3}} = {@code {1,3}} =&gt; continue</li>
-//
-// </ul>
-//
-// <p><strong>EXACT AMBIGUITY DETECTION</strong></p>
-//
-// <p>If all states report the same conflicting set of alternatives, then we
-// know we have the exact ambiguity set.</p>
-//
-// <p><code>|A_<em>i</em>|&gt;1</code> and
-// <code>A_<em>i</em> = A_<em>j</em></code> for all <em>i</em>, <em>j</em>.</p>
-//
-// <p>In other words, we continue examining lookahead until all {@code A_i}
-// have more than one alternative and all {@code A_i} are the same. If
-// {@code A={{1,2}, {1,3}}}, then regular LL prediction would terminate
-// because the resolved set is {@code {1}}. To determine what the real
-// ambiguity is, we have to know whether the ambiguity is between one and
-// two or one and three so we keep going. We can only stop prediction when
-// we need exact ambiguity detection when the sets look like
-// {@code A={{1,2}}} or {@code {{1,2},{1,2}}}, etc...</p>
-//
-PredictionMode.resolvesToJustOneViableAlt = function (altsets) {
-    return PredictionMode.getSingleViableAlt(altsets);
-};
-
-//
-// Determines if every alternative subset in {@code altsets} contains more
-// than one alternative.
-//
-// @param altsets a collection of alternative subsets
-// @return {@code true} if every {@link BitSet} in {@code altsets} has
-// {@link BitSet//cardinality cardinality} &gt; 1, otherwise {@code false}
-//
-PredictionMode.allSubsetsConflict = function (altsets) {
-    return !PredictionMode.hasNonConflictingAltSet(altsets);
-};
-//
-// Determines if any single alternative subset in {@code altsets} contains
-// exactly one alternative.
-//
-// @param altsets a collection of alternative subsets
-// @return {@code true} if {@code altsets} contains a {@link BitSet} with
-// {@link BitSet//cardinality cardinality} 1, otherwise {@code false}
-//
-PredictionMode.hasNonConflictingAltSet = function (altsets) {
-    for (var i = 0; i < altsets.length; i++) {
-        var alts = altsets[i];
-        if (alts.length === 1) {
-            return true;
-        }
-    }
-    return false;
-};
-
-//
-// Determines if any single alternative subset in {@code altsets} contains
-// more than one alternative.
-//
-// @param altsets a collection of alternative subsets
-// @return {@code true} if {@code altsets} contains a {@link BitSet} with
-// {@link BitSet//cardinality cardinality} &gt; 1, otherwise {@code false}
-//
-PredictionMode.hasConflictingAltSet = function (altsets) {
-    for (var i = 0; i < altsets.length; i++) {
-        var alts = altsets[i];
-        if (alts.length > 1) {
-            return true;
-        }
-    }
-    return false;
-};
-
-//
-// Determines if every alternative subset in {@code altsets} is equivalent.
-//
-// @param altsets a collection of alternative subsets
-// @return {@code true} if every member of {@code altsets} is equal to the
-// others, otherwise {@code false}
-//
-PredictionMode.allSubsetsEqual = function (altsets) {
-    var first = null;
-    for (var i = 0; i < altsets.length; i++) {
-        var alts = altsets[i];
-        if (first === null) {
-            first = alts;
-        } else if (alts !== first) {
-            return false;
-        }
-    }
-    return true;
-};
-
-//
-// Returns the unique alternative predicted by all alternative subsets in
-// {@code altsets}. If no such alternative exists, this method returns
-// {@link ATN//INVALID_ALT_NUMBER}.
-//
-// @param altsets a collection of alternative subsets
-//
-PredictionMode.getUniqueAlt = function (altsets) {
-    var all = PredictionMode.getAlts(altsets);
-    if (all.length === 1) {
-        return all.minValue();
-    } else {
-        return ATN.INVALID_ALT_NUMBER;
-    }
-};
-
-// Gets the complete set of represented alternatives for a collection of
-// alternative subsets. This method returns the union of each {@link BitSet}
-// in {@code altsets}.
-//
-// @param altsets a collection of alternative subsets
-// @return the set of represented alternatives in {@code altsets}
-//
-PredictionMode.getAlts = function (altsets) {
-    var all = new BitSet();
-    altsets.map(function (alts) {
-        all.or(alts);
-    });
-    return all;
-};
-
-//
-// This function gets the conflicting alt subsets from a configuration set.
-// For each configuration {@code c} in {@code configs}:
-//
-// <pre>
-// map[c] U= c.{@link ATNConfig//alt alt} // map hash/equals uses s and x, not
-// alt and not pred
-// </pre>
-
-PredictionMode.getConflictingAltSubsets = function (configs) {
-    var configToAlts = new Map();
-    configToAlts.hashFunction = function (cfg) {
-        hashStuff(cfg.state.stateNumber, cfg.context);
-    };
-    configToAlts.equalsFunction = function (c1, c2) {
-        return c1.state.stateNumber == c2.state.stateNumber && c1.context.equals(c2.context);
-    };
-    configs.items.map(function (cfg) {
-        var alts = configToAlts.get(cfg);
-        if (alts === null) {
-            alts = new BitSet();
-            configToAlts.put(cfg, alts);
-        }
-        alts.add(cfg.alt);
-    });
-    return configToAlts.getValues();
-};
-
-//
-// Get a map from state to alt subset from a configuration set. For each
-// configuration {@code c} in {@code configs}:
-//
-// <pre>
-// map[c.{@link ATNConfig//state state}] U= c.{@link ATNConfig//alt alt}
-// </pre>
-//
-PredictionMode.getStateToAltMap = function (configs) {
-    var m = new AltDict();
-    configs.items.map(function (c) {
-        var alts = m.get(c.state);
-        if (alts === null) {
-            alts = new BitSet();
-            m.put(c.state, alts);
-        }
-        alts.add(c.alt);
-    });
-    return m;
-};
-
-PredictionMode.hasStateAssociatedWithOneAlt = function (configs) {
-    var values = PredictionMode.getStateToAltMap(configs).values();
-    for (var i = 0; i < values.length; i++) {
-        if (values[i].length === 1) {
-            return true;
-        }
-    }
-    return false;
-};
-
-PredictionMode.getSingleViableAlt = function (altsets) {
-    var result = null;
-    for (var i = 0; i < altsets.length; i++) {
-        var alts = altsets[i];
-        var minAlt = alts.minValue();
-        if (result === null) {
-            result = minAlt;
-        } else if (result !== minAlt) {
-            // more than 1 viable alt
-            return ATN.INVALID_ALT_NUMBER;
-        }
-    }
-    return result;
-};
-
-exports.PredictionMode = PredictionMode;
-
-/***/ }),
-/* 30 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -8003,11 +5819,1319 @@ exports.BailErrorStrategy = BailErrorStrategy;
 exports.DefaultErrorStrategy = DefaultErrorStrategy;
 
 /***/ }),
+/* 22 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
+/**
+ * Checks if `value` is the
+ * [language type](http://www.ecma-international.org/ecma-262/7.0/#sec-ecmascript-language-types)
+ * of `Object`. (e.g. arrays, functions, objects, regexes, `new Number(0)`, and `new String('')`)
+ *
+ * @static
+ * @memberOf _
+ * @since 0.1.0
+ * @category Lang
+ * @param {*} value The value to check.
+ * @returns {boolean} Returns `true` if `value` is an object, else `false`.
+ * @example
+ *
+ * _.isObject({});
+ * // => true
+ *
+ * _.isObject([1, 2, 3]);
+ * // => true
+ *
+ * _.isObject(_.noop);
+ * // => true
+ *
+ * _.isObject(null);
+ * // => false
+ */
+function isObject(value) {
+  var type = typeof value === 'undefined' ? 'undefined' : _typeof(value);
+  return value != null && (type == 'object' || type == 'function');
+}
+
+module.exports = isObject;
+
+/***/ }),
+/* 23 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
+var freeGlobal = __webpack_require__(42);
+
+/** Detect free variable `self`. */
+var freeSelf = (typeof self === 'undefined' ? 'undefined' : _typeof(self)) == 'object' && self && self.Object === Object && self;
+
+/** Used as a reference to the global object. */
+var root = freeGlobal || freeSelf || Function('return this')();
+
+module.exports = root;
+
+/***/ }),
+/* 24 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var root = __webpack_require__(23);
+
+/** Built-in value references. */
+var _Symbol = root.Symbol;
+
+module.exports = _Symbol;
+
+/***/ }),
+/* 25 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+/*! https://mths.be/codepointat v0.2.0 by @mathias */
+if (!String.prototype.codePointAt) {
+	(function () {
+		'use strict'; // needed to support `apply`/`call` with `undefined`/`null`
+
+		var defineProperty = function () {
+			// IE 8 only supports `Object.defineProperty` on DOM elements
+			try {
+				var object = {};
+				var $defineProperty = Object.defineProperty;
+				var result = $defineProperty(object, object, object) && $defineProperty;
+			} catch (error) {}
+			return result;
+		}();
+		var codePointAt = function codePointAt(position) {
+			if (this == null) {
+				throw TypeError();
+			}
+			var string = String(this);
+			var size = string.length;
+			// `ToInteger`
+			var index = position ? Number(position) : 0;
+			if (index != index) {
+				// better `isNaN`
+				index = 0;
+			}
+			// Account for out-of-bounds indices:
+			if (index < 0 || index >= size) {
+				return undefined;
+			}
+			// Get the first code unit
+			var first = string.charCodeAt(index);
+			var second;
+			if ( // check if it’s the start of a surrogate pair
+			first >= 0xD800 && first <= 0xDBFF && // high surrogate
+			size > index + 1 // there is a next code unit
+			) {
+					second = string.charCodeAt(index + 1);
+					if (second >= 0xDC00 && second <= 0xDFFF) {
+						// low surrogate
+						// https://mathiasbynens.be/notes/javascript-encoding#surrogate-formulae
+						return (first - 0xD800) * 0x400 + second - 0xDC00 + 0x10000;
+					}
+				}
+			return first;
+		};
+		if (defineProperty) {
+			defineProperty(String.prototype, 'codePointAt', {
+				'value': codePointAt,
+				'configurable': true,
+				'writable': true
+			});
+		} else {
+			String.prototype.codePointAt = codePointAt;
+		}
+	})();
+}
+
+/***/ }),
+/* 26 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+/*! https://mths.be/fromcodepoint v0.2.1 by @mathias */
+if (!String.fromCodePoint) {
+	(function () {
+		var defineProperty = function () {
+			// IE 8 only supports `Object.defineProperty` on DOM elements
+			try {
+				var object = {};
+				var $defineProperty = Object.defineProperty;
+				var result = $defineProperty(object, object, object) && $defineProperty;
+			} catch (error) {}
+			return result;
+		}();
+		var stringFromCharCode = String.fromCharCode;
+		var floor = Math.floor;
+		var fromCodePoint = function fromCodePoint(_) {
+			var MAX_SIZE = 0x4000;
+			var codeUnits = [];
+			var highSurrogate;
+			var lowSurrogate;
+			var index = -1;
+			var length = arguments.length;
+			if (!length) {
+				return '';
+			}
+			var result = '';
+			while (++index < length) {
+				var codePoint = Number(arguments[index]);
+				if (!isFinite(codePoint) || // `NaN`, `+Infinity`, or `-Infinity`
+				codePoint < 0 || // not a valid Unicode code point
+				codePoint > 0x10FFFF || // not a valid Unicode code point
+				floor(codePoint) != codePoint // not an integer
+				) {
+						throw RangeError('Invalid code point: ' + codePoint);
+					}
+				if (codePoint <= 0xFFFF) {
+					// BMP code point
+					codeUnits.push(codePoint);
+				} else {
+					// Astral code point; split in surrogate halves
+					// https://mathiasbynens.be/notes/javascript-encoding#surrogate-formulae
+					codePoint -= 0x10000;
+					highSurrogate = (codePoint >> 10) + 0xD800;
+					lowSurrogate = codePoint % 0x400 + 0xDC00;
+					codeUnits.push(highSurrogate, lowSurrogate);
+				}
+				if (index + 1 == length || codeUnits.length > MAX_SIZE) {
+					result += stringFromCharCode.apply(null, codeUnits);
+					codeUnits.length = 0;
+				}
+			}
+			return result;
+		};
+		if (defineProperty) {
+			defineProperty(String, 'fromCodePoint', {
+				'value': fromCodePoint,
+				'configurable': true,
+				'writable': true
+			});
+		} else {
+			String.fromCodePoint = fromCodePoint;
+		}
+	})();
+}
+
+/***/ }),
+/* 27 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+//
+/* Copyright (c) 2012-2017 The ANTLR Project. All rights reserved.
+ * Use of this file is governed by the BSD 3-clause license that
+ * can be found in the LICENSE.txt file in the project root.
+ */
+//
+
+var Token = __webpack_require__(1).Token;
+var ConsoleErrorListener = __webpack_require__(13).ConsoleErrorListener;
+var ProxyErrorListener = __webpack_require__(13).ProxyErrorListener;
+
+function Recognizer() {
+    this._listeners = [ConsoleErrorListener.INSTANCE];
+    this._interp = null;
+    this._stateNumber = -1;
+    return this;
+}
+
+Recognizer.tokenTypeMapCache = {};
+Recognizer.ruleIndexMapCache = {};
+
+Recognizer.prototype.checkVersion = function (toolVersion) {
+    var runtimeVersion = "4.7";
+    if (runtimeVersion !== toolVersion) {
+        console.log("ANTLR runtime and generated code versions disagree: " + runtimeVersion + "!=" + toolVersion);
+    }
+};
+
+Recognizer.prototype.addErrorListener = function (listener) {
+    this._listeners.push(listener);
+};
+
+Recognizer.prototype.removeErrorListeners = function () {
+    this._listeners = [];
+};
+
+Recognizer.prototype.getTokenTypeMap = function () {
+    var tokenNames = this.getTokenNames();
+    if (tokenNames === null) {
+        throw "The current recognizer does not provide a list of token names.";
+    }
+    var result = this.tokenTypeMapCache[tokenNames];
+    if (result === undefined) {
+        result = tokenNames.reduce(function (o, k, i) {
+            o[k] = i;
+        });
+        result.EOF = Token.EOF;
+        this.tokenTypeMapCache[tokenNames] = result;
+    }
+    return result;
+};
+
+// Get a map from rule names to rule indexes.
+//
+// <p>Used for XPath and tree pattern compilation.</p>
+//
+Recognizer.prototype.getRuleIndexMap = function () {
+    var ruleNames = this.ruleNames;
+    if (ruleNames === null) {
+        throw "The current recognizer does not provide a list of rule names.";
+    }
+    var result = this.ruleIndexMapCache[ruleNames];
+    if (result === undefined) {
+        result = ruleNames.reduce(function (o, k, i) {
+            o[k] = i;
+        });
+        this.ruleIndexMapCache[ruleNames] = result;
+    }
+    return result;
+};
+
+Recognizer.prototype.getTokenType = function (tokenName) {
+    var ttype = this.getTokenTypeMap()[tokenName];
+    if (ttype !== undefined) {
+        return ttype;
+    } else {
+        return Token.INVALID_TYPE;
+    }
+};
+
+// What is the error header, normally line/character position information?//
+Recognizer.prototype.getErrorHeader = function (e) {
+    var line = e.getOffendingToken().line;
+    var column = e.getOffendingToken().column;
+    return "line " + line + ":" + column;
+};
+
+// How should a token be displayed in an error message? The default
+//  is to display just the text, but during development you might
+//  want to have a lot of information spit out.  Override in that case
+//  to use t.toString() (which, for CommonToken, dumps everything about
+//  the token). This is better than forcing you to override a method in
+//  your token objects because you don't have to go modify your lexer
+//  so that it creates a new Java type.
+//
+// @deprecated This method is not called by the ANTLR 4 Runtime. Specific
+// implementations of {@link ANTLRErrorStrategy} may provide a similar
+// feature when necessary. For example, see
+// {@link DefaultErrorStrategy//getTokenErrorDisplay}.
+//
+Recognizer.prototype.getTokenErrorDisplay = function (t) {
+    if (t === null) {
+        return "<no token>";
+    }
+    var s = t.text;
+    if (s === null) {
+        if (t.type === Token.EOF) {
+            s = "<EOF>";
+        } else {
+            s = "<" + t.type + ">";
+        }
+    }
+    s = s.replace("\n", "\\n").replace("\r", "\\r").replace("\t", "\\t");
+    return "'" + s + "'";
+};
+
+Recognizer.prototype.getErrorListenerDispatch = function () {
+    return new ProxyErrorListener(this._listeners);
+};
+
+// subclass needs to override these if there are sempreds or actions
+// that the ATN interp needs to execute
+Recognizer.prototype.sempred = function (localctx, ruleIndex, actionIndex) {
+    return true;
+};
+
+Recognizer.prototype.precpred = function (localctx, precedence) {
+    return true;
+};
+
+//Indicate that the recognizer has changed internal state that is
+//consistent with the ATN state passed in.  This way we always know
+//where we are in the ATN as the parser goes along. The rule
+//context objects form a stack that lets us see the stack of
+//invoking rules. Combine this and we have complete ATN
+//configuration information.
+
+Object.defineProperty(Recognizer.prototype, "state", {
+    get: function get() {
+        return this._stateNumber;
+    },
+    set: function set(state) {
+        this._stateNumber = state;
+    }
+});
+
+exports.Recognizer = Recognizer;
+
+/***/ }),
+/* 28 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+// Generated from lib/Expr.g4 by ANTLR 4.7
+// jshint ignore: start
+var antlr4 = __webpack_require__(19);
+
+var serializedATN = ["\x03\u608B\uA72A\u8133\uB9ED\u417C\u3BE7\u7786\u5964", "\x02\r:\b\x01\x04\x02\t\x02\x04\x03\t\x03\x04\x04", "\t\x04\x04\x05\t\x05\x04\x06\t\x06\x04\x07\t\x07", "\x04\b\t\b\x04\t\t\t\x04\n\t\n\x04\x0B\t\x0B\x04\f\t\f", "\x03\x02\x03\x02\x03\x03\x03\x03\x03\x04\x03\x04", "\x03\x05\x03\x05\x03\x06\x03\x06\x03\x07\x03\x07", "\x03\b\x03\b\x03\t\x03\t\x03\n\x06\n+\n\n\r\n\x0E\n,\x03", "\x0B\x06\x0B0\n\x0B\r\x0B\x0E\x0B1\x03\f\x06\f5\n", "\f\r\f\x0E\f6\x03\f\x03\f\x02\x02\r\x03\x03\x05\x04", "\x07\x05\t\x06\x0B\x07\r\b\x0F\t\x11\n\x13\x0B\x15", "\f\x17\r\x03\x02\x05\x03\x022;\x04\x02C\\c|\x05\x02", "\x0B\f\x0F\x0F\"\"\x02<\x02\x03\x03\x02\x02\x02", "\x02\x05\x03\x02\x02\x02\x02\x07\x03\x02\x02\x02", "\x02\t\x03\x02\x02\x02\x02\x0B\x03\x02\x02\x02", "\x02\r\x03\x02\x02\x02\x02\x0F\x03\x02\x02\x02", "\x02\x11\x03\x02\x02\x02\x02\x13\x03\x02\x02\x02", "\x02\x15\x03\x02\x02\x02\x02\x17\x03\x02\x02\x02", "\x03\x19\x03\x02\x02\x02\x05\x1B\x03\x02\x02\x02", "\x07\x1D\x03\x02\x02\x02\t\x1F\x03\x02\x02\x02", "\x0B!\x03\x02\x02\x02\r#\x03\x02\x02\x02\x0F%\x03", "\x02\x02\x02\x11'\x03\x02\x02\x02\x13*\x03\x02", "\x02\x02\x15/\x03\x02\x02\x02\x174\x03\x02\x02", "\x02\x19\x1A\x07?\x02\x02\x1A\x04\x03\x02\x02", "\x02\x1B\x1C\x07,\x02\x02\x1C\x06\x03\x02\x02", "\x02\x1D\x1E\x071\x02\x02\x1E\b\x03\x02\x02\x02", "\x1F \x07-\x02\x02 \n\x03\x02\x02\x02!\"\x07/\x02", "\x02\"\f\x03\x02\x02\x02#$\x07*\x02\x02$\x0E\x03", "\x02\x02\x02%&\x07+\x02\x02&\x10\x03\x02\x02\x02", "'(\x07=\x02\x02(\x12\x03\x02\x02\x02)+\t\x02\x02", "\x02*)\x03\x02\x02\x02+,\x03\x02\x02\x02,*\x03\x02", "\x02\x02,-\x03\x02\x02\x02-\x14\x03\x02\x02\x02", ".0\t\x03\x02\x02/.\x03\x02\x02\x0201\x03\x02\x02", "\x021/\x03\x02\x02\x0212\x03\x02\x02\x022\x16\x03", "\x02\x02\x0235\t\x04\x02\x0243\x03\x02\x02\x025", "6\x03\x02\x02\x0264\x03\x02\x02\x0267\x03\x02\x02", "\x0278\x03\x02\x02\x0289\b\f\x02\x029\x18\x03\x02", "\x02\x02\x06\x02,16\x03\b\x02\x02"].join("");
+
+var atn = new antlr4.atn.ATNDeserializer().deserialize(serializedATN);
+
+var decisionsToDFA = atn.decisionToState.map(function (ds, index) {
+    return new antlr4.dfa.DFA(ds, index);
+});
+
+function ExprLexer(input) {
+    antlr4.Lexer.call(this, input);
+    this._interp = new antlr4.atn.LexerATNSimulator(this, atn, decisionsToDFA, new antlr4.PredictionContextCache());
+    return this;
+}
+
+ExprLexer.prototype = Object.create(antlr4.Lexer.prototype);
+ExprLexer.prototype.constructor = ExprLexer;
+
+ExprLexer.EOF = antlr4.Token.EOF;
+ExprLexer.T__0 = 1;
+ExprLexer.T__1 = 2;
+ExprLexer.T__2 = 3;
+ExprLexer.T__3 = 4;
+ExprLexer.T__4 = 5;
+ExprLexer.T__5 = 6;
+ExprLexer.T__6 = 7;
+ExprLexer.NEWLINE = 8;
+ExprLexer.INT = 9;
+ExprLexer.ID = 10;
+ExprLexer.WS = 11;
+
+ExprLexer.prototype.channelNames = ["DEFAULT_TOKEN_CHANNEL", "HIDDEN"];
+
+ExprLexer.prototype.modeNames = ["DEFAULT_MODE"];
+
+ExprLexer.prototype.literalNames = [null, "'='", "'*'", "'/'", "'+'", "'-'", "'('", "')'", "';'"];
+
+ExprLexer.prototype.symbolicNames = [null, null, null, null, null, null, null, null, "NEWLINE", "INT", "ID", "WS"];
+
+ExprLexer.prototype.ruleNames = ["T__0", "T__1", "T__2", "T__3", "T__4", "T__5", "T__6", "NEWLINE", "INT", "ID", "WS"];
+
+ExprLexer.prototype.grammarFileName = "Expr.g4";
+
+exports.ExprLexer = ExprLexer;
+
+/***/ }),
+/* 29 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+/* Copyright (c) 2012-2017 The ANTLR Project. All rights reserved.
+ * Use of this file is governed by the BSD 3-clause license that
+ * can be found in the LICENSE.txt file in the project root.
+ */
+
+var Utils = __webpack_require__(0);
+var Token = __webpack_require__(1).Token;
+var RuleNode = __webpack_require__(5).RuleNode;
+var ErrorNode = __webpack_require__(5).ErrorNode;
+var TerminalNode = __webpack_require__(5).TerminalNode;
+var ParserRuleContext = __webpack_require__(20).ParserRuleContext;
+var RuleContext = __webpack_require__(16).RuleContext;
+var INVALID_ALT_NUMBER = __webpack_require__(8).INVALID_ALT_NUMBER;
+
+/** A set of utility routines useful for all kinds of ANTLR trees. */
+function Trees() {}
+
+// Print out a whole tree in LISP form. {@link //getNodeText} is used on the
+//  node payloads to get the text for the nodes.  Detect
+//  parse trees and extract data appropriately.
+Trees.toStringTree = function (tree, ruleNames, recog) {
+    ruleNames = ruleNames || null;
+    recog = recog || null;
+    if (recog !== null) {
+        ruleNames = recog.ruleNames;
+    }
+    var s = Trees.getNodeText(tree, ruleNames);
+    s = Utils.escapeWhitespace(s, false);
+    var c = tree.getChildCount();
+    if (c === 0) {
+        return s;
+    }
+    var res = "(" + s + ' ';
+    if (c > 0) {
+        s = Trees.toStringTree(tree.getChild(0), ruleNames);
+        res = res.concat(s);
+    }
+    for (var i = 1; i < c; i++) {
+        s = Trees.toStringTree(tree.getChild(i), ruleNames);
+        res = res.concat(' ' + s);
+    }
+    res = res.concat(")");
+    return res;
+};
+
+Trees.getNodeText = function (t, ruleNames, recog) {
+    ruleNames = ruleNames || null;
+    recog = recog || null;
+    if (recog !== null) {
+        ruleNames = recog.ruleNames;
+    }
+    if (ruleNames !== null) {
+        if (t instanceof RuleContext) {
+            var altNumber = t.getAltNumber();
+            if (altNumber != INVALID_ALT_NUMBER) {
+                return ruleNames[t.ruleIndex] + ":" + altNumber;
+            }
+            return ruleNames[t.ruleIndex];
+        } else if (t instanceof ErrorNode) {
+            return t.toString();
+        } else if (t instanceof TerminalNode) {
+            if (t.symbol !== null) {
+                return t.symbol.text;
+            }
+        }
+    }
+    // no recog for rule names
+    var payload = t.getPayload();
+    if (payload instanceof Token) {
+        return payload.text;
+    }
+    return t.getPayload().toString();
+};
+
+// Return ordered list of all children of this node
+Trees.getChildren = function (t) {
+    var list = [];
+    for (var i = 0; i < t.getChildCount(); i++) {
+        list.push(t.getChild(i));
+    }
+    return list;
+};
+
+// Return a list of all ancestors of this node.  The first node of
+//  list is the root and the last is the parent of this node.
+//
+Trees.getAncestors = function (t) {
+    var ancestors = [];
+    t = t.getParent();
+    while (t !== null) {
+        ancestors = [t].concat(ancestors);
+        t = t.getParent();
+    }
+    return ancestors;
+};
+
+Trees.findAllTokenNodes = function (t, ttype) {
+    return Trees.findAllNodes(t, ttype, true);
+};
+
+Trees.findAllRuleNodes = function (t, ruleIndex) {
+    return Trees.findAllNodes(t, ruleIndex, false);
+};
+
+Trees.findAllNodes = function (t, index, findTokens) {
+    var nodes = [];
+    Trees._findAllNodes(t, index, findTokens, nodes);
+    return nodes;
+};
+
+Trees._findAllNodes = function (t, index, findTokens, nodes) {
+    // check this node (the root) first
+    if (findTokens && t instanceof TerminalNode) {
+        if (t.symbol.type === index) {
+            nodes.push(t);
+        }
+    } else if (!findTokens && t instanceof ParserRuleContext) {
+        if (t.ruleIndex === index) {
+            nodes.push(t);
+        }
+    }
+    // check children
+    for (var i = 0; i < t.getChildCount(); i++) {
+        Trees._findAllNodes(t.getChild(i), index, findTokens, nodes);
+    }
+};
+
+Trees.descendants = function (t) {
+    var nodes = [t];
+    for (var i = 0; i < t.getChildCount(); i++) {
+        nodes = nodes.concat(Trees.descendants(t.getChild(i)));
+    }
+    return nodes;
+};
+
+exports.Trees = Trees;
+
+/***/ }),
+/* 30 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+/* Copyright (c) 2012-2017 The ANTLR Project. All rights reserved.
+ * Use of this file is governed by the BSD 3-clause license that
+ * can be found in the LICENSE.txt file in the project root.
+ */
+
+var Token = __webpack_require__(1).Token;
+var ATN = __webpack_require__(8).ATN;
+var ATNType = __webpack_require__(56).ATNType;
+var ATNStates = __webpack_require__(4);
+var ATNState = ATNStates.ATNState;
+var BasicState = ATNStates.BasicState;
+var DecisionState = ATNStates.DecisionState;
+var BlockStartState = ATNStates.BlockStartState;
+var BlockEndState = ATNStates.BlockEndState;
+var LoopEndState = ATNStates.LoopEndState;
+var RuleStartState = ATNStates.RuleStartState;
+var RuleStopState = ATNStates.RuleStopState;
+var TokensStartState = ATNStates.TokensStartState;
+var PlusLoopbackState = ATNStates.PlusLoopbackState;
+var StarLoopbackState = ATNStates.StarLoopbackState;
+var StarLoopEntryState = ATNStates.StarLoopEntryState;
+var PlusBlockStartState = ATNStates.PlusBlockStartState;
+var StarBlockStartState = ATNStates.StarBlockStartState;
+var BasicBlockStartState = ATNStates.BasicBlockStartState;
+var Transitions = __webpack_require__(7);
+var Transition = Transitions.Transition;
+var AtomTransition = Transitions.AtomTransition;
+var SetTransition = Transitions.SetTransition;
+var NotSetTransition = Transitions.NotSetTransition;
+var RuleTransition = Transitions.RuleTransition;
+var RangeTransition = Transitions.RangeTransition;
+var ActionTransition = Transitions.ActionTransition;
+var EpsilonTransition = Transitions.EpsilonTransition;
+var WildcardTransition = Transitions.WildcardTransition;
+var PredicateTransition = Transitions.PredicateTransition;
+var PrecedencePredicateTransition = Transitions.PrecedencePredicateTransition;
+var IntervalSet = __webpack_require__(2).IntervalSet;
+var Interval = __webpack_require__(2).Interval;
+var ATNDeserializationOptions = __webpack_require__(31).ATNDeserializationOptions;
+var LexerActions = __webpack_require__(32);
+var LexerActionType = LexerActions.LexerActionType;
+var LexerSkipAction = LexerActions.LexerSkipAction;
+var LexerChannelAction = LexerActions.LexerChannelAction;
+var LexerCustomAction = LexerActions.LexerCustomAction;
+var LexerMoreAction = LexerActions.LexerMoreAction;
+var LexerTypeAction = LexerActions.LexerTypeAction;
+var LexerPushModeAction = LexerActions.LexerPushModeAction;
+var LexerPopModeAction = LexerActions.LexerPopModeAction;
+var LexerModeAction = LexerActions.LexerModeAction;
+// This is the earliest supported serialized UUID.
+// stick to serialized version for now, we don't need a UUID instance
+var BASE_SERIALIZED_UUID = "AADB8D7E-AEEF-4415-AD2B-8204D6CF042E";
+
+//
+// This UUID indicates the serialized ATN contains two sets of
+// IntervalSets, where the second set's values are encoded as
+// 32-bit integers to support the full Unicode SMP range up to U+10FFFF.
+//
+var ADDED_UNICODE_SMP = "59627784-3BE5-417A-B9EB-8131A7286089";
+
+// This list contains all of the currently supported UUIDs, ordered by when
+// the feature first appeared in this branch.
+var SUPPORTED_UUIDS = [BASE_SERIALIZED_UUID, ADDED_UNICODE_SMP];
+
+var SERIALIZED_VERSION = 3;
+
+// This is the current serialized UUID.
+var SERIALIZED_UUID = ADDED_UNICODE_SMP;
+
+function initArray(length, value) {
+    var tmp = [];
+    tmp[length - 1] = value;
+    return tmp.map(function (i) {
+        return value;
+    });
+}
+
+function ATNDeserializer(options) {
+
+    if (options === undefined || options === null) {
+        options = ATNDeserializationOptions.defaultOptions;
+    }
+    this.deserializationOptions = options;
+    this.stateFactories = null;
+    this.actionFactories = null;
+
+    return this;
+}
+
+// Determines if a particular serialized representation of an ATN supports
+// a particular feature, identified by the {@link UUID} used for serializing
+// the ATN at the time the feature was first introduced.
+//
+// @param feature The {@link UUID} marking the first time the feature was
+// supported in the serialized ATN.
+// @param actualUuid The {@link UUID} of the actual serialized ATN which is
+// currently being deserialized.
+// @return {@code true} if the {@code actualUuid} value represents a
+// serialized ATN at or after the feature identified by {@code feature} was
+// introduced; otherwise, {@code false}.
+
+ATNDeserializer.prototype.isFeatureSupported = function (feature, actualUuid) {
+    var idx1 = SUPPORTED_UUIDS.indexOf(feature);
+    if (idx1 < 0) {
+        return false;
+    }
+    var idx2 = SUPPORTED_UUIDS.indexOf(actualUuid);
+    return idx2 >= idx1;
+};
+
+ATNDeserializer.prototype.deserialize = function (data) {
+    this.reset(data);
+    this.checkVersion();
+    this.checkUUID();
+    var atn = this.readATN();
+    this.readStates(atn);
+    this.readRules(atn);
+    this.readModes(atn);
+    var sets = [];
+    // First, deserialize sets with 16-bit arguments <= U+FFFF.
+    this.readSets(atn, sets, this.readInt.bind(this));
+    // Next, if the ATN was serialized with the Unicode SMP feature,
+    // deserialize sets with 32-bit arguments <= U+10FFFF.
+    if (this.isFeatureSupported(ADDED_UNICODE_SMP, this.uuid)) {
+        this.readSets(atn, sets, this.readInt32.bind(this));
+    }
+    this.readEdges(atn, sets);
+    this.readDecisions(atn);
+    this.readLexerActions(atn);
+    this.markPrecedenceDecisions(atn);
+    this.verifyATN(atn);
+    if (this.deserializationOptions.generateRuleBypassTransitions && atn.grammarType === ATNType.PARSER) {
+        this.generateRuleBypassTransitions(atn);
+        // re-verify after modification
+        this.verifyATN(atn);
+    }
+    return atn;
+};
+
+ATNDeserializer.prototype.reset = function (data) {
+    var adjust = function adjust(c) {
+        var v = c.charCodeAt(0);
+        return v > 1 ? v - 2 : -1;
+    };
+    var temp = data.split("").map(adjust);
+    // don't adjust the first value since that's the version number
+    temp[0] = data.charCodeAt(0);
+    this.data = temp;
+    this.pos = 0;
+};
+
+ATNDeserializer.prototype.checkVersion = function () {
+    var version = this.readInt();
+    if (version !== SERIALIZED_VERSION) {
+        throw "Could not deserialize ATN with version " + version + " (expected " + SERIALIZED_VERSION + ").";
+    }
+};
+
+ATNDeserializer.prototype.checkUUID = function () {
+    var uuid = this.readUUID();
+    if (SUPPORTED_UUIDS.indexOf(uuid) < 0) {
+        throw "Could not deserialize ATN with UUID: " + uuid + " (expected " + SERIALIZED_UUID + " or a legacy UUID).", uuid, SERIALIZED_UUID;
+    }
+    this.uuid = uuid;
+};
+
+ATNDeserializer.prototype.readATN = function () {
+    var grammarType = this.readInt();
+    var maxTokenType = this.readInt();
+    return new ATN(grammarType, maxTokenType);
+};
+
+ATNDeserializer.prototype.readStates = function (atn) {
+    var j, pair, stateNumber;
+    var loopBackStateNumbers = [];
+    var endStateNumbers = [];
+    var nstates = this.readInt();
+    for (var i = 0; i < nstates; i++) {
+        var stype = this.readInt();
+        // ignore bad type of states
+        if (stype === ATNState.INVALID_TYPE) {
+            atn.addState(null);
+            continue;
+        }
+        var ruleIndex = this.readInt();
+        if (ruleIndex === 0xFFFF) {
+            ruleIndex = -1;
+        }
+        var s = this.stateFactory(stype, ruleIndex);
+        if (stype === ATNState.LOOP_END) {
+            // special case
+            var loopBackStateNumber = this.readInt();
+            loopBackStateNumbers.push([s, loopBackStateNumber]);
+        } else if (s instanceof BlockStartState) {
+            var endStateNumber = this.readInt();
+            endStateNumbers.push([s, endStateNumber]);
+        }
+        atn.addState(s);
+    }
+    // delay the assignment of loop back and end states until we know all the
+    // state instances have been initialized
+    for (j = 0; j < loopBackStateNumbers.length; j++) {
+        pair = loopBackStateNumbers[j];
+        pair[0].loopBackState = atn.states[pair[1]];
+    }
+
+    for (j = 0; j < endStateNumbers.length; j++) {
+        pair = endStateNumbers[j];
+        pair[0].endState = atn.states[pair[1]];
+    }
+
+    var numNonGreedyStates = this.readInt();
+    for (j = 0; j < numNonGreedyStates; j++) {
+        stateNumber = this.readInt();
+        atn.states[stateNumber].nonGreedy = true;
+    }
+
+    var numPrecedenceStates = this.readInt();
+    for (j = 0; j < numPrecedenceStates; j++) {
+        stateNumber = this.readInt();
+        atn.states[stateNumber].isPrecedenceRule = true;
+    }
+};
+
+ATNDeserializer.prototype.readRules = function (atn) {
+    var i;
+    var nrules = this.readInt();
+    if (atn.grammarType === ATNType.LEXER) {
+        atn.ruleToTokenType = initArray(nrules, 0);
+    }
+    atn.ruleToStartState = initArray(nrules, 0);
+    for (i = 0; i < nrules; i++) {
+        var s = this.readInt();
+        var startState = atn.states[s];
+        atn.ruleToStartState[i] = startState;
+        if (atn.grammarType === ATNType.LEXER) {
+            var tokenType = this.readInt();
+            if (tokenType === 0xFFFF) {
+                tokenType = Token.EOF;
+            }
+            atn.ruleToTokenType[i] = tokenType;
+        }
+    }
+    atn.ruleToStopState = initArray(nrules, 0);
+    for (i = 0; i < atn.states.length; i++) {
+        var state = atn.states[i];
+        if (!(state instanceof RuleStopState)) {
+            continue;
+        }
+        atn.ruleToStopState[state.ruleIndex] = state;
+        atn.ruleToStartState[state.ruleIndex].stopState = state;
+    }
+};
+
+ATNDeserializer.prototype.readModes = function (atn) {
+    var nmodes = this.readInt();
+    for (var i = 0; i < nmodes; i++) {
+        var s = this.readInt();
+        atn.modeToStartState.push(atn.states[s]);
+    }
+};
+
+ATNDeserializer.prototype.readSets = function (atn, sets, readUnicode) {
+    var m = this.readInt();
+    for (var i = 0; i < m; i++) {
+        var iset = new IntervalSet();
+        sets.push(iset);
+        var n = this.readInt();
+        var containsEof = this.readInt();
+        if (containsEof !== 0) {
+            iset.addOne(-1);
+        }
+        for (var j = 0; j < n; j++) {
+            var i1 = readUnicode();
+            var i2 = readUnicode();
+            iset.addRange(i1, i2);
+        }
+    }
+};
+
+ATNDeserializer.prototype.readEdges = function (atn, sets) {
+    var i, j, state, trans, target;
+    var nedges = this.readInt();
+    for (i = 0; i < nedges; i++) {
+        var src = this.readInt();
+        var trg = this.readInt();
+        var ttype = this.readInt();
+        var arg1 = this.readInt();
+        var arg2 = this.readInt();
+        var arg3 = this.readInt();
+        trans = this.edgeFactory(atn, ttype, src, trg, arg1, arg2, arg3, sets);
+        var srcState = atn.states[src];
+        srcState.addTransition(trans);
+    }
+    // edges for rule stop states can be derived, so they aren't serialized
+    for (i = 0; i < atn.states.length; i++) {
+        state = atn.states[i];
+        for (j = 0; j < state.transitions.length; j++) {
+            var t = state.transitions[j];
+            if (!(t instanceof RuleTransition)) {
+                continue;
+            }
+            var outermostPrecedenceReturn = -1;
+            if (atn.ruleToStartState[t.target.ruleIndex].isPrecedenceRule) {
+                if (t.precedence === 0) {
+                    outermostPrecedenceReturn = t.target.ruleIndex;
+                }
+            }
+
+            trans = new EpsilonTransition(t.followState, outermostPrecedenceReturn);
+            atn.ruleToStopState[t.target.ruleIndex].addTransition(trans);
+        }
+    }
+
+    for (i = 0; i < atn.states.length; i++) {
+        state = atn.states[i];
+        if (state instanceof BlockStartState) {
+            // we need to know the end state to set its start state
+            if (state.endState === null) {
+                throw "IllegalState";
+            }
+            // block end states can only be associated to a single block start
+            // state
+            if (state.endState.startState !== null) {
+                throw "IllegalState";
+            }
+            state.endState.startState = state;
+        }
+        if (state instanceof PlusLoopbackState) {
+            for (j = 0; j < state.transitions.length; j++) {
+                target = state.transitions[j].target;
+                if (target instanceof PlusBlockStartState) {
+                    target.loopBackState = state;
+                }
+            }
+        } else if (state instanceof StarLoopbackState) {
+            for (j = 0; j < state.transitions.length; j++) {
+                target = state.transitions[j].target;
+                if (target instanceof StarLoopEntryState) {
+                    target.loopBackState = state;
+                }
+            }
+        }
+    }
+};
+
+ATNDeserializer.prototype.readDecisions = function (atn) {
+    var ndecisions = this.readInt();
+    for (var i = 0; i < ndecisions; i++) {
+        var s = this.readInt();
+        var decState = atn.states[s];
+        atn.decisionToState.push(decState);
+        decState.decision = i;
+    }
+};
+
+ATNDeserializer.prototype.readLexerActions = function (atn) {
+    if (atn.grammarType === ATNType.LEXER) {
+        var count = this.readInt();
+        atn.lexerActions = initArray(count, null);
+        for (var i = 0; i < count; i++) {
+            var actionType = this.readInt();
+            var data1 = this.readInt();
+            if (data1 === 0xFFFF) {
+                data1 = -1;
+            }
+            var data2 = this.readInt();
+            if (data2 === 0xFFFF) {
+                data2 = -1;
+            }
+            var lexerAction = this.lexerActionFactory(actionType, data1, data2);
+            atn.lexerActions[i] = lexerAction;
+        }
+    }
+};
+
+ATNDeserializer.prototype.generateRuleBypassTransitions = function (atn) {
+    var i;
+    var count = atn.ruleToStartState.length;
+    for (i = 0; i < count; i++) {
+        atn.ruleToTokenType[i] = atn.maxTokenType + i + 1;
+    }
+    for (i = 0; i < count; i++) {
+        this.generateRuleBypassTransition(atn, i);
+    }
+};
+
+ATNDeserializer.prototype.generateRuleBypassTransition = function (atn, idx) {
+    var i, state;
+    var bypassStart = new BasicBlockStartState();
+    bypassStart.ruleIndex = idx;
+    atn.addState(bypassStart);
+
+    var bypassStop = new BlockEndState();
+    bypassStop.ruleIndex = idx;
+    atn.addState(bypassStop);
+
+    bypassStart.endState = bypassStop;
+    atn.defineDecisionState(bypassStart);
+
+    bypassStop.startState = bypassStart;
+
+    var excludeTransition = null;
+    var endState = null;
+
+    if (atn.ruleToStartState[idx].isPrecedenceRule) {
+        // wrap from the beginning of the rule to the StarLoopEntryState
+        endState = null;
+        for (i = 0; i < atn.states.length; i++) {
+            state = atn.states[i];
+            if (this.stateIsEndStateFor(state, idx)) {
+                endState = state;
+                excludeTransition = state.loopBackState.transitions[0];
+                break;
+            }
+        }
+        if (excludeTransition === null) {
+            throw "Couldn't identify final state of the precedence rule prefix section.";
+        }
+    } else {
+        endState = atn.ruleToStopState[idx];
+    }
+
+    // all non-excluded transitions that currently target end state need to
+    // target blockEnd instead
+    for (i = 0; i < atn.states.length; i++) {
+        state = atn.states[i];
+        for (var j = 0; j < state.transitions.length; j++) {
+            var transition = state.transitions[j];
+            if (transition === excludeTransition) {
+                continue;
+            }
+            if (transition.target === endState) {
+                transition.target = bypassStop;
+            }
+        }
+    }
+
+    // all transitions leaving the rule start state need to leave blockStart
+    // instead
+    var ruleToStartState = atn.ruleToStartState[idx];
+    var count = ruleToStartState.transitions.length;
+    while (count > 0) {
+        bypassStart.addTransition(ruleToStartState.transitions[count - 1]);
+        ruleToStartState.transitions = ruleToStartState.transitions.slice(-1);
+    }
+    // link the new states
+    atn.ruleToStartState[idx].addTransition(new EpsilonTransition(bypassStart));
+    bypassStop.addTransition(new EpsilonTransition(endState));
+
+    var matchState = new BasicState();
+    atn.addState(matchState);
+    matchState.addTransition(new AtomTransition(bypassStop, atn.ruleToTokenType[idx]));
+    bypassStart.addTransition(new EpsilonTransition(matchState));
+};
+
+ATNDeserializer.prototype.stateIsEndStateFor = function (state, idx) {
+    if (state.ruleIndex !== idx) {
+        return null;
+    }
+    if (!(state instanceof StarLoopEntryState)) {
+        return null;
+    }
+    var maybeLoopEndState = state.transitions[state.transitions.length - 1].target;
+    if (!(maybeLoopEndState instanceof LoopEndState)) {
+        return null;
+    }
+    if (maybeLoopEndState.epsilonOnlyTransitions && maybeLoopEndState.transitions[0].target instanceof RuleStopState) {
+        return state;
+    } else {
+        return null;
+    }
+};
+
+//
+// Analyze the {@link StarLoopEntryState} states in the specified ATN to set
+// the {@link StarLoopEntryState//isPrecedenceDecision} field to the
+// correct value.
+//
+// @param atn The ATN.
+//
+ATNDeserializer.prototype.markPrecedenceDecisions = function (atn) {
+    for (var i = 0; i < atn.states.length; i++) {
+        var state = atn.states[i];
+        if (!(state instanceof StarLoopEntryState)) {
+            continue;
+        }
+        // We analyze the ATN to determine if this ATN decision state is the
+        // decision for the closure block that determines whether a
+        // precedence rule should continue or complete.
+        //
+        if (atn.ruleToStartState[state.ruleIndex].isPrecedenceRule) {
+            var maybeLoopEndState = state.transitions[state.transitions.length - 1].target;
+            if (maybeLoopEndState instanceof LoopEndState) {
+                if (maybeLoopEndState.epsilonOnlyTransitions && maybeLoopEndState.transitions[0].target instanceof RuleStopState) {
+                    state.isPrecedenceDecision = true;
+                }
+            }
+        }
+    }
+};
+
+ATNDeserializer.prototype.verifyATN = function (atn) {
+    if (!this.deserializationOptions.verifyATN) {
+        return;
+    }
+    // verify assumptions
+    for (var i = 0; i < atn.states.length; i++) {
+        var state = atn.states[i];
+        if (state === null) {
+            continue;
+        }
+        this.checkCondition(state.epsilonOnlyTransitions || state.transitions.length <= 1);
+        if (state instanceof PlusBlockStartState) {
+            this.checkCondition(state.loopBackState !== null);
+        } else if (state instanceof StarLoopEntryState) {
+            this.checkCondition(state.loopBackState !== null);
+            this.checkCondition(state.transitions.length === 2);
+            if (state.transitions[0].target instanceof StarBlockStartState) {
+                this.checkCondition(state.transitions[1].target instanceof LoopEndState);
+                this.checkCondition(!state.nonGreedy);
+            } else if (state.transitions[0].target instanceof LoopEndState) {
+                this.checkCondition(state.transitions[1].target instanceof StarBlockStartState);
+                this.checkCondition(state.nonGreedy);
+            } else {
+                throw "IllegalState";
+            }
+        } else if (state instanceof StarLoopbackState) {
+            this.checkCondition(state.transitions.length === 1);
+            this.checkCondition(state.transitions[0].target instanceof StarLoopEntryState);
+        } else if (state instanceof LoopEndState) {
+            this.checkCondition(state.loopBackState !== null);
+        } else if (state instanceof RuleStartState) {
+            this.checkCondition(state.stopState !== null);
+        } else if (state instanceof BlockStartState) {
+            this.checkCondition(state.endState !== null);
+        } else if (state instanceof BlockEndState) {
+            this.checkCondition(state.startState !== null);
+        } else if (state instanceof DecisionState) {
+            this.checkCondition(state.transitions.length <= 1 || state.decision >= 0);
+        } else {
+            this.checkCondition(state.transitions.length <= 1 || state instanceof RuleStopState);
+        }
+    }
+};
+
+ATNDeserializer.prototype.checkCondition = function (condition, message) {
+    if (!condition) {
+        if (message === undefined || message === null) {
+            message = "IllegalState";
+        }
+        throw message;
+    }
+};
+
+ATNDeserializer.prototype.readInt = function () {
+    return this.data[this.pos++];
+};
+
+ATNDeserializer.prototype.readInt32 = function () {
+    var low = this.readInt();
+    var high = this.readInt();
+    return low | high << 16;
+};
+
+ATNDeserializer.prototype.readLong = function () {
+    var low = this.readInt32();
+    var high = this.readInt32();
+    return low & 0x00000000FFFFFFFF | high << 32;
+};
+
+function createByteToHex() {
+    var bth = [];
+    for (var i = 0; i < 256; i++) {
+        bth[i] = (i + 0x100).toString(16).substr(1).toUpperCase();
+    }
+    return bth;
+}
+
+var byteToHex = createByteToHex();
+
+ATNDeserializer.prototype.readUUID = function () {
+    var bb = [];
+    for (var i = 7; i >= 0; i--) {
+        var int = this.readInt();
+        /* jshint bitwise: false */
+        bb[2 * i + 1] = int & 0xFF;
+        bb[2 * i] = int >> 8 & 0xFF;
+    }
+    return byteToHex[bb[0]] + byteToHex[bb[1]] + byteToHex[bb[2]] + byteToHex[bb[3]] + '-' + byteToHex[bb[4]] + byteToHex[bb[5]] + '-' + byteToHex[bb[6]] + byteToHex[bb[7]] + '-' + byteToHex[bb[8]] + byteToHex[bb[9]] + '-' + byteToHex[bb[10]] + byteToHex[bb[11]] + byteToHex[bb[12]] + byteToHex[bb[13]] + byteToHex[bb[14]] + byteToHex[bb[15]];
+};
+
+ATNDeserializer.prototype.edgeFactory = function (atn, type, src, trg, arg1, arg2, arg3, sets) {
+    var target = atn.states[trg];
+    switch (type) {
+        case Transition.EPSILON:
+            return new EpsilonTransition(target);
+        case Transition.RANGE:
+            return arg3 !== 0 ? new RangeTransition(target, Token.EOF, arg2) : new RangeTransition(target, arg1, arg2);
+        case Transition.RULE:
+            return new RuleTransition(atn.states[arg1], arg2, arg3, target);
+        case Transition.PREDICATE:
+            return new PredicateTransition(target, arg1, arg2, arg3 !== 0);
+        case Transition.PRECEDENCE:
+            return new PrecedencePredicateTransition(target, arg1);
+        case Transition.ATOM:
+            return arg3 !== 0 ? new AtomTransition(target, Token.EOF) : new AtomTransition(target, arg1);
+        case Transition.ACTION:
+            return new ActionTransition(target, arg1, arg2, arg3 !== 0);
+        case Transition.SET:
+            return new SetTransition(target, sets[arg1]);
+        case Transition.NOT_SET:
+            return new NotSetTransition(target, sets[arg1]);
+        case Transition.WILDCARD:
+            return new WildcardTransition(target);
+        default:
+            throw "The specified transition type: " + type + " is not valid.";
+    }
+};
+
+ATNDeserializer.prototype.stateFactory = function (type, ruleIndex) {
+    if (this.stateFactories === null) {
+        var sf = [];
+        sf[ATNState.INVALID_TYPE] = null;
+        sf[ATNState.BASIC] = function () {
+            return new BasicState();
+        };
+        sf[ATNState.RULE_START] = function () {
+            return new RuleStartState();
+        };
+        sf[ATNState.BLOCK_START] = function () {
+            return new BasicBlockStartState();
+        };
+        sf[ATNState.PLUS_BLOCK_START] = function () {
+            return new PlusBlockStartState();
+        };
+        sf[ATNState.STAR_BLOCK_START] = function () {
+            return new StarBlockStartState();
+        };
+        sf[ATNState.TOKEN_START] = function () {
+            return new TokensStartState();
+        };
+        sf[ATNState.RULE_STOP] = function () {
+            return new RuleStopState();
+        };
+        sf[ATNState.BLOCK_END] = function () {
+            return new BlockEndState();
+        };
+        sf[ATNState.STAR_LOOP_BACK] = function () {
+            return new StarLoopbackState();
+        };
+        sf[ATNState.STAR_LOOP_ENTRY] = function () {
+            return new StarLoopEntryState();
+        };
+        sf[ATNState.PLUS_LOOP_BACK] = function () {
+            return new PlusLoopbackState();
+        };
+        sf[ATNState.LOOP_END] = function () {
+            return new LoopEndState();
+        };
+        this.stateFactories = sf;
+    }
+    if (type > this.stateFactories.length || this.stateFactories[type] === null) {
+        throw "The specified state type " + type + " is not valid.";
+    } else {
+        var s = this.stateFactories[type]();
+        if (s !== null) {
+            s.ruleIndex = ruleIndex;
+            return s;
+        }
+    }
+};
+
+ATNDeserializer.prototype.lexerActionFactory = function (type, data1, data2) {
+    if (this.actionFactories === null) {
+        var af = [];
+        af[LexerActionType.CHANNEL] = function (data1, data2) {
+            return new LexerChannelAction(data1);
+        };
+        af[LexerActionType.CUSTOM] = function (data1, data2) {
+            return new LexerCustomAction(data1, data2);
+        };
+        af[LexerActionType.MODE] = function (data1, data2) {
+            return new LexerModeAction(data1);
+        };
+        af[LexerActionType.MORE] = function (data1, data2) {
+            return LexerMoreAction.INSTANCE;
+        };
+        af[LexerActionType.POP_MODE] = function (data1, data2) {
+            return LexerPopModeAction.INSTANCE;
+        };
+        af[LexerActionType.PUSH_MODE] = function (data1, data2) {
+            return new LexerPushModeAction(data1);
+        };
+        af[LexerActionType.SKIP] = function (data1, data2) {
+            return LexerSkipAction.INSTANCE;
+        };
+        af[LexerActionType.TYPE] = function (data1, data2) {
+            return new LexerTypeAction(data1);
+        };
+        this.actionFactories = af;
+    }
+    if (type > this.actionFactories.length || this.actionFactories[type] === null) {
+        throw "The specified lexer action type " + type + " is not valid.";
+    } else {
+        return this.actionFactories[type](data1, data2);
+    }
+};
+
+exports.ATNDeserializer = ATNDeserializer;
+
+/***/ }),
 /* 31 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
+
+/* Copyright (c) 2012-2017 The ANTLR Project. All rights reserved.
+ * Use of this file is governed by the BSD 3-clause license that
+ * can be found in the LICENSE.txt file in the project root.
+ */
+
+function ATNDeserializationOptions(copyFrom) {
+  if (copyFrom === undefined) {
+    copyFrom = null;
+  }
+  this.readOnly = false;
+  this.verifyATN = copyFrom === null ? true : copyFrom.verifyATN;
+  this.generateRuleBypassTransitions = copyFrom === null ? false : copyFrom.generateRuleBypassTransitions;
+
+  return this;
+}
+
+ATNDeserializationOptions.defaultOptions = new ATNDeserializationOptions();
+ATNDeserializationOptions.defaultOptions.readOnly = true;
+
+//    def __setattr__(self, key, value):
+//        if key!="readOnly" and self.readOnly:
+//            raise Exception("The object is read only.")
+//        super(type(self), self).__setattr__(key,value)
+
+exports.ATNDeserializationOptions = ATNDeserializationOptions;
 
 /***/ }),
 /* 32 */
@@ -8016,17 +7140,1636 @@ exports.DefaultErrorStrategy = DefaultErrorStrategy;
 "use strict";
 
 
-var _ace = __webpack_require__(33);
+//
+/* Copyright (c) 2012-2017 The ANTLR Project. All rights reserved.
+ * Use of this file is governed by the BSD 3-clause license that
+ * can be found in the LICENSE.txt file in the project root.
+ */
+//
+
+function LexerActionType() {}
+
+LexerActionType.CHANNEL = 0; //The type of a {@link LexerChannelAction} action.
+LexerActionType.CUSTOM = 1; //The type of a {@link LexerCustomAction} action.
+LexerActionType.MODE = 2; //The type of a {@link LexerModeAction} action.
+LexerActionType.MORE = 3; //The type of a {@link LexerMoreAction} action.
+LexerActionType.POP_MODE = 4; //The type of a {@link LexerPopModeAction} action.
+LexerActionType.PUSH_MODE = 5; //The type of a {@link LexerPushModeAction} action.
+LexerActionType.SKIP = 6; //The type of a {@link LexerSkipAction} action.
+LexerActionType.TYPE = 7; //The type of a {@link LexerTypeAction} action.
+
+function LexerAction(action) {
+    this.actionType = action;
+    this.isPositionDependent = false;
+    return this;
+}
+
+LexerAction.prototype.hashCode = function () {
+    var hash = new Hash();
+    this.updateHashCode(hash);
+    return hash.finish();
+};
+
+LexerAction.prototype.updateHashCode = function (hash) {
+    hash.update(this.actionType);
+};
+
+LexerAction.prototype.equals = function (other) {
+    return this === other;
+};
+
+//
+// Implements the {@code skip} lexer action by calling {@link Lexer//skip}.
+//
+// <p>The {@code skip} command does not have any parameters, so this action is
+// implemented as a singleton instance exposed by {@link //INSTANCE}.</p>
+function LexerSkipAction() {
+    LexerAction.call(this, LexerActionType.SKIP);
+    return this;
+}
+
+LexerSkipAction.prototype = Object.create(LexerAction.prototype);
+LexerSkipAction.prototype.constructor = LexerSkipAction;
+
+// Provides a singleton instance of this parameterless lexer action.
+LexerSkipAction.INSTANCE = new LexerSkipAction();
+
+LexerSkipAction.prototype.execute = function (lexer) {
+    lexer.skip();
+};
+
+LexerSkipAction.prototype.toString = function () {
+    return "skip";
+};
+
+//  Implements the {@code type} lexer action by calling {@link Lexer//setType}
+// with the assigned type.
+function LexerTypeAction(type) {
+    LexerAction.call(this, LexerActionType.TYPE);
+    this.type = type;
+    return this;
+}
+
+LexerTypeAction.prototype = Object.create(LexerAction.prototype);
+LexerTypeAction.prototype.constructor = LexerTypeAction;
+
+LexerTypeAction.prototype.execute = function (lexer) {
+    lexer.type = this.type;
+};
+
+LexerTypeAction.prototype.updateHashCode = function (hash) {
+    hash.update(this.actionType, this.type);
+};
+
+LexerTypeAction.prototype.equals = function (other) {
+    if (this === other) {
+        return true;
+    } else if (!(other instanceof LexerTypeAction)) {
+        return false;
+    } else {
+        return this.type === other.type;
+    }
+};
+
+LexerTypeAction.prototype.toString = function () {
+    return "type(" + this.type + ")";
+};
+
+// Implements the {@code pushMode} lexer action by calling
+// {@link Lexer//pushMode} with the assigned mode.
+function LexerPushModeAction(mode) {
+    LexerAction.call(this, LexerActionType.PUSH_MODE);
+    this.mode = mode;
+    return this;
+}
+
+LexerPushModeAction.prototype = Object.create(LexerAction.prototype);
+LexerPushModeAction.prototype.constructor = LexerPushModeAction;
+
+// <p>This action is implemented by calling {@link Lexer//pushMode} with the
+// value provided by {@link //getMode}.</p>
+LexerPushModeAction.prototype.execute = function (lexer) {
+    lexer.pushMode(this.mode);
+};
+
+LexerPushModeAction.prototype.updateHashCode = function (hash) {
+    hash.update(this.actionType, this.mode);
+};
+
+LexerPushModeAction.prototype.equals = function (other) {
+    if (this === other) {
+        return true;
+    } else if (!(other instanceof LexerPushModeAction)) {
+        return false;
+    } else {
+        return this.mode === other.mode;
+    }
+};
+
+LexerPushModeAction.prototype.toString = function () {
+    return "pushMode(" + this.mode + ")";
+};
+
+// Implements the {@code popMode} lexer action by calling {@link Lexer//popMode}.
+//
+// <p>The {@code popMode} command does not have any parameters, so this action is
+// implemented as a singleton instance exposed by {@link //INSTANCE}.</p>
+function LexerPopModeAction() {
+    LexerAction.call(this, LexerActionType.POP_MODE);
+    return this;
+}
+
+LexerPopModeAction.prototype = Object.create(LexerAction.prototype);
+LexerPopModeAction.prototype.constructor = LexerPopModeAction;
+
+LexerPopModeAction.INSTANCE = new LexerPopModeAction();
+
+// <p>This action is implemented by calling {@link Lexer//popMode}.</p>
+LexerPopModeAction.prototype.execute = function (lexer) {
+    lexer.popMode();
+};
+
+LexerPopModeAction.prototype.toString = function () {
+    return "popMode";
+};
+
+// Implements the {@code more} lexer action by calling {@link Lexer//more}.
+//
+// <p>The {@code more} command does not have any parameters, so this action is
+// implemented as a singleton instance exposed by {@link //INSTANCE}.</p>
+function LexerMoreAction() {
+    LexerAction.call(this, LexerActionType.MORE);
+    return this;
+}
+
+LexerMoreAction.prototype = Object.create(LexerAction.prototype);
+LexerMoreAction.prototype.constructor = LexerMoreAction;
+
+LexerMoreAction.INSTANCE = new LexerMoreAction();
+
+// <p>This action is implemented by calling {@link Lexer//popMode}.</p>
+LexerMoreAction.prototype.execute = function (lexer) {
+    lexer.more();
+};
+
+LexerMoreAction.prototype.toString = function () {
+    return "more";
+};
+
+// Implements the {@code mode} lexer action by calling {@link Lexer//mode} with
+// the assigned mode.
+function LexerModeAction(mode) {
+    LexerAction.call(this, LexerActionType.MODE);
+    this.mode = mode;
+    return this;
+}
+
+LexerModeAction.prototype = Object.create(LexerAction.prototype);
+LexerModeAction.prototype.constructor = LexerModeAction;
+
+// <p>This action is implemented by calling {@link Lexer//mode} with the
+// value provided by {@link //getMode}.</p>
+LexerModeAction.prototype.execute = function (lexer) {
+    lexer.mode(this.mode);
+};
+
+LexerModeAction.prototype.updateHashCode = function (hash) {
+    hash.update(this.actionType, this.mode);
+};
+
+LexerModeAction.prototype.equals = function (other) {
+    if (this === other) {
+        return true;
+    } else if (!(other instanceof LexerModeAction)) {
+        return false;
+    } else {
+        return this.mode === other.mode;
+    }
+};
+
+LexerModeAction.prototype.toString = function () {
+    return "mode(" + this.mode + ")";
+};
+
+// Executes a custom lexer action by calling {@link Recognizer//action} with the
+// rule and action indexes assigned to the custom action. The implementation of
+// a custom action is added to the generated code for the lexer in an override
+// of {@link Recognizer//action} when the grammar is compiled.
+//
+// <p>This class may represent embedded actions created with the <code>{...}</code>
+// syntax in ANTLR 4, as well as actions created for lexer commands where the
+// command argument could not be evaluated when the grammar was compiled.</p>
+
+
+// Constructs a custom lexer action with the specified rule and action
+// indexes.
+//
+// @param ruleIndex The rule index to use for calls to
+// {@link Recognizer//action}.
+// @param actionIndex The action index to use for calls to
+// {@link Recognizer//action}.
+
+function LexerCustomAction(ruleIndex, actionIndex) {
+    LexerAction.call(this, LexerActionType.CUSTOM);
+    this.ruleIndex = ruleIndex;
+    this.actionIndex = actionIndex;
+    this.isPositionDependent = true;
+    return this;
+}
+
+LexerCustomAction.prototype = Object.create(LexerAction.prototype);
+LexerCustomAction.prototype.constructor = LexerCustomAction;
+
+// <p>Custom actions are implemented by calling {@link Lexer//action} with the
+// appropriate rule and action indexes.</p>
+LexerCustomAction.prototype.execute = function (lexer) {
+    lexer.action(null, this.ruleIndex, this.actionIndex);
+};
+
+LexerCustomAction.prototype.updateHashCode = function (hash) {
+    hash.update(this.actionType, this.ruleIndex, this.actionIndex);
+};
+
+LexerCustomAction.prototype.equals = function (other) {
+    if (this === other) {
+        return true;
+    } else if (!(other instanceof LexerCustomAction)) {
+        return false;
+    } else {
+        return this.ruleIndex === other.ruleIndex && this.actionIndex === other.actionIndex;
+    }
+};
+
+// Implements the {@code channel} lexer action by calling
+// {@link Lexer//setChannel} with the assigned channel.
+// Constructs a new {@code channel} action with the specified channel value.
+// @param channel The channel value to pass to {@link Lexer//setChannel}.
+function LexerChannelAction(channel) {
+    LexerAction.call(this, LexerActionType.CHANNEL);
+    this.channel = channel;
+    return this;
+}
+
+LexerChannelAction.prototype = Object.create(LexerAction.prototype);
+LexerChannelAction.prototype.constructor = LexerChannelAction;
+
+// <p>This action is implemented by calling {@link Lexer//setChannel} with the
+// value provided by {@link //getChannel}.</p>
+LexerChannelAction.prototype.execute = function (lexer) {
+    lexer._channel = this.channel;
+};
+
+LexerChannelAction.prototype.updateHashCode = function (hash) {
+    hash.update(this.actionType, this.channel);
+};
+
+LexerChannelAction.prototype.equals = function (other) {
+    if (this === other) {
+        return true;
+    } else if (!(other instanceof LexerChannelAction)) {
+        return false;
+    } else {
+        return this.channel === other.channel;
+    }
+};
+
+LexerChannelAction.prototype.toString = function () {
+    return "channel(" + this.channel + ")";
+};
+
+// This implementation of {@link LexerAction} is used for tracking input offsets
+// for position-dependent actions within a {@link LexerActionExecutor}.
+//
+// <p>This action is not serialized as part of the ATN, and is only required for
+// position-dependent lexer actions which appear at a location other than the
+// end of a rule. For more information about DFA optimizations employed for
+// lexer actions, see {@link LexerActionExecutor//append} and
+// {@link LexerActionExecutor//fixOffsetBeforeMatch}.</p>
+
+// Constructs a new indexed custom action by associating a character offset
+// with a {@link LexerAction}.
+//
+// <p>Note: This class is only required for lexer actions for which
+// {@link LexerAction//isPositionDependent} returns {@code true}.</p>
+//
+// @param offset The offset into the input {@link CharStream}, relative to
+// the token start index, at which the specified lexer action should be
+// executed.
+// @param action The lexer action to execute at a particular offset in the
+// input {@link CharStream}.
+function LexerIndexedCustomAction(offset, action) {
+    LexerAction.call(this, action.actionType);
+    this.offset = offset;
+    this.action = action;
+    this.isPositionDependent = true;
+    return this;
+}
+
+LexerIndexedCustomAction.prototype = Object.create(LexerAction.prototype);
+LexerIndexedCustomAction.prototype.constructor = LexerIndexedCustomAction;
+
+// <p>This method calls {@link //execute} on the result of {@link //getAction}
+// using the provided {@code lexer}.</p>
+LexerIndexedCustomAction.prototype.execute = function (lexer) {
+    // assume the input stream position was properly set by the calling code
+    this.action.execute(lexer);
+};
+
+LexerIndexedCustomAction.prototype.updateHashCode = function (hash) {
+    hash.update(this.actionType, this.offset, this.action);
+};
+
+LexerIndexedCustomAction.prototype.equals = function (other) {
+    if (this === other) {
+        return true;
+    } else if (!(other instanceof LexerIndexedCustomAction)) {
+        return false;
+    } else {
+        return this.offset === other.offset && this.action === other.action;
+    }
+};
+
+exports.LexerActionType = LexerActionType;
+exports.LexerSkipAction = LexerSkipAction;
+exports.LexerChannelAction = LexerChannelAction;
+exports.LexerCustomAction = LexerCustomAction;
+exports.LexerIndexedCustomAction = LexerIndexedCustomAction;
+exports.LexerMoreAction = LexerMoreAction;
+exports.LexerTypeAction = LexerTypeAction;
+exports.LexerPushModeAction = LexerPushModeAction;
+exports.LexerPopModeAction = LexerPopModeAction;
+exports.LexerModeAction = LexerModeAction;
+
+/***/ }),
+/* 33 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+//
+/* Copyright (c) 2012-2017 The ANTLR Project. All rights reserved.
+ * Use of this file is governed by the BSD 3-clause license that
+ * can be found in the LICENSE.txt file in the project root.
+ */
+///
+
+var DFAState = __webpack_require__(11).DFAState;
+var ATNConfigSet = __webpack_require__(9).ATNConfigSet;
+var getCachedPredictionContext = __webpack_require__(6).getCachedPredictionContext;
+
+function ATNSimulator(atn, sharedContextCache) {
+
+    // The context cache maps all PredictionContext objects that are ==
+    //  to a single cached copy. This cache is shared across all contexts
+    //  in all ATNConfigs in all DFA states.  We rebuild each ATNConfigSet
+    //  to use only cached nodes/graphs in addDFAState(). We don't want to
+    //  fill this during closure() since there are lots of contexts that
+    //  pop up but are not used ever again. It also greatly slows down closure().
+    //
+    //  <p>This cache makes a huge difference in memory and a little bit in speed.
+    //  For the Java grammar on java.*, it dropped the memory requirements
+    //  at the end from 25M to 16M. We don't store any of the full context
+    //  graphs in the DFA because they are limited to local context only,
+    //  but apparently there's a lot of repetition there as well. We optimize
+    //  the config contexts before storing the config set in the DFA states
+    //  by literally rebuilding them with cached subgraphs only.</p>
+    //
+    //  <p>I tried a cache for use during closure operations, that was
+    //  whacked after each adaptivePredict(). It cost a little bit
+    //  more time I think and doesn't save on the overall footprint
+    //  so it's not worth the complexity.</p>
+    ///
+    this.atn = atn;
+    this.sharedContextCache = sharedContextCache;
+    return this;
+}
+
+// Must distinguish between missing edge and edge we know leads nowhere///
+ATNSimulator.ERROR = new DFAState(0x7FFFFFFF, new ATNConfigSet());
+
+ATNSimulator.prototype.getCachedContext = function (context) {
+    if (this.sharedContextCache === null) {
+        return context;
+    }
+    var visited = {};
+    return getCachedPredictionContext(context, this.sharedContextCache, visited);
+};
+
+exports.ATNSimulator = ATNSimulator;
+
+/***/ }),
+/* 34 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+//
+/* Copyright (c) 2012-2017 The ANTLR Project. All rights reserved.
+ * Use of this file is governed by the BSD 3-clause license that
+ * can be found in the LICENSE.txt file in the project root.
+ */
+//
+//
+// This enumeration defines the prediction modes available in ANTLR 4 along with
+// utility methods for analyzing configuration sets for conflicts and/or
+// ambiguities.
+
+var Set = __webpack_require__(0).Set;
+var Map = __webpack_require__(0).Map;
+var BitSet = __webpack_require__(0).BitSet;
+var AltDict = __webpack_require__(0).AltDict;
+var ATN = __webpack_require__(8).ATN;
+var RuleStopState = __webpack_require__(4).RuleStopState;
+var ATNConfigSet = __webpack_require__(9).ATNConfigSet;
+var ATNConfig = __webpack_require__(15).ATNConfig;
+var SemanticContext = __webpack_require__(10).SemanticContext;
+var Hash = __webpack_require__(0).Hash;
+var hashStuff = __webpack_require__(0).hashStuff;
+var equalArrays = __webpack_require__(0).equalArrays;
+
+function PredictionMode() {
+    return this;
+}
+
+//
+// The SLL(*) prediction mode. This prediction mode ignores the current
+// parser context when making predictions. This is the fastest prediction
+// mode, and provides correct results for many grammars. This prediction
+// mode is more powerful than the prediction mode provided by ANTLR 3, but
+// may result in syntax errors for grammar and input combinations which are
+// not SLL.
+//
+// <p>
+// When using this prediction mode, the parser will either return a correct
+// parse tree (i.e. the same parse tree that would be returned with the
+// {@link //LL} prediction mode), or it will report a syntax error. If a
+// syntax error is encountered when using the {@link //SLL} prediction mode,
+// it may be due to either an actual syntax error in the input or indicate
+// that the particular combination of grammar and input requires the more
+// powerful {@link //LL} prediction abilities to complete successfully.</p>
+//
+// <p>
+// This prediction mode does not provide any guarantees for prediction
+// behavior for syntactically-incorrect inputs.</p>
+//
+PredictionMode.SLL = 0;
+//
+// The LL(*) prediction mode. This prediction mode allows the current parser
+// context to be used for resolving SLL conflicts that occur during
+// prediction. This is the fastest prediction mode that guarantees correct
+// parse results for all combinations of grammars with syntactically correct
+// inputs.
+//
+// <p>
+// When using this prediction mode, the parser will make correct decisions
+// for all syntactically-correct grammar and input combinations. However, in
+// cases where the grammar is truly ambiguous this prediction mode might not
+// report a precise answer for <em>exactly which</em> alternatives are
+// ambiguous.</p>
+//
+// <p>
+// This prediction mode does not provide any guarantees for prediction
+// behavior for syntactically-incorrect inputs.</p>
+//
+PredictionMode.LL = 1;
+//
+// The LL(*) prediction mode with exact ambiguity detection. In addition to
+// the correctness guarantees provided by the {@link //LL} prediction mode,
+// this prediction mode instructs the prediction algorithm to determine the
+// complete and exact set of ambiguous alternatives for every ambiguous
+// decision encountered while parsing.
+//
+// <p>
+// This prediction mode may be used for diagnosing ambiguities during
+// grammar development. Due to the performance overhead of calculating sets
+// of ambiguous alternatives, this prediction mode should be avoided when
+// the exact results are not necessary.</p>
+//
+// <p>
+// This prediction mode does not provide any guarantees for prediction
+// behavior for syntactically-incorrect inputs.</p>
+//
+PredictionMode.LL_EXACT_AMBIG_DETECTION = 2;
+
+//
+// Computes the SLL prediction termination condition.
+//
+// <p>
+// This method computes the SLL prediction termination condition for both of
+// the following cases.</p>
+//
+// <ul>
+// <li>The usual SLL+LL fallback upon SLL conflict</li>
+// <li>Pure SLL without LL fallback</li>
+// </ul>
+//
+// <p><strong>COMBINED SLL+LL PARSING</strong></p>
+//
+// <p>When LL-fallback is enabled upon SLL conflict, correct predictions are
+// ensured regardless of how the termination condition is computed by this
+// method. Due to the substantially higher cost of LL prediction, the
+// prediction should only fall back to LL when the additional lookahead
+// cannot lead to a unique SLL prediction.</p>
+//
+// <p>Assuming combined SLL+LL parsing, an SLL configuration set with only
+// conflicting subsets should fall back to full LL, even if the
+// configuration sets don't resolve to the same alternative (e.g.
+// {@code {1,2}} and {@code {3,4}}. If there is at least one non-conflicting
+// configuration, SLL could continue with the hopes that more lookahead will
+// resolve via one of those non-conflicting configurations.</p>
+//
+// <p>Here's the prediction termination rule them: SLL (for SLL+LL parsing)
+// stops when it sees only conflicting configuration subsets. In contrast,
+// full LL keeps going when there is uncertainty.</p>
+//
+// <p><strong>HEURISTIC</strong></p>
+//
+// <p>As a heuristic, we stop prediction when we see any conflicting subset
+// unless we see a state that only has one alternative associated with it.
+// The single-alt-state thing lets prediction continue upon rules like
+// (otherwise, it would admit defeat too soon):</p>
+//
+// <p>{@code [12|1|[], 6|2|[], 12|2|[]]. s : (ID | ID ID?) ';' ;}</p>
+//
+// <p>When the ATN simulation reaches the state before {@code ';'}, it has a
+// DFA state that looks like: {@code [12|1|[], 6|2|[], 12|2|[]]}. Naturally
+// {@code 12|1|[]} and {@code 12|2|[]} conflict, but we cannot stop
+// processing this node because alternative to has another way to continue,
+// via {@code [6|2|[]]}.</p>
+//
+// <p>It also let's us continue for this rule:</p>
+//
+// <p>{@code [1|1|[], 1|2|[], 8|3|[]] a : A | A | A B ;}</p>
+//
+// <p>After matching input A, we reach the stop state for rule A, state 1.
+// State 8 is the state right before B. Clearly alternatives 1 and 2
+// conflict and no amount of further lookahead will separate the two.
+// However, alternative 3 will be able to continue and so we do not stop
+// working on this state. In the previous example, we're concerned with
+// states associated with the conflicting alternatives. Here alt 3 is not
+// associated with the conflicting configs, but since we can continue
+// looking for input reasonably, don't declare the state done.</p>
+//
+// <p><strong>PURE SLL PARSING</strong></p>
+//
+// <p>To handle pure SLL parsing, all we have to do is make sure that we
+// combine stack contexts for configurations that differ only by semantic
+// predicate. From there, we can do the usual SLL termination heuristic.</p>
+//
+// <p><strong>PREDICATES IN SLL+LL PARSING</strong></p>
+//
+// <p>SLL decisions don't evaluate predicates until after they reach DFA stop
+// states because they need to create the DFA cache that works in all
+// semantic situations. In contrast, full LL evaluates predicates collected
+// during start state computation so it can ignore predicates thereafter.
+// This means that SLL termination detection can totally ignore semantic
+// predicates.</p>
+//
+// <p>Implementation-wise, {@link ATNConfigSet} combines stack contexts but not
+// semantic predicate contexts so we might see two configurations like the
+// following.</p>
+//
+// <p>{@code (s, 1, x, {}), (s, 1, x', {p})}</p>
+//
+// <p>Before testing these configurations against others, we have to merge
+// {@code x} and {@code x'} (without modifying the existing configurations).
+// For example, we test {@code (x+x')==x''} when looking for conflicts in
+// the following configurations.</p>
+//
+// <p>{@code (s, 1, x, {}), (s, 1, x', {p}), (s, 2, x'', {})}</p>
+//
+// <p>If the configuration set has predicates (as indicated by
+// {@link ATNConfigSet//hasSemanticContext}), this algorithm makes a copy of
+// the configurations to strip out all of the predicates so that a standard
+// {@link ATNConfigSet} will merge everything ignoring predicates.</p>
+//
+PredictionMode.hasSLLConflictTerminatingPrediction = function (mode, configs) {
+    // Configs in rule stop states indicate reaching the end of the decision
+    // rule (local context) or end of start rule (full context). If all
+    // configs meet this condition, then none of the configurations is able
+    // to match additional input so we terminate prediction.
+    //
+    if (PredictionMode.allConfigsInRuleStopStates(configs)) {
+        return true;
+    }
+    // pure SLL mode parsing
+    if (mode === PredictionMode.SLL) {
+        // Don't bother with combining configs from different semantic
+        // contexts if we can fail over to full LL; costs more time
+        // since we'll often fail over anyway.
+        if (configs.hasSemanticContext) {
+            // dup configs, tossing out semantic predicates
+            var dup = new ATNConfigSet();
+            for (var i = 0; i < configs.items.length; i++) {
+                var c = configs.items[i];
+                c = new ATNConfig({ semanticContext: SemanticContext.NONE }, c);
+                dup.add(c);
+            }
+            configs = dup;
+        }
+        // now we have combined contexts for configs with dissimilar preds
+    }
+    // pure SLL or combined SLL+LL mode parsing
+    var altsets = PredictionMode.getConflictingAltSubsets(configs);
+    return PredictionMode.hasConflictingAltSet(altsets) && !PredictionMode.hasStateAssociatedWithOneAlt(configs);
+};
+
+// Checks if any configuration in {@code configs} is in a
+// {@link RuleStopState}. Configurations meeting this condition have reached
+// the end of the decision rule (local context) or end of start rule (full
+// context).
+//
+// @param configs the configuration set to test
+// @return {@code true} if any configuration in {@code configs} is in a
+// {@link RuleStopState}, otherwise {@code false}
+PredictionMode.hasConfigInRuleStopState = function (configs) {
+    for (var i = 0; i < configs.items.length; i++) {
+        var c = configs.items[i];
+        if (c.state instanceof RuleStopState) {
+            return true;
+        }
+    }
+    return false;
+};
+
+// Checks if all configurations in {@code configs} are in a
+// {@link RuleStopState}. Configurations meeting this condition have reached
+// the end of the decision rule (local context) or end of start rule (full
+// context).
+//
+// @param configs the configuration set to test
+// @return {@code true} if all configurations in {@code configs} are in a
+// {@link RuleStopState}, otherwise {@code false}
+PredictionMode.allConfigsInRuleStopStates = function (configs) {
+    for (var i = 0; i < configs.items.length; i++) {
+        var c = configs.items[i];
+        if (!(c.state instanceof RuleStopState)) {
+            return false;
+        }
+    }
+    return true;
+};
+
+//
+// Full LL prediction termination.
+//
+// <p>Can we stop looking ahead during ATN simulation or is there some
+// uncertainty as to which alternative we will ultimately pick, after
+// consuming more input? Even if there are partial conflicts, we might know
+// that everything is going to resolve to the same minimum alternative. That
+// means we can stop since no more lookahead will change that fact. On the
+// other hand, there might be multiple conflicts that resolve to different
+// minimums. That means we need more look ahead to decide which of those
+// alternatives we should predict.</p>
+//
+// <p>The basic idea is to split the set of configurations {@code C}, into
+// conflicting subsets {@code (s, _, ctx, _)} and singleton subsets with
+// non-conflicting configurations. Two configurations conflict if they have
+// identical {@link ATNConfig//state} and {@link ATNConfig//context} values
+// but different {@link ATNConfig//alt} value, e.g. {@code (s, i, ctx, _)}
+// and {@code (s, j, ctx, _)} for {@code i!=j}.</p>
+//
+// <p>Reduce these configuration subsets to the set of possible alternatives.
+// You can compute the alternative subsets in one pass as follows:</p>
+//
+// <p>{@code A_s,ctx = {i | (s, i, ctx, _)}} for each configuration in
+// {@code C} holding {@code s} and {@code ctx} fixed.</p>
+//
+// <p>Or in pseudo-code, for each configuration {@code c} in {@code C}:</p>
+//
+// <pre>
+// map[c] U= c.{@link ATNConfig//alt alt} // map hash/equals uses s and x, not
+// alt and not pred
+// </pre>
+//
+// <p>The values in {@code map} are the set of {@code A_s,ctx} sets.</p>
+//
+// <p>If {@code |A_s,ctx|=1} then there is no conflict associated with
+// {@code s} and {@code ctx}.</p>
+//
+// <p>Reduce the subsets to singletons by choosing a minimum of each subset. If
+// the union of these alternative subsets is a singleton, then no amount of
+// more lookahead will help us. We will always pick that alternative. If,
+// however, there is more than one alternative, then we are uncertain which
+// alternative to predict and must continue looking for resolution. We may
+// or may not discover an ambiguity in the future, even if there are no
+// conflicting subsets this round.</p>
+//
+// <p>The biggest sin is to terminate early because it means we've made a
+// decision but were uncertain as to the eventual outcome. We haven't used
+// enough lookahead. On the other hand, announcing a conflict too late is no
+// big deal; you will still have the conflict. It's just inefficient. It
+// might even look until the end of file.</p>
+//
+// <p>No special consideration for semantic predicates is required because
+// predicates are evaluated on-the-fly for full LL prediction, ensuring that
+// no configuration contains a semantic context during the termination
+// check.</p>
+//
+// <p><strong>CONFLICTING CONFIGS</strong></p>
+//
+// <p>Two configurations {@code (s, i, x)} and {@code (s, j, x')}, conflict
+// when {@code i!=j} but {@code x=x'}. Because we merge all
+// {@code (s, i, _)} configurations together, that means that there are at
+// most {@code n} configurations associated with state {@code s} for
+// {@code n} possible alternatives in the decision. The merged stacks
+// complicate the comparison of configuration contexts {@code x} and
+// {@code x'}. Sam checks to see if one is a subset of the other by calling
+// merge and checking to see if the merged result is either {@code x} or
+// {@code x'}. If the {@code x} associated with lowest alternative {@code i}
+// is the superset, then {@code i} is the only possible prediction since the
+// others resolve to {@code min(i)} as well. However, if {@code x} is
+// associated with {@code j>i} then at least one stack configuration for
+// {@code j} is not in conflict with alternative {@code i}. The algorithm
+// should keep going, looking for more lookahead due to the uncertainty.</p>
+//
+// <p>For simplicity, I'm doing a equality check between {@code x} and
+// {@code x'} that lets the algorithm continue to consume lookahead longer
+// than necessary. The reason I like the equality is of course the
+// simplicity but also because that is the test you need to detect the
+// alternatives that are actually in conflict.</p>
+//
+// <p><strong>CONTINUE/STOP RULE</strong></p>
+//
+// <p>Continue if union of resolved alternative sets from non-conflicting and
+// conflicting alternative subsets has more than one alternative. We are
+// uncertain about which alternative to predict.</p>
+//
+// <p>The complete set of alternatives, {@code [i for (_,i,_)]}, tells us which
+// alternatives are still in the running for the amount of input we've
+// consumed at this point. The conflicting sets let us to strip away
+// configurations that won't lead to more states because we resolve
+// conflicts to the configuration with a minimum alternate for the
+// conflicting set.</p>
+//
+// <p><strong>CASES</strong></p>
+//
+// <ul>
+//
+// <li>no conflicts and more than 1 alternative in set =&gt; continue</li>
+//
+// <li> {@code (s, 1, x)}, {@code (s, 2, x)}, {@code (s, 3, z)},
+// {@code (s', 1, y)}, {@code (s', 2, y)} yields non-conflicting set
+// {@code {3}} U conflicting sets {@code min({1,2})} U {@code min({1,2})} =
+// {@code {1,3}} =&gt; continue
+// </li>
+//
+// <li>{@code (s, 1, x)}, {@code (s, 2, x)}, {@code (s', 1, y)},
+// {@code (s', 2, y)}, {@code (s'', 1, z)} yields non-conflicting set
+// {@code {1}} U conflicting sets {@code min({1,2})} U {@code min({1,2})} =
+// {@code {1}} =&gt; stop and predict 1</li>
+//
+// <li>{@code (s, 1, x)}, {@code (s, 2, x)}, {@code (s', 1, y)},
+// {@code (s', 2, y)} yields conflicting, reduced sets {@code {1}} U
+// {@code {1}} = {@code {1}} =&gt; stop and predict 1, can announce
+// ambiguity {@code {1,2}}</li>
+//
+// <li>{@code (s, 1, x)}, {@code (s, 2, x)}, {@code (s', 2, y)},
+// {@code (s', 3, y)} yields conflicting, reduced sets {@code {1}} U
+// {@code {2}} = {@code {1,2}} =&gt; continue</li>
+//
+// <li>{@code (s, 1, x)}, {@code (s, 2, x)}, {@code (s', 3, y)},
+// {@code (s', 4, y)} yields conflicting, reduced sets {@code {1}} U
+// {@code {3}} = {@code {1,3}} =&gt; continue</li>
+//
+// </ul>
+//
+// <p><strong>EXACT AMBIGUITY DETECTION</strong></p>
+//
+// <p>If all states report the same conflicting set of alternatives, then we
+// know we have the exact ambiguity set.</p>
+//
+// <p><code>|A_<em>i</em>|&gt;1</code> and
+// <code>A_<em>i</em> = A_<em>j</em></code> for all <em>i</em>, <em>j</em>.</p>
+//
+// <p>In other words, we continue examining lookahead until all {@code A_i}
+// have more than one alternative and all {@code A_i} are the same. If
+// {@code A={{1,2}, {1,3}}}, then regular LL prediction would terminate
+// because the resolved set is {@code {1}}. To determine what the real
+// ambiguity is, we have to know whether the ambiguity is between one and
+// two or one and three so we keep going. We can only stop prediction when
+// we need exact ambiguity detection when the sets look like
+// {@code A={{1,2}}} or {@code {{1,2},{1,2}}}, etc...</p>
+//
+PredictionMode.resolvesToJustOneViableAlt = function (altsets) {
+    return PredictionMode.getSingleViableAlt(altsets);
+};
+
+//
+// Determines if every alternative subset in {@code altsets} contains more
+// than one alternative.
+//
+// @param altsets a collection of alternative subsets
+// @return {@code true} if every {@link BitSet} in {@code altsets} has
+// {@link BitSet//cardinality cardinality} &gt; 1, otherwise {@code false}
+//
+PredictionMode.allSubsetsConflict = function (altsets) {
+    return !PredictionMode.hasNonConflictingAltSet(altsets);
+};
+//
+// Determines if any single alternative subset in {@code altsets} contains
+// exactly one alternative.
+//
+// @param altsets a collection of alternative subsets
+// @return {@code true} if {@code altsets} contains a {@link BitSet} with
+// {@link BitSet//cardinality cardinality} 1, otherwise {@code false}
+//
+PredictionMode.hasNonConflictingAltSet = function (altsets) {
+    for (var i = 0; i < altsets.length; i++) {
+        var alts = altsets[i];
+        if (alts.length === 1) {
+            return true;
+        }
+    }
+    return false;
+};
+
+//
+// Determines if any single alternative subset in {@code altsets} contains
+// more than one alternative.
+//
+// @param altsets a collection of alternative subsets
+// @return {@code true} if {@code altsets} contains a {@link BitSet} with
+// {@link BitSet//cardinality cardinality} &gt; 1, otherwise {@code false}
+//
+PredictionMode.hasConflictingAltSet = function (altsets) {
+    for (var i = 0; i < altsets.length; i++) {
+        var alts = altsets[i];
+        if (alts.length > 1) {
+            return true;
+        }
+    }
+    return false;
+};
+
+//
+// Determines if every alternative subset in {@code altsets} is equivalent.
+//
+// @param altsets a collection of alternative subsets
+// @return {@code true} if every member of {@code altsets} is equal to the
+// others, otherwise {@code false}
+//
+PredictionMode.allSubsetsEqual = function (altsets) {
+    var first = null;
+    for (var i = 0; i < altsets.length; i++) {
+        var alts = altsets[i];
+        if (first === null) {
+            first = alts;
+        } else if (alts !== first) {
+            return false;
+        }
+    }
+    return true;
+};
+
+//
+// Returns the unique alternative predicted by all alternative subsets in
+// {@code altsets}. If no such alternative exists, this method returns
+// {@link ATN//INVALID_ALT_NUMBER}.
+//
+// @param altsets a collection of alternative subsets
+//
+PredictionMode.getUniqueAlt = function (altsets) {
+    var all = PredictionMode.getAlts(altsets);
+    if (all.length === 1) {
+        return all.minValue();
+    } else {
+        return ATN.INVALID_ALT_NUMBER;
+    }
+};
+
+// Gets the complete set of represented alternatives for a collection of
+// alternative subsets. This method returns the union of each {@link BitSet}
+// in {@code altsets}.
+//
+// @param altsets a collection of alternative subsets
+// @return the set of represented alternatives in {@code altsets}
+//
+PredictionMode.getAlts = function (altsets) {
+    var all = new BitSet();
+    altsets.map(function (alts) {
+        all.or(alts);
+    });
+    return all;
+};
+
+//
+// This function gets the conflicting alt subsets from a configuration set.
+// For each configuration {@code c} in {@code configs}:
+//
+// <pre>
+// map[c] U= c.{@link ATNConfig//alt alt} // map hash/equals uses s and x, not
+// alt and not pred
+// </pre>
+
+PredictionMode.getConflictingAltSubsets = function (configs) {
+    var configToAlts = new Map();
+    configToAlts.hashFunction = function (cfg) {
+        hashStuff(cfg.state.stateNumber, cfg.context);
+    };
+    configToAlts.equalsFunction = function (c1, c2) {
+        return c1.state.stateNumber == c2.state.stateNumber && c1.context.equals(c2.context);
+    };
+    configs.items.map(function (cfg) {
+        var alts = configToAlts.get(cfg);
+        if (alts === null) {
+            alts = new BitSet();
+            configToAlts.put(cfg, alts);
+        }
+        alts.add(cfg.alt);
+    });
+    return configToAlts.getValues();
+};
+
+//
+// Get a map from state to alt subset from a configuration set. For each
+// configuration {@code c} in {@code configs}:
+//
+// <pre>
+// map[c.{@link ATNConfig//state state}] U= c.{@link ATNConfig//alt alt}
+// </pre>
+//
+PredictionMode.getStateToAltMap = function (configs) {
+    var m = new AltDict();
+    configs.items.map(function (c) {
+        var alts = m.get(c.state);
+        if (alts === null) {
+            alts = new BitSet();
+            m.put(c.state, alts);
+        }
+        alts.add(c.alt);
+    });
+    return m;
+};
+
+PredictionMode.hasStateAssociatedWithOneAlt = function (configs) {
+    var values = PredictionMode.getStateToAltMap(configs).values();
+    for (var i = 0; i < values.length; i++) {
+        if (values[i].length === 1) {
+            return true;
+        }
+    }
+    return false;
+};
+
+PredictionMode.getSingleViableAlt = function (altsets) {
+    var result = null;
+    for (var i = 0; i < altsets.length; i++) {
+        var alts = altsets[i];
+        var minAlt = alts.minValue();
+        if (result === null) {
+            result = minAlt;
+        } else if (result !== minAlt) {
+            // more than 1 viable alt
+            return ATN.INVALID_ALT_NUMBER;
+        }
+    }
+    return result;
+};
+
+exports.PredictionMode = PredictionMode;
+
+/***/ }),
+/* 35 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+/***/ }),
+/* 36 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+// Generated from lib/Expr.g4 by ANTLR 4.7
+// jshint ignore: start
+var antlr4 = __webpack_require__(19);
+var ExprVisitor = __webpack_require__(37).ExprVisitor;
+
+var grammarFileName = "Expr.g4";
+
+var serializedATN = ['\x03\u608B\uA72A\u8133\uB9ED\u417C\u3BE7\u7786\u5964', '\x03\r-\x04\x02\t\x02\x04\x03\t\x03\x04\x04\t\x04', '\x03\x02\x06\x02\n\n\x02\r\x02\x0E\x02\x0B\x03\x03', '\x03\x03\x03\x03\x03\x03\x03\x03\x03\x03\x03\x03', '\x03\x03\x03\x03\x05\x03\x17\n\x03\x03\x04\x03', '\x04\x03\x04\x03\x04\x03\x04\x03\x04\x03\x04\x05', '\x04 \n\x04\x03\x04\x03\x04\x03\x04\x03\x04\x03', '\x04\x03\x04\x07\x04(\n\x04\f\x04\x0E\x04+\x0B\x04', '\x03\x04\x02\x03\x06\x05\x02\x04\x06\x02\x04\x03', '\x02\x04\x05\x03\x02\x06\x07\x020\x02\t\x03\x02', '\x02\x02\x04\x16\x03\x02\x02\x02\x06\x1F\x03\x02', '\x02\x02\b\n\x05\x04\x03\x02\t\b\x03\x02\x02\x02', '\n\x0B\x03\x02\x02\x02\x0B\t\x03\x02\x02\x02\x0B', '\f\x03\x02\x02\x02\f\x03\x03\x02\x02\x02\r\x0E\x05', '\x06\x04\x02\x0E\x0F\x07\n\x02\x02\x0F\x17\x03', '\x02\x02\x02\x10\x11\x07\f\x02\x02\x11\x12\x07', '\x03\x02\x02\x12\x13\x05\x06\x04\x02\x13\x14\x07', '\n\x02\x02\x14\x17\x03\x02\x02\x02\x15\x17\x07', '\n\x02\x02\x16\r\x03\x02\x02\x02\x16\x10\x03\x02', '\x02\x02\x16\x15\x03\x02\x02\x02\x17\x05\x03\x02', '\x02\x02\x18\x19\b\x04\x01\x02\x19\x1A\x07\b\x02', '\x02\x1A\x1B\x05\x06\x04\x02\x1B\x1C\x07\t\x02', '\x02\x1C \x03\x02\x02\x02\x1D \x07\x0B\x02\x02', '\x1E \x07\f\x02\x02\x1F\x18\x03\x02\x02\x02\x1F', '\x1D\x03\x02\x02\x02\x1F\x1E\x03\x02\x02\x02 ', ')\x03\x02\x02\x02!"\f\x07\x02\x02"#\t\x02\x02\x02', '#(\x05\x06\x04\b$%\f\x06\x02\x02%&\t\x03\x02\x02&', '(\x05\x06\x04\x07\'!\x03\x02\x02\x02\'$\x03\x02', '\x02\x02(+\x03\x02\x02\x02)\'\x03\x02\x02\x02)*', '\x03\x02\x02\x02*\x07\x03\x02\x02\x02+)\x03\x02', '\x02\x02\x07\x0B\x16\x1F\')'].join("");
+
+var atn = new antlr4.atn.ATNDeserializer().deserialize(serializedATN);
+
+var decisionsToDFA = atn.decisionToState.map(function (ds, index) {
+    return new antlr4.dfa.DFA(ds, index);
+});
+
+var sharedContextCache = new antlr4.PredictionContextCache();
+
+var literalNames = [null, "'='", "'*'", "'/'", "'+'", "'-'", "'('", "')'", "';'"];
+
+var symbolicNames = [null, null, null, null, null, null, null, null, "NEWLINE", "INT", "ID", "WS"];
+
+var ruleNames = ["prog", "stat", "expr"];
+
+function ExprParser(input) {
+    antlr4.Parser.call(this, input);
+    this._interp = new antlr4.atn.ParserATNSimulator(this, atn, decisionsToDFA, sharedContextCache);
+    this.ruleNames = ruleNames;
+    this.literalNames = literalNames;
+    this.symbolicNames = symbolicNames;
+    return this;
+}
+
+ExprParser.prototype = Object.create(antlr4.Parser.prototype);
+ExprParser.prototype.constructor = ExprParser;
+
+Object.defineProperty(ExprParser.prototype, "atn", {
+    get: function get() {
+        return atn;
+    }
+});
+
+ExprParser.EOF = antlr4.Token.EOF;
+ExprParser.T__0 = 1;
+ExprParser.T__1 = 2;
+ExprParser.T__2 = 3;
+ExprParser.T__3 = 4;
+ExprParser.T__4 = 5;
+ExprParser.T__5 = 6;
+ExprParser.T__6 = 7;
+ExprParser.NEWLINE = 8;
+ExprParser.INT = 9;
+ExprParser.ID = 10;
+ExprParser.WS = 11;
+
+ExprParser.RULE_prog = 0;
+ExprParser.RULE_stat = 1;
+ExprParser.RULE_expr = 2;
+
+function ProgContext(parser, parent, invokingState) {
+    if (parent === undefined) {
+        parent = null;
+    }
+    if (invokingState === undefined || invokingState === null) {
+        invokingState = -1;
+    }
+    antlr4.ParserRuleContext.call(this, parent, invokingState);
+    this.parser = parser;
+    this.ruleIndex = ExprParser.RULE_prog;
+    return this;
+}
+
+ProgContext.prototype = Object.create(antlr4.ParserRuleContext.prototype);
+ProgContext.prototype.constructor = ProgContext;
+
+ProgContext.prototype.stat = function (i) {
+    if (i === undefined) {
+        i = null;
+    }
+    if (i === null) {
+        return this.getTypedRuleContexts(StatContext);
+    } else {
+        return this.getTypedRuleContext(StatContext, i);
+    }
+};
+
+ProgContext.prototype.accept = function (visitor) {
+    if (visitor instanceof ExprVisitor) {
+        return visitor.visitProg(this);
+    } else {
+        return visitor.visitChildren(this);
+    }
+};
+
+ExprParser.ProgContext = ProgContext;
+
+ExprParser.prototype.prog = function () {
+
+    var localctx = new ProgContext(this, this._ctx, this.state);
+    this.enterRule(localctx, 0, ExprParser.RULE_prog);
+    var _la = 0; // Token type
+    try {
+        this.enterOuterAlt(localctx, 1);
+        this.state = 7;
+        this._errHandler.sync(this);
+        _la = this._input.LA(1);
+        do {
+            this.state = 6;
+            this.stat();
+            this.state = 9;
+            this._errHandler.sync(this);
+            _la = this._input.LA(1);
+        } while ((_la & ~0x1f) == 0 && (1 << _la & (1 << ExprParser.T__5 | 1 << ExprParser.NEWLINE | 1 << ExprParser.INT | 1 << ExprParser.ID)) !== 0);
+    } catch (re) {
+        if (re instanceof antlr4.error.RecognitionException) {
+            localctx.exception = re;
+            this._errHandler.reportError(this, re);
+            this._errHandler.recover(this, re);
+        } else {
+            throw re;
+        }
+    } finally {
+        this.exitRule();
+    }
+    return localctx;
+};
+
+function StatContext(parser, parent, invokingState) {
+    if (parent === undefined) {
+        parent = null;
+    }
+    if (invokingState === undefined || invokingState === null) {
+        invokingState = -1;
+    }
+    antlr4.ParserRuleContext.call(this, parent, invokingState);
+    this.parser = parser;
+    this.ruleIndex = ExprParser.RULE_stat;
+    return this;
+}
+
+StatContext.prototype = Object.create(antlr4.ParserRuleContext.prototype);
+StatContext.prototype.constructor = StatContext;
+
+StatContext.prototype.copyFrom = function (ctx) {
+    antlr4.ParserRuleContext.prototype.copyFrom.call(this, ctx);
+};
+
+function PrintContext(parser, ctx) {
+    StatContext.call(this, parser);
+    StatContext.prototype.copyFrom.call(this, ctx);
+    return this;
+}
+
+PrintContext.prototype = Object.create(StatContext.prototype);
+PrintContext.prototype.constructor = PrintContext;
+
+ExprParser.PrintContext = PrintContext;
+
+PrintContext.prototype.expr = function () {
+    return this.getTypedRuleContext(ExprContext, 0);
+};
+
+PrintContext.prototype.NEWLINE = function () {
+    return this.getToken(ExprParser.NEWLINE, 0);
+};
+PrintContext.prototype.accept = function (visitor) {
+    if (visitor instanceof ExprVisitor) {
+        return visitor.visitPrint(this);
+    } else {
+        return visitor.visitChildren(this);
+    }
+};
+
+function BlankContext(parser, ctx) {
+    StatContext.call(this, parser);
+    StatContext.prototype.copyFrom.call(this, ctx);
+    return this;
+}
+
+BlankContext.prototype = Object.create(StatContext.prototype);
+BlankContext.prototype.constructor = BlankContext;
+
+ExprParser.BlankContext = BlankContext;
+
+BlankContext.prototype.NEWLINE = function () {
+    return this.getToken(ExprParser.NEWLINE, 0);
+};
+BlankContext.prototype.accept = function (visitor) {
+    if (visitor instanceof ExprVisitor) {
+        return visitor.visitBlank(this);
+    } else {
+        return visitor.visitChildren(this);
+    }
+};
+
+function AssignContext(parser, ctx) {
+    StatContext.call(this, parser);
+    StatContext.prototype.copyFrom.call(this, ctx);
+    return this;
+}
+
+AssignContext.prototype = Object.create(StatContext.prototype);
+AssignContext.prototype.constructor = AssignContext;
+
+ExprParser.AssignContext = AssignContext;
+
+AssignContext.prototype.ID = function () {
+    return this.getToken(ExprParser.ID, 0);
+};
+
+AssignContext.prototype.expr = function () {
+    return this.getTypedRuleContext(ExprContext, 0);
+};
+
+AssignContext.prototype.NEWLINE = function () {
+    return this.getToken(ExprParser.NEWLINE, 0);
+};
+AssignContext.prototype.accept = function (visitor) {
+    if (visitor instanceof ExprVisitor) {
+        return visitor.visitAssign(this);
+    } else {
+        return visitor.visitChildren(this);
+    }
+};
+
+ExprParser.StatContext = StatContext;
+
+ExprParser.prototype.stat = function () {
+
+    var localctx = new StatContext(this, this._ctx, this.state);
+    this.enterRule(localctx, 2, ExprParser.RULE_stat);
+    try {
+        this.state = 20;
+        this._errHandler.sync(this);
+        var la_ = this._interp.adaptivePredict(this._input, 1, this._ctx);
+        switch (la_) {
+            case 1:
+                localctx = new PrintContext(this, localctx);
+                this.enterOuterAlt(localctx, 1);
+                this.state = 11;
+                this.expr(0);
+                this.state = 12;
+                this.match(ExprParser.NEWLINE);
+                break;
+
+            case 2:
+                localctx = new AssignContext(this, localctx);
+                this.enterOuterAlt(localctx, 2);
+                this.state = 14;
+                this.match(ExprParser.ID);
+                this.state = 15;
+                this.match(ExprParser.T__0);
+                this.state = 16;
+                this.expr(0);
+                this.state = 17;
+                this.match(ExprParser.NEWLINE);
+                break;
+
+            case 3:
+                localctx = new BlankContext(this, localctx);
+                this.enterOuterAlt(localctx, 3);
+                this.state = 19;
+                this.match(ExprParser.NEWLINE);
+                break;
+
+        }
+    } catch (re) {
+        if (re instanceof antlr4.error.RecognitionException) {
+            localctx.exception = re;
+            this._errHandler.reportError(this, re);
+            this._errHandler.recover(this, re);
+        } else {
+            throw re;
+        }
+    } finally {
+        this.exitRule();
+    }
+    return localctx;
+};
+
+function ExprContext(parser, parent, invokingState) {
+    if (parent === undefined) {
+        parent = null;
+    }
+    if (invokingState === undefined || invokingState === null) {
+        invokingState = -1;
+    }
+    antlr4.ParserRuleContext.call(this, parent, invokingState);
+    this.parser = parser;
+    this.ruleIndex = ExprParser.RULE_expr;
+    return this;
+}
+
+ExprContext.prototype = Object.create(antlr4.ParserRuleContext.prototype);
+ExprContext.prototype.constructor = ExprContext;
+
+ExprContext.prototype.copyFrom = function (ctx) {
+    antlr4.ParserRuleContext.prototype.copyFrom.call(this, ctx);
+};
+
+function OpExprContext(parser, ctx) {
+    ExprContext.call(this, parser);
+    this.left = null; // ExprContext;
+    this.op = null; // Token;
+    this.right = null; // ExprContext;
+    ExprContext.prototype.copyFrom.call(this, ctx);
+    return this;
+}
+
+OpExprContext.prototype = Object.create(ExprContext.prototype);
+OpExprContext.prototype.constructor = OpExprContext;
+
+ExprParser.OpExprContext = OpExprContext;
+
+OpExprContext.prototype.expr = function (i) {
+    if (i === undefined) {
+        i = null;
+    }
+    if (i === null) {
+        return this.getTypedRuleContexts(ExprContext);
+    } else {
+        return this.getTypedRuleContext(ExprContext, i);
+    }
+};
+OpExprContext.prototype.accept = function (visitor) {
+    if (visitor instanceof ExprVisitor) {
+        return visitor.visitOpExpr(this);
+    } else {
+        return visitor.visitChildren(this);
+    }
+};
+
+function AtomExprContext(parser, ctx) {
+    ExprContext.call(this, parser);
+    ExprContext.prototype.copyFrom.call(this, ctx);
+    return this;
+}
+
+AtomExprContext.prototype = Object.create(ExprContext.prototype);
+AtomExprContext.prototype.constructor = AtomExprContext;
+
+ExprParser.AtomExprContext = AtomExprContext;
+
+AtomExprContext.prototype.INT = function () {
+    return this.getToken(ExprParser.INT, 0);
+};
+AtomExprContext.prototype.accept = function (visitor) {
+    if (visitor instanceof ExprVisitor) {
+        return visitor.visitAtomExpr(this);
+    } else {
+        return visitor.visitChildren(this);
+    }
+};
+
+function ParenExprContext(parser, ctx) {
+    ExprContext.call(this, parser);
+    ExprContext.prototype.copyFrom.call(this, ctx);
+    return this;
+}
+
+ParenExprContext.prototype = Object.create(ExprContext.prototype);
+ParenExprContext.prototype.constructor = ParenExprContext;
+
+ExprParser.ParenExprContext = ParenExprContext;
+
+ParenExprContext.prototype.expr = function () {
+    return this.getTypedRuleContext(ExprContext, 0);
+};
+ParenExprContext.prototype.accept = function (visitor) {
+    if (visitor instanceof ExprVisitor) {
+        return visitor.visitParenExpr(this);
+    } else {
+        return visitor.visitChildren(this);
+    }
+};
+
+function IdExprContext(parser, ctx) {
+    ExprContext.call(this, parser);
+    ExprContext.prototype.copyFrom.call(this, ctx);
+    return this;
+}
+
+IdExprContext.prototype = Object.create(ExprContext.prototype);
+IdExprContext.prototype.constructor = IdExprContext;
+
+ExprParser.IdExprContext = IdExprContext;
+
+IdExprContext.prototype.ID = function () {
+    return this.getToken(ExprParser.ID, 0);
+};
+IdExprContext.prototype.accept = function (visitor) {
+    if (visitor instanceof ExprVisitor) {
+        return visitor.visitIdExpr(this);
+    } else {
+        return visitor.visitChildren(this);
+    }
+};
+
+ExprParser.prototype.expr = function (_p) {
+    if (_p === undefined) {
+        _p = 0;
+    }
+    var _parentctx = this._ctx;
+    var _parentState = this.state;
+    var localctx = new ExprContext(this, this._ctx, _parentState);
+    var _prevctx = localctx;
+    var _startState = 4;
+    this.enterRecursionRule(localctx, 4, ExprParser.RULE_expr, _p);
+    var _la = 0; // Token type
+    try {
+        this.enterOuterAlt(localctx, 1);
+        this.state = 29;
+        this._errHandler.sync(this);
+        switch (this._input.LA(1)) {
+            case ExprParser.T__5:
+                localctx = new ParenExprContext(this, localctx);
+                this._ctx = localctx;
+                _prevctx = localctx;
+
+                this.state = 23;
+                this.match(ExprParser.T__5);
+                this.state = 24;
+                this.expr(0);
+                this.state = 25;
+                this.match(ExprParser.T__6);
+                break;
+            case ExprParser.INT:
+                localctx = new AtomExprContext(this, localctx);
+                this._ctx = localctx;
+                _prevctx = localctx;
+                this.state = 27;
+                this.match(ExprParser.INT);
+                break;
+            case ExprParser.ID:
+                localctx = new IdExprContext(this, localctx);
+                this._ctx = localctx;
+                _prevctx = localctx;
+                this.state = 28;
+                this.match(ExprParser.ID);
+                break;
+            default:
+                throw new antlr4.error.NoViableAltException(this);
+        }
+        this._ctx.stop = this._input.LT(-1);
+        this.state = 39;
+        this._errHandler.sync(this);
+        var _alt = this._interp.adaptivePredict(this._input, 4, this._ctx);
+        while (_alt != 2 && _alt != antlr4.atn.ATN.INVALID_ALT_NUMBER) {
+            if (_alt === 1) {
+                if (this._parseListeners !== null) {
+                    this.triggerExitRuleEvent();
+                }
+                _prevctx = localctx;
+                this.state = 37;
+                this._errHandler.sync(this);
+                var la_ = this._interp.adaptivePredict(this._input, 3, this._ctx);
+                switch (la_) {
+                    case 1:
+                        localctx = new OpExprContext(this, new ExprContext(this, _parentctx, _parentState));
+                        localctx.left = _prevctx;
+                        this.pushNewRecursionContext(localctx, _startState, ExprParser.RULE_expr);
+                        this.state = 31;
+                        if (!this.precpred(this._ctx, 5)) {
+                            throw new antlr4.error.FailedPredicateException(this, "this.precpred(this._ctx, 5)");
+                        }
+                        this.state = 32;
+                        localctx.op = this._input.LT(1);
+                        _la = this._input.LA(1);
+                        if (!(_la === ExprParser.T__1 || _la === ExprParser.T__2)) {
+                            localctx.op = this._errHandler.recoverInline(this);
+                        } else {
+                            this._errHandler.reportMatch(this);
+                            this.consume();
+                        }
+                        this.state = 33;
+                        localctx.right = this.expr(6);
+                        break;
+
+                    case 2:
+                        localctx = new OpExprContext(this, new ExprContext(this, _parentctx, _parentState));
+                        localctx.left = _prevctx;
+                        this.pushNewRecursionContext(localctx, _startState, ExprParser.RULE_expr);
+                        this.state = 34;
+                        if (!this.precpred(this._ctx, 4)) {
+                            throw new antlr4.error.FailedPredicateException(this, "this.precpred(this._ctx, 4)");
+                        }
+                        this.state = 35;
+                        localctx.op = this._input.LT(1);
+                        _la = this._input.LA(1);
+                        if (!(_la === ExprParser.T__3 || _la === ExprParser.T__4)) {
+                            localctx.op = this._errHandler.recoverInline(this);
+                        } else {
+                            this._errHandler.reportMatch(this);
+                            this.consume();
+                        }
+                        this.state = 36;
+                        localctx.right = this.expr(5);
+                        break;
+
+                }
+            }
+            this.state = 41;
+            this._errHandler.sync(this);
+            _alt = this._interp.adaptivePredict(this._input, 4, this._ctx);
+        }
+    } catch (error) {
+        if (error instanceof antlr4.error.RecognitionException) {
+            localctx.exception = error;
+            this._errHandler.reportError(this, error);
+            this._errHandler.recover(this, error);
+        } else {
+            throw error;
+        }
+    } finally {
+        this.unrollRecursionContexts(_parentctx);
+    }
+    return localctx;
+};
+
+ExprParser.prototype.sempred = function (localctx, ruleIndex, predIndex) {
+    switch (ruleIndex) {
+        case 2:
+            return this.expr_sempred(localctx, predIndex);
+        default:
+            throw "No predicate with index:" + ruleIndex;
+    }
+};
+
+ExprParser.prototype.expr_sempred = function (localctx, predIndex) {
+    switch (predIndex) {
+        case 0:
+            return this.precpred(this._ctx, 5);
+        case 1:
+            return this.precpred(this._ctx, 4);
+        default:
+            throw "No predicate with index:" + predIndex;
+    }
+};
+
+exports.ExprParser = ExprParser;
+
+/***/ }),
+/* 37 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+// Generated from lib/Expr.g4 by ANTLR 4.7
+// jshint ignore: start
+var antlr4 = __webpack_require__(19);
+
+// This class defines a complete generic visitor for a parse tree produced by ExprParser.
+
+function ExprVisitor() {
+  antlr4.tree.ParseTreeVisitor.call(this);
+  return this;
+}
+
+ExprVisitor.prototype = Object.create(antlr4.tree.ParseTreeVisitor.prototype);
+ExprVisitor.prototype.constructor = ExprVisitor;
+
+// Visit a parse tree produced by ExprParser#prog.
+ExprVisitor.prototype.visitProg = function (ctx) {
+  return this.visitChildren(ctx);
+};
+
+// Visit a parse tree produced by ExprParser#print.
+ExprVisitor.prototype.visitPrint = function (ctx) {
+  return this.visitChildren(ctx);
+};
+
+// Visit a parse tree produced by ExprParser#assign.
+ExprVisitor.prototype.visitAssign = function (ctx) {
+  return this.visitChildren(ctx);
+};
+
+// Visit a parse tree produced by ExprParser#blank.
+ExprVisitor.prototype.visitBlank = function (ctx) {
+  return this.visitChildren(ctx);
+};
+
+// Visit a parse tree produced by ExprParser#opExpr.
+ExprVisitor.prototype.visitOpExpr = function (ctx) {
+  return this.visitChildren(ctx);
+};
+
+// Visit a parse tree produced by ExprParser#atomExpr.
+ExprVisitor.prototype.visitAtomExpr = function (ctx) {
+  return this.visitChildren(ctx);
+};
+
+// Visit a parse tree produced by ExprParser#parenExpr.
+ExprVisitor.prototype.visitParenExpr = function (ctx) {
+  return this.visitChildren(ctx);
+};
+
+// Visit a parse tree produced by ExprParser#idExpr.
+ExprVisitor.prototype.visitIdExpr = function (ctx) {
+  return this.visitChildren(ctx);
+};
+
+exports.ExprVisitor = ExprVisitor;
+
+/***/ }),
+/* 38 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _ace = __webpack_require__(39);
 
 var _ace2 = _interopRequireDefault(_ace);
 
-__webpack_require__(34);
+var _debounce = __webpack_require__(40);
 
-var _validate = __webpack_require__(35);
+var _debounce2 = _interopRequireDefault(_debounce);
+
+__webpack_require__(50);
+
+var _validate = __webpack_require__(51);
 
 var _validate2 = _interopRequireDefault(_validate);
 
-var _run = __webpack_require__(55);
+var _run = __webpack_require__(68);
 
 var _run2 = _interopRequireDefault(_run);
 
@@ -8039,7 +8782,7 @@ var Range = _ace2.default.require('ace/range').Range;
 
 var markers = [];
 
-editor.getSession().on('change', function () {
+function validateInput() {
     var errors = (0, _validate2.default)(editor.getValue());
     var session = editor.getSession();
     markers.forEach(function (marker) {
@@ -8058,20 +8801,561 @@ editor.getSession().on('change', function () {
     errors.forEach(function (error) {
         markers.push(session.addMarker(new Range(error.line, error.column, error.line, error.column + error.length), "lint-mark-error", false));
     });
-});
+}
+
+var debounced = (0, _debounce2.default)(validateInput, 500);
+editor.getSession().on('change', debounced);
 
 document.getElementById('btnRun').onclick = function () {
     alert((0, _run2.default)(editor.getValue()));
 };
 
 /***/ }),
-/* 33 */
+/* 39 */
 /***/ (function(module, exports) {
 
 module.exports = ace;
 
 /***/ }),
-/* 34 */
+/* 40 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var isObject = __webpack_require__(22),
+    now = __webpack_require__(41),
+    toNumber = __webpack_require__(44);
+
+/** Error message constants. */
+var FUNC_ERROR_TEXT = 'Expected a function';
+
+/* Built-in method references for those with the same name as other `lodash` methods. */
+var nativeMax = Math.max,
+    nativeMin = Math.min;
+
+/**
+ * Creates a debounced function that delays invoking `func` until after `wait`
+ * milliseconds have elapsed since the last time the debounced function was
+ * invoked. The debounced function comes with a `cancel` method to cancel
+ * delayed `func` invocations and a `flush` method to immediately invoke them.
+ * Provide `options` to indicate whether `func` should be invoked on the
+ * leading and/or trailing edge of the `wait` timeout. The `func` is invoked
+ * with the last arguments provided to the debounced function. Subsequent
+ * calls to the debounced function return the result of the last `func`
+ * invocation.
+ *
+ * **Note:** If `leading` and `trailing` options are `true`, `func` is
+ * invoked on the trailing edge of the timeout only if the debounced function
+ * is invoked more than once during the `wait` timeout.
+ *
+ * If `wait` is `0` and `leading` is `false`, `func` invocation is deferred
+ * until to the next tick, similar to `setTimeout` with a timeout of `0`.
+ *
+ * See [David Corbacho's article](https://css-tricks.com/debouncing-throttling-explained-examples/)
+ * for details over the differences between `_.debounce` and `_.throttle`.
+ *
+ * @static
+ * @memberOf _
+ * @since 0.1.0
+ * @category Function
+ * @param {Function} func The function to debounce.
+ * @param {number} [wait=0] The number of milliseconds to delay.
+ * @param {Object} [options={}] The options object.
+ * @param {boolean} [options.leading=false]
+ *  Specify invoking on the leading edge of the timeout.
+ * @param {number} [options.maxWait]
+ *  The maximum time `func` is allowed to be delayed before it's invoked.
+ * @param {boolean} [options.trailing=true]
+ *  Specify invoking on the trailing edge of the timeout.
+ * @returns {Function} Returns the new debounced function.
+ * @example
+ *
+ * // Avoid costly calculations while the window size is in flux.
+ * jQuery(window).on('resize', _.debounce(calculateLayout, 150));
+ *
+ * // Invoke `sendMail` when clicked, debouncing subsequent calls.
+ * jQuery(element).on('click', _.debounce(sendMail, 300, {
+ *   'leading': true,
+ *   'trailing': false
+ * }));
+ *
+ * // Ensure `batchLog` is invoked once after 1 second of debounced calls.
+ * var debounced = _.debounce(batchLog, 250, { 'maxWait': 1000 });
+ * var source = new EventSource('/stream');
+ * jQuery(source).on('message', debounced);
+ *
+ * // Cancel the trailing debounced invocation.
+ * jQuery(window).on('popstate', debounced.cancel);
+ */
+function debounce(func, wait, options) {
+  var lastArgs,
+      lastThis,
+      maxWait,
+      result,
+      timerId,
+      lastCallTime,
+      lastInvokeTime = 0,
+      leading = false,
+      maxing = false,
+      trailing = true;
+
+  if (typeof func != 'function') {
+    throw new TypeError(FUNC_ERROR_TEXT);
+  }
+  wait = toNumber(wait) || 0;
+  if (isObject(options)) {
+    leading = !!options.leading;
+    maxing = 'maxWait' in options;
+    maxWait = maxing ? nativeMax(toNumber(options.maxWait) || 0, wait) : maxWait;
+    trailing = 'trailing' in options ? !!options.trailing : trailing;
+  }
+
+  function invokeFunc(time) {
+    var args = lastArgs,
+        thisArg = lastThis;
+
+    lastArgs = lastThis = undefined;
+    lastInvokeTime = time;
+    result = func.apply(thisArg, args);
+    return result;
+  }
+
+  function leadingEdge(time) {
+    // Reset any `maxWait` timer.
+    lastInvokeTime = time;
+    // Start the timer for the trailing edge.
+    timerId = setTimeout(timerExpired, wait);
+    // Invoke the leading edge.
+    return leading ? invokeFunc(time) : result;
+  }
+
+  function remainingWait(time) {
+    var timeSinceLastCall = time - lastCallTime,
+        timeSinceLastInvoke = time - lastInvokeTime,
+        result = wait - timeSinceLastCall;
+
+    return maxing ? nativeMin(result, maxWait - timeSinceLastInvoke) : result;
+  }
+
+  function shouldInvoke(time) {
+    var timeSinceLastCall = time - lastCallTime,
+        timeSinceLastInvoke = time - lastInvokeTime;
+
+    // Either this is the first call, activity has stopped and we're at the
+    // trailing edge, the system time has gone backwards and we're treating
+    // it as the trailing edge, or we've hit the `maxWait` limit.
+    return lastCallTime === undefined || timeSinceLastCall >= wait || timeSinceLastCall < 0 || maxing && timeSinceLastInvoke >= maxWait;
+  }
+
+  function timerExpired() {
+    var time = now();
+    if (shouldInvoke(time)) {
+      return trailingEdge(time);
+    }
+    // Restart the timer.
+    timerId = setTimeout(timerExpired, remainingWait(time));
+  }
+
+  function trailingEdge(time) {
+    timerId = undefined;
+
+    // Only invoke if we have `lastArgs` which means `func` has been
+    // debounced at least once.
+    if (trailing && lastArgs) {
+      return invokeFunc(time);
+    }
+    lastArgs = lastThis = undefined;
+    return result;
+  }
+
+  function cancel() {
+    if (timerId !== undefined) {
+      clearTimeout(timerId);
+    }
+    lastInvokeTime = 0;
+    lastArgs = lastCallTime = lastThis = timerId = undefined;
+  }
+
+  function flush() {
+    return timerId === undefined ? result : trailingEdge(now());
+  }
+
+  function debounced() {
+    var time = now(),
+        isInvoking = shouldInvoke(time);
+
+    lastArgs = arguments;
+    lastThis = this;
+    lastCallTime = time;
+
+    if (isInvoking) {
+      if (timerId === undefined) {
+        return leadingEdge(lastCallTime);
+      }
+      if (maxing) {
+        // Handle invocations in a tight loop.
+        timerId = setTimeout(timerExpired, wait);
+        return invokeFunc(lastCallTime);
+      }
+    }
+    if (timerId === undefined) {
+      timerId = setTimeout(timerExpired, wait);
+    }
+    return result;
+  }
+  debounced.cancel = cancel;
+  debounced.flush = flush;
+  return debounced;
+}
+
+module.exports = debounce;
+
+/***/ }),
+/* 41 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var root = __webpack_require__(23);
+
+/**
+ * Gets the timestamp of the number of milliseconds that have elapsed since
+ * the Unix epoch (1 January 1970 00:00:00 UTC).
+ *
+ * @static
+ * @memberOf _
+ * @since 2.4.0
+ * @category Date
+ * @returns {number} Returns the timestamp.
+ * @example
+ *
+ * _.defer(function(stamp) {
+ *   console.log(_.now() - stamp);
+ * }, _.now());
+ * // => Logs the number of milliseconds it took for the deferred invocation.
+ */
+var now = function now() {
+  return root.Date.now();
+};
+
+module.exports = now;
+
+/***/ }),
+/* 42 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(global) {
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
+/** Detect free variable `global` from Node.js. */
+var freeGlobal = (typeof global === 'undefined' ? 'undefined' : _typeof(global)) == 'object' && global && global.Object === Object && global;
+
+module.exports = freeGlobal;
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(43)))
+
+/***/ }),
+/* 43 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
+var g;
+
+// This works in non-strict mode
+g = function () {
+	return this;
+}();
+
+try {
+	// This works if eval is allowed (see CSP)
+	g = g || Function("return this")() || (1, eval)("this");
+} catch (e) {
+	// This works if the window reference is available
+	if ((typeof window === "undefined" ? "undefined" : _typeof(window)) === "object") g = window;
+}
+
+// g can still be undefined, but nothing to do about it...
+// We return undefined, instead of nothing here, so it's
+// easier to handle this case. if(!global) { ...}
+
+module.exports = g;
+
+/***/ }),
+/* 44 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var isObject = __webpack_require__(22),
+    isSymbol = __webpack_require__(45);
+
+/** Used as references for various `Number` constants. */
+var NAN = 0 / 0;
+
+/** Used to match leading and trailing whitespace. */
+var reTrim = /^\s+|\s+$/g;
+
+/** Used to detect bad signed hexadecimal string values. */
+var reIsBadHex = /^[-+]0x[0-9a-f]+$/i;
+
+/** Used to detect binary string values. */
+var reIsBinary = /^0b[01]+$/i;
+
+/** Used to detect octal string values. */
+var reIsOctal = /^0o[0-7]+$/i;
+
+/** Built-in method references without a dependency on `root`. */
+var freeParseInt = parseInt;
+
+/**
+ * Converts `value` to a number.
+ *
+ * @static
+ * @memberOf _
+ * @since 4.0.0
+ * @category Lang
+ * @param {*} value The value to process.
+ * @returns {number} Returns the number.
+ * @example
+ *
+ * _.toNumber(3.2);
+ * // => 3.2
+ *
+ * _.toNumber(Number.MIN_VALUE);
+ * // => 5e-324
+ *
+ * _.toNumber(Infinity);
+ * // => Infinity
+ *
+ * _.toNumber('3.2');
+ * // => 3.2
+ */
+function toNumber(value) {
+  if (typeof value == 'number') {
+    return value;
+  }
+  if (isSymbol(value)) {
+    return NAN;
+  }
+  if (isObject(value)) {
+    var other = typeof value.valueOf == 'function' ? value.valueOf() : value;
+    value = isObject(other) ? other + '' : other;
+  }
+  if (typeof value != 'string') {
+    return value === 0 ? value : +value;
+  }
+  value = value.replace(reTrim, '');
+  var isBinary = reIsBinary.test(value);
+  return isBinary || reIsOctal.test(value) ? freeParseInt(value.slice(2), isBinary ? 2 : 8) : reIsBadHex.test(value) ? NAN : +value;
+}
+
+module.exports = toNumber;
+
+/***/ }),
+/* 45 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
+var baseGetTag = __webpack_require__(46),
+    isObjectLike = __webpack_require__(49);
+
+/** `Object#toString` result references. */
+var symbolTag = '[object Symbol]';
+
+/**
+ * Checks if `value` is classified as a `Symbol` primitive or object.
+ *
+ * @static
+ * @memberOf _
+ * @since 4.0.0
+ * @category Lang
+ * @param {*} value The value to check.
+ * @returns {boolean} Returns `true` if `value` is a symbol, else `false`.
+ * @example
+ *
+ * _.isSymbol(Symbol.iterator);
+ * // => true
+ *
+ * _.isSymbol('abc');
+ * // => false
+ */
+function isSymbol(value) {
+    return (typeof value === 'undefined' ? 'undefined' : _typeof(value)) == 'symbol' || isObjectLike(value) && baseGetTag(value) == symbolTag;
+}
+
+module.exports = isSymbol;
+
+/***/ }),
+/* 46 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _Symbol = __webpack_require__(24),
+    getRawTag = __webpack_require__(47),
+    objectToString = __webpack_require__(48);
+
+/** `Object#toString` result references. */
+var nullTag = '[object Null]',
+    undefinedTag = '[object Undefined]';
+
+/** Built-in value references. */
+var symToStringTag = _Symbol ? _Symbol.toStringTag : undefined;
+
+/**
+ * The base implementation of `getTag` without fallbacks for buggy environments.
+ *
+ * @private
+ * @param {*} value The value to query.
+ * @returns {string} Returns the `toStringTag`.
+ */
+function baseGetTag(value) {
+    if (value == null) {
+        return value === undefined ? undefinedTag : nullTag;
+    }
+    return symToStringTag && symToStringTag in Object(value) ? getRawTag(value) : objectToString(value);
+}
+
+module.exports = baseGetTag;
+
+/***/ }),
+/* 47 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _Symbol = __webpack_require__(24);
+
+/** Used for built-in method references. */
+var objectProto = Object.prototype;
+
+/** Used to check objects for own properties. */
+var hasOwnProperty = objectProto.hasOwnProperty;
+
+/**
+ * Used to resolve the
+ * [`toStringTag`](http://ecma-international.org/ecma-262/7.0/#sec-object.prototype.tostring)
+ * of values.
+ */
+var nativeObjectToString = objectProto.toString;
+
+/** Built-in value references. */
+var symToStringTag = _Symbol ? _Symbol.toStringTag : undefined;
+
+/**
+ * A specialized version of `baseGetTag` which ignores `Symbol.toStringTag` values.
+ *
+ * @private
+ * @param {*} value The value to query.
+ * @returns {string} Returns the raw `toStringTag`.
+ */
+function getRawTag(value) {
+  var isOwn = hasOwnProperty.call(value, symToStringTag),
+      tag = value[symToStringTag];
+
+  try {
+    value[symToStringTag] = undefined;
+    var unmasked = true;
+  } catch (e) {}
+
+  var result = nativeObjectToString.call(value);
+  if (unmasked) {
+    if (isOwn) {
+      value[symToStringTag] = tag;
+    } else {
+      delete value[symToStringTag];
+    }
+  }
+  return result;
+}
+
+module.exports = getRawTag;
+
+/***/ }),
+/* 48 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+/** Used for built-in method references. */
+var objectProto = Object.prototype;
+
+/**
+ * Used to resolve the
+ * [`toStringTag`](http://ecma-international.org/ecma-262/7.0/#sec-object.prototype.tostring)
+ * of values.
+ */
+var nativeObjectToString = objectProto.toString;
+
+/**
+ * Converts `value` to a string using `Object.prototype.toString`.
+ *
+ * @private
+ * @param {*} value The value to convert.
+ * @returns {string} Returns the converted string.
+ */
+function objectToString(value) {
+  return nativeObjectToString.call(value);
+}
+
+module.exports = objectToString;
+
+/***/ }),
+/* 49 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
+/**
+ * Checks if `value` is object-like. A value is object-like if it's not `null`
+ * and has a `typeof` result of "object".
+ *
+ * @static
+ * @memberOf _
+ * @since 4.0.0
+ * @category Lang
+ * @param {*} value The value to check.
+ * @returns {boolean} Returns `true` if `value` is object-like, else `false`.
+ * @example
+ *
+ * _.isObjectLike({});
+ * // => true
+ *
+ * _.isObjectLike([1, 2, 3]);
+ * // => true
+ *
+ * _.isObjectLike(_.noop);
+ * // => false
+ *
+ * _.isObjectLike(null);
+ * // => false
+ */
+function isObjectLike(value) {
+  return value != null && (typeof value === 'undefined' ? 'undefined' : _typeof(value)) == 'object';
+}
+
+module.exports = isObjectLike;
+
+/***/ }),
+/* 50 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -8112,7 +9396,7 @@ ace.define('ace/mode/my-mode', ["require", "exports", "module", "ace/lib/oop", "
 });
 
 /***/ }),
-/* 35 */
+/* 51 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -8126,15 +9410,15 @@ var _createClass = function () { function defineProperties(target, props) { for 
 
 exports.default = validate;
 
-var _InputStream = __webpack_require__(13);
+var _InputStream = __webpack_require__(12);
 
-var _CommonTokenStream = __webpack_require__(22);
+var _CommonTokenStream = __webpack_require__(18);
 
-var _ErrorListener2 = __webpack_require__(12);
+var _ErrorListener2 = __webpack_require__(13);
 
-var _ExprLexer = __webpack_require__(38);
+var _ExprLexer = __webpack_require__(28);
 
-var _ExprParser = __webpack_require__(53);
+var _ExprParser = __webpack_require__(36);
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -8200,7 +9484,7 @@ function validate(input) {
 }
 
 /***/ }),
-/* 36 */
+/* 52 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -8581,7 +9865,7 @@ BufferedTokenStream.prototype.fill = function () {
 exports.BufferedTokenStream = BufferedTokenStream;
 
 /***/ }),
-/* 37 */
+/* 53 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -8658,62 +9942,7 @@ CommonTokenFactory.prototype.createThin = function (type, text) {
 exports.CommonTokenFactory = CommonTokenFactory;
 
 /***/ }),
-/* 38 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-// Generated from lib/Expr.g4 by ANTLR 4.7
-// jshint ignore: start
-var antlr4 = __webpack_require__(18);
-
-var serializedATN = ["\x03\u608B\uA72A\u8133\uB9ED\u417C\u3BE7\u7786\u5964", "\x02\r:\b\x01\x04\x02\t\x02\x04\x03\t\x03\x04\x04", "\t\x04\x04\x05\t\x05\x04\x06\t\x06\x04\x07\t\x07", "\x04\b\t\b\x04\t\t\t\x04\n\t\n\x04\x0B\t\x0B\x04\f\t\f", "\x03\x02\x03\x02\x03\x03\x03\x03\x03\x04\x03\x04", "\x03\x05\x03\x05\x03\x06\x03\x06\x03\x07\x03\x07", "\x03\b\x03\b\x03\t\x03\t\x03\n\x06\n+\n\n\r\n\x0E\n,\x03", "\x0B\x06\x0B0\n\x0B\r\x0B\x0E\x0B1\x03\f\x06\f5\n", "\f\r\f\x0E\f6\x03\f\x03\f\x02\x02\r\x03\x03\x05\x04", "\x07\x05\t\x06\x0B\x07\r\b\x0F\t\x11\n\x13\x0B\x15", "\f\x17\r\x03\x02\x05\x03\x022;\x04\x02C\\c|\x05\x02", "\x0B\f\x0F\x0F\"\"\x02<\x02\x03\x03\x02\x02\x02", "\x02\x05\x03\x02\x02\x02\x02\x07\x03\x02\x02\x02", "\x02\t\x03\x02\x02\x02\x02\x0B\x03\x02\x02\x02", "\x02\r\x03\x02\x02\x02\x02\x0F\x03\x02\x02\x02", "\x02\x11\x03\x02\x02\x02\x02\x13\x03\x02\x02\x02", "\x02\x15\x03\x02\x02\x02\x02\x17\x03\x02\x02\x02", "\x03\x19\x03\x02\x02\x02\x05\x1B\x03\x02\x02\x02", "\x07\x1D\x03\x02\x02\x02\t\x1F\x03\x02\x02\x02", "\x0B!\x03\x02\x02\x02\r#\x03\x02\x02\x02\x0F%\x03", "\x02\x02\x02\x11'\x03\x02\x02\x02\x13*\x03\x02", "\x02\x02\x15/\x03\x02\x02\x02\x174\x03\x02\x02", "\x02\x19\x1A\x07?\x02\x02\x1A\x04\x03\x02\x02", "\x02\x1B\x1C\x07,\x02\x02\x1C\x06\x03\x02\x02", "\x02\x1D\x1E\x071\x02\x02\x1E\b\x03\x02\x02\x02", "\x1F \x07-\x02\x02 \n\x03\x02\x02\x02!\"\x07/\x02", "\x02\"\f\x03\x02\x02\x02#$\x07*\x02\x02$\x0E\x03", "\x02\x02\x02%&\x07+\x02\x02&\x10\x03\x02\x02\x02", "'(\x07=\x02\x02(\x12\x03\x02\x02\x02)+\t\x02\x02", "\x02*)\x03\x02\x02\x02+,\x03\x02\x02\x02,*\x03\x02", "\x02\x02,-\x03\x02\x02\x02-\x14\x03\x02\x02\x02", ".0\t\x03\x02\x02/.\x03\x02\x02\x0201\x03\x02\x02", "\x021/\x03\x02\x02\x0212\x03\x02\x02\x022\x16\x03", "\x02\x02\x0235\t\x04\x02\x0243\x03\x02\x02\x025", "6\x03\x02\x02\x0264\x03\x02\x02\x0267\x03\x02\x02", "\x0278\x03\x02\x02\x0289\b\f\x02\x029\x18\x03\x02", "\x02\x02\x06\x02,16\x03\b\x02\x02"].join("");
-
-var atn = new antlr4.atn.ATNDeserializer().deserialize(serializedATN);
-
-var decisionsToDFA = atn.decisionToState.map(function (ds, index) {
-    return new antlr4.dfa.DFA(ds, index);
-});
-
-function ExprLexer(input) {
-    antlr4.Lexer.call(this, input);
-    this._interp = new antlr4.atn.LexerATNSimulator(this, atn, decisionsToDFA, new antlr4.PredictionContextCache());
-    return this;
-}
-
-ExprLexer.prototype = Object.create(antlr4.Lexer.prototype);
-ExprLexer.prototype.constructor = ExprLexer;
-
-ExprLexer.EOF = antlr4.Token.EOF;
-ExprLexer.T__0 = 1;
-ExprLexer.T__1 = 2;
-ExprLexer.T__2 = 3;
-ExprLexer.T__3 = 4;
-ExprLexer.T__4 = 5;
-ExprLexer.T__5 = 6;
-ExprLexer.T__6 = 7;
-ExprLexer.NEWLINE = 8;
-ExprLexer.INT = 9;
-ExprLexer.ID = 10;
-ExprLexer.WS = 11;
-
-ExprLexer.prototype.channelNames = ["DEFAULT_TOKEN_CHANNEL", "HIDDEN"];
-
-ExprLexer.prototype.modeNames = ["DEFAULT_MODE"];
-
-ExprLexer.prototype.literalNames = [null, "'='", "'*'", "'/'", "'+'", "'-'", "'('", "')'", "';'"];
-
-ExprLexer.prototype.symbolicNames = [null, null, null, null, null, null, null, null, "NEWLINE", "INT", "ID", "WS"];
-
-ExprLexer.prototype.ruleNames = ["T__0", "T__1", "T__2", "T__3", "T__4", "T__5", "T__6", "NEWLINE", "INT", "ID", "WS"];
-
-ExprLexer.prototype.grammarFileName = "Expr.g4";
-
-exports.ExprLexer = ExprLexer;
-
-/***/ }),
-/* 39 */
+/* 54 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -8725,13 +9954,13 @@ exports.ExprLexer = ExprLexer;
  */
 
 exports.ATN = __webpack_require__(8).ATN;
-exports.ATNDeserializer = __webpack_require__(25).ATNDeserializer;
-exports.LexerATNSimulator = __webpack_require__(42).LexerATNSimulator;
-exports.ParserATNSimulator = __webpack_require__(44).ParserATNSimulator;
-exports.PredictionMode = __webpack_require__(29).PredictionMode;
+exports.ATNDeserializer = __webpack_require__(30).ATNDeserializer;
+exports.LexerATNSimulator = __webpack_require__(57).LexerATNSimulator;
+exports.ParserATNSimulator = __webpack_require__(59).ParserATNSimulator;
+exports.PredictionMode = __webpack_require__(34).PredictionMode;
 
 /***/ }),
-/* 40 */
+/* 55 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -8935,7 +10164,7 @@ LL1Analyzer.prototype._LOOK = function (s, stopState, ctx, look, lookBusy, calle
 exports.LL1Analyzer = LL1Analyzer;
 
 /***/ }),
-/* 41 */
+/* 56 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -8957,7 +10186,7 @@ ATNType.PARSER = 1;
 exports.ATNType = ATNType;
 
 /***/ }),
-/* 42 */
+/* 57 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -8989,7 +10218,7 @@ exports.ATNType = ATNType;
 var Token = __webpack_require__(1).Token;
 var Lexer = __webpack_require__(14).Lexer;
 var ATN = __webpack_require__(8).ATN;
-var ATNSimulator = __webpack_require__(28).ATNSimulator;
+var ATNSimulator = __webpack_require__(33).ATNSimulator;
 var DFAState = __webpack_require__(11).DFAState;
 var ATNConfigSet = __webpack_require__(9).ATNConfigSet;
 var OrderedATNConfigSet = __webpack_require__(9).OrderedATNConfigSet;
@@ -8998,7 +10227,7 @@ var SingletonPredictionContext = __webpack_require__(6).SingletonPredictionConte
 var RuleStopState = __webpack_require__(4).RuleStopState;
 var LexerATNConfig = __webpack_require__(15).LexerATNConfig;
 var Transition = __webpack_require__(7).Transition;
-var LexerActionExecutor = __webpack_require__(43).LexerActionExecutor;
+var LexerActionExecutor = __webpack_require__(58).LexerActionExecutor;
 var LexerNoViableAltException = __webpack_require__(3).LexerNoViableAltException;
 
 function resetSimState(sim) {
@@ -9589,7 +10818,7 @@ LexerATNSimulator.prototype.getTokenName = function (tt) {
 exports.LexerATNSimulator = LexerATNSimulator;
 
 /***/ }),
-/* 43 */
+/* 58 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -9610,7 +10839,7 @@ exports.LexerATNSimulator = LexerATNSimulator;
 // not cause bloating of the {@link DFA} created for the lexer.</p>
 
 var hashStuff = __webpack_require__(0).hashStuff;
-var LexerIndexedCustomAction = __webpack_require__(27).LexerIndexedCustomAction;
+var LexerIndexedCustomAction = __webpack_require__(32).LexerIndexedCustomAction;
 
 function LexerActionExecutor(lexerActions) {
 	this.lexerActions = lexerActions === null ? [] : lexerActions;
@@ -9760,7 +10989,7 @@ LexerActionExecutor.prototype.equals = function (other) {
 exports.LexerActionExecutor = LexerActionExecutor;
 
 /***/ }),
-/* 44 */
+/* 59 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10012,10 +11241,10 @@ var ATNConfigSet = __webpack_require__(9).ATNConfigSet;
 var Token = __webpack_require__(1).Token;
 var DFAState = __webpack_require__(11).DFAState;
 var PredPrediction = __webpack_require__(11).PredPrediction;
-var ATNSimulator = __webpack_require__(28).ATNSimulator;
-var PredictionMode = __webpack_require__(29).PredictionMode;
+var ATNSimulator = __webpack_require__(33).ATNSimulator;
+var PredictionMode = __webpack_require__(34).PredictionMode;
 var RuleContext = __webpack_require__(16).RuleContext;
-var ParserRuleContext = __webpack_require__(19).ParserRuleContext;
+var ParserRuleContext = __webpack_require__(20).ParserRuleContext;
 var SemanticContext = __webpack_require__(10).SemanticContext;
 var StarLoopEntryState = __webpack_require__(4).StarLoopEntryState;
 var RuleStopState = __webpack_require__(4).RuleStopState;
@@ -11459,7 +12688,7 @@ ParserATNSimulator.prototype.reportAmbiguity = function (dfa, D, startIndex, sto
 exports.ParserATNSimulator = ParserATNSimulator;
 
 /***/ }),
-/* 45 */
+/* 60 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11470,13 +12699,13 @@ exports.ParserATNSimulator = ParserATNSimulator;
  * can be found in the LICENSE.txt file in the project root.
  */
 
-exports.DFA = __webpack_require__(46).DFA;
+exports.DFA = __webpack_require__(61).DFA;
 exports.DFASerializer = __webpack_require__(17).DFASerializer;
 exports.LexerDFASerializer = __webpack_require__(17).LexerDFASerializer;
 exports.PredPrediction = __webpack_require__(11).PredPrediction;
 
 /***/ }),
-/* 46 */
+/* 61 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11634,7 +12863,7 @@ DFA.prototype.toLexerString = function () {
 exports.DFA = DFA;
 
 /***/ }),
-/* 47 */
+/* 62 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11646,14 +12875,14 @@ exports.DFA = DFA;
  */
 
 var Tree = __webpack_require__(5);
-exports.Trees = __webpack_require__(24).Trees;
+exports.Trees = __webpack_require__(29).Trees;
 exports.RuleNode = Tree.RuleNode;
 exports.ParseTreeListener = Tree.ParseTreeListener;
 exports.ParseTreeVisitor = Tree.ParseTreeVisitor;
 exports.ParseTreeWalker = Tree.ParseTreeWalker;
 
 /***/ }),
-/* 48 */
+/* 63 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11669,12 +12898,12 @@ exports.NoViableAltException = __webpack_require__(3).NoViableAltException;
 exports.LexerNoViableAltException = __webpack_require__(3).LexerNoViableAltException;
 exports.InputMismatchException = __webpack_require__(3).InputMismatchException;
 exports.FailedPredicateException = __webpack_require__(3).FailedPredicateException;
-exports.DiagnosticErrorListener = __webpack_require__(49).DiagnosticErrorListener;
-exports.BailErrorStrategy = __webpack_require__(30).BailErrorStrategy;
-exports.ErrorListener = __webpack_require__(12).ErrorListener;
+exports.DiagnosticErrorListener = __webpack_require__(64).DiagnosticErrorListener;
+exports.BailErrorStrategy = __webpack_require__(21).BailErrorStrategy;
+exports.ErrorListener = __webpack_require__(13).ErrorListener;
 
 /***/ }),
-/* 49 */
+/* 64 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11707,7 +12936,7 @@ exports.ErrorListener = __webpack_require__(12).ErrorListener;
 // </ul>
 
 var BitSet = __webpack_require__(0).BitSet;
-var ErrorListener = __webpack_require__(12).ErrorListener;
+var ErrorListener = __webpack_require__(13).ErrorListener;
 var Interval = __webpack_require__(2).Interval;
 
 function DiagnosticErrorListener(exactOnly) {
@@ -11779,7 +13008,7 @@ DiagnosticErrorListener.prototype.getConflictingAlts = function (reportedAlts, c
 exports.DiagnosticErrorListener = DiagnosticErrorListener;
 
 /***/ }),
-/* 50 */
+/* 65 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11792,10 +13021,10 @@ exports.DiagnosticErrorListener = DiagnosticErrorListener;
  */
 //
 
-var InputStream = __webpack_require__(13).InputStream;
+var InputStream = __webpack_require__(12).InputStream;
 
 var isNodeJs = typeof window === 'undefined' && typeof importScripts === 'undefined';
-var fs = isNodeJs ? __webpack_require__(31) : null;
+var fs = isNodeJs ? __webpack_require__(35) : null;
 
 // Utility functions to create InputStreams from various sources.
 //
@@ -11858,7 +13087,7 @@ var CharStreams = {
 exports.CharStreams = CharStreams;
 
 /***/ }),
-/* 51 */
+/* 66 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11875,9 +13104,9 @@ exports.CharStreams = CharStreams;
 //  This is an InputStream that is loaded from a file all at once
 //  when you construct the object.
 //
-var InputStream = __webpack_require__(13).InputStream;
+var InputStream = __webpack_require__(12).InputStream;
 var isNodeJs = typeof window === 'undefined' && typeof importScripts === 'undefined';
-var fs = isNodeJs ? __webpack_require__(31) : null;
+var fs = isNodeJs ? __webpack_require__(35) : null;
 
 function FileStream(fileName, decodeToUnicodeCodePoints) {
 	var data = fs.readFileSync(fileName, "utf8");
@@ -11892,7 +13121,7 @@ FileStream.prototype.constructor = FileStream;
 exports.FileStream = FileStream;
 
 /***/ }),
-/* 52 */
+/* 67 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11905,10 +13134,10 @@ exports.FileStream = FileStream;
 
 var Token = __webpack_require__(1).Token;
 var ParseTreeListener = __webpack_require__(5).ParseTreeListener;
-var Recognizer = __webpack_require__(23).Recognizer;
-var DefaultErrorStrategy = __webpack_require__(30).DefaultErrorStrategy;
-var ATNDeserializer = __webpack_require__(25).ATNDeserializer;
-var ATNDeserializationOptions = __webpack_require__(26).ATNDeserializationOptions;
+var Recognizer = __webpack_require__(27).Recognizer;
+var DefaultErrorStrategy = __webpack_require__(21).DefaultErrorStrategy;
+var ATNDeserializer = __webpack_require__(30).ATNDeserializer;
+var ATNDeserializationOptions = __webpack_require__(31).ATNDeserializationOptions;
 var TerminalNode = __webpack_require__(5).TerminalNode;
 var ErrorNode = __webpack_require__(5).ErrorNode;
 
@@ -12572,617 +13801,7 @@ Parser.prototype.setTrace = function (trace) {
 exports.Parser = Parser;
 
 /***/ }),
-/* 53 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-// Generated from lib/Expr.g4 by ANTLR 4.7
-// jshint ignore: start
-var antlr4 = __webpack_require__(18);
-var ExprVisitor = __webpack_require__(54).ExprVisitor;
-
-var grammarFileName = "Expr.g4";
-
-var serializedATN = ['\x03\u608B\uA72A\u8133\uB9ED\u417C\u3BE7\u7786\u5964', '\x03\r-\x04\x02\t\x02\x04\x03\t\x03\x04\x04\t\x04', '\x03\x02\x06\x02\n\n\x02\r\x02\x0E\x02\x0B\x03\x03', '\x03\x03\x03\x03\x03\x03\x03\x03\x03\x03\x03\x03', '\x03\x03\x03\x03\x05\x03\x17\n\x03\x03\x04\x03', '\x04\x03\x04\x03\x04\x03\x04\x03\x04\x03\x04\x05', '\x04 \n\x04\x03\x04\x03\x04\x03\x04\x03\x04\x03', '\x04\x03\x04\x07\x04(\n\x04\f\x04\x0E\x04+\x0B\x04', '\x03\x04\x02\x03\x06\x05\x02\x04\x06\x02\x04\x03', '\x02\x04\x05\x03\x02\x06\x07\x020\x02\t\x03\x02', '\x02\x02\x04\x16\x03\x02\x02\x02\x06\x1F\x03\x02', '\x02\x02\b\n\x05\x04\x03\x02\t\b\x03\x02\x02\x02', '\n\x0B\x03\x02\x02\x02\x0B\t\x03\x02\x02\x02\x0B', '\f\x03\x02\x02\x02\f\x03\x03\x02\x02\x02\r\x0E\x05', '\x06\x04\x02\x0E\x0F\x07\n\x02\x02\x0F\x17\x03', '\x02\x02\x02\x10\x11\x07\f\x02\x02\x11\x12\x07', '\x03\x02\x02\x12\x13\x05\x06\x04\x02\x13\x14\x07', '\n\x02\x02\x14\x17\x03\x02\x02\x02\x15\x17\x07', '\n\x02\x02\x16\r\x03\x02\x02\x02\x16\x10\x03\x02', '\x02\x02\x16\x15\x03\x02\x02\x02\x17\x05\x03\x02', '\x02\x02\x18\x19\b\x04\x01\x02\x19\x1A\x07\b\x02', '\x02\x1A\x1B\x05\x06\x04\x02\x1B\x1C\x07\t\x02', '\x02\x1C \x03\x02\x02\x02\x1D \x07\x0B\x02\x02', '\x1E \x07\f\x02\x02\x1F\x18\x03\x02\x02\x02\x1F', '\x1D\x03\x02\x02\x02\x1F\x1E\x03\x02\x02\x02 ', ')\x03\x02\x02\x02!"\f\x07\x02\x02"#\t\x02\x02\x02', '#(\x05\x06\x04\b$%\f\x06\x02\x02%&\t\x03\x02\x02&', '(\x05\x06\x04\x07\'!\x03\x02\x02\x02\'$\x03\x02', '\x02\x02(+\x03\x02\x02\x02)\'\x03\x02\x02\x02)*', '\x03\x02\x02\x02*\x07\x03\x02\x02\x02+)\x03\x02', '\x02\x02\x07\x0B\x16\x1F\')'].join("");
-
-var atn = new antlr4.atn.ATNDeserializer().deserialize(serializedATN);
-
-var decisionsToDFA = atn.decisionToState.map(function (ds, index) {
-    return new antlr4.dfa.DFA(ds, index);
-});
-
-var sharedContextCache = new antlr4.PredictionContextCache();
-
-var literalNames = [null, "'='", "'*'", "'/'", "'+'", "'-'", "'('", "')'", "';'"];
-
-var symbolicNames = [null, null, null, null, null, null, null, null, "NEWLINE", "INT", "ID", "WS"];
-
-var ruleNames = ["prog", "stat", "expr"];
-
-function ExprParser(input) {
-    antlr4.Parser.call(this, input);
-    this._interp = new antlr4.atn.ParserATNSimulator(this, atn, decisionsToDFA, sharedContextCache);
-    this.ruleNames = ruleNames;
-    this.literalNames = literalNames;
-    this.symbolicNames = symbolicNames;
-    return this;
-}
-
-ExprParser.prototype = Object.create(antlr4.Parser.prototype);
-ExprParser.prototype.constructor = ExprParser;
-
-Object.defineProperty(ExprParser.prototype, "atn", {
-    get: function get() {
-        return atn;
-    }
-});
-
-ExprParser.EOF = antlr4.Token.EOF;
-ExprParser.T__0 = 1;
-ExprParser.T__1 = 2;
-ExprParser.T__2 = 3;
-ExprParser.T__3 = 4;
-ExprParser.T__4 = 5;
-ExprParser.T__5 = 6;
-ExprParser.T__6 = 7;
-ExprParser.NEWLINE = 8;
-ExprParser.INT = 9;
-ExprParser.ID = 10;
-ExprParser.WS = 11;
-
-ExprParser.RULE_prog = 0;
-ExprParser.RULE_stat = 1;
-ExprParser.RULE_expr = 2;
-
-function ProgContext(parser, parent, invokingState) {
-    if (parent === undefined) {
-        parent = null;
-    }
-    if (invokingState === undefined || invokingState === null) {
-        invokingState = -1;
-    }
-    antlr4.ParserRuleContext.call(this, parent, invokingState);
-    this.parser = parser;
-    this.ruleIndex = ExprParser.RULE_prog;
-    return this;
-}
-
-ProgContext.prototype = Object.create(antlr4.ParserRuleContext.prototype);
-ProgContext.prototype.constructor = ProgContext;
-
-ProgContext.prototype.stat = function (i) {
-    if (i === undefined) {
-        i = null;
-    }
-    if (i === null) {
-        return this.getTypedRuleContexts(StatContext);
-    } else {
-        return this.getTypedRuleContext(StatContext, i);
-    }
-};
-
-ProgContext.prototype.accept = function (visitor) {
-    if (visitor instanceof ExprVisitor) {
-        return visitor.visitProg(this);
-    } else {
-        return visitor.visitChildren(this);
-    }
-};
-
-ExprParser.ProgContext = ProgContext;
-
-ExprParser.prototype.prog = function () {
-
-    var localctx = new ProgContext(this, this._ctx, this.state);
-    this.enterRule(localctx, 0, ExprParser.RULE_prog);
-    var _la = 0; // Token type
-    try {
-        this.enterOuterAlt(localctx, 1);
-        this.state = 7;
-        this._errHandler.sync(this);
-        _la = this._input.LA(1);
-        do {
-            this.state = 6;
-            this.stat();
-            this.state = 9;
-            this._errHandler.sync(this);
-            _la = this._input.LA(1);
-        } while ((_la & ~0x1f) == 0 && (1 << _la & (1 << ExprParser.T__5 | 1 << ExprParser.NEWLINE | 1 << ExprParser.INT | 1 << ExprParser.ID)) !== 0);
-    } catch (re) {
-        if (re instanceof antlr4.error.RecognitionException) {
-            localctx.exception = re;
-            this._errHandler.reportError(this, re);
-            this._errHandler.recover(this, re);
-        } else {
-            throw re;
-        }
-    } finally {
-        this.exitRule();
-    }
-    return localctx;
-};
-
-function StatContext(parser, parent, invokingState) {
-    if (parent === undefined) {
-        parent = null;
-    }
-    if (invokingState === undefined || invokingState === null) {
-        invokingState = -1;
-    }
-    antlr4.ParserRuleContext.call(this, parent, invokingState);
-    this.parser = parser;
-    this.ruleIndex = ExprParser.RULE_stat;
-    return this;
-}
-
-StatContext.prototype = Object.create(antlr4.ParserRuleContext.prototype);
-StatContext.prototype.constructor = StatContext;
-
-StatContext.prototype.copyFrom = function (ctx) {
-    antlr4.ParserRuleContext.prototype.copyFrom.call(this, ctx);
-};
-
-function PrintContext(parser, ctx) {
-    StatContext.call(this, parser);
-    StatContext.prototype.copyFrom.call(this, ctx);
-    return this;
-}
-
-PrintContext.prototype = Object.create(StatContext.prototype);
-PrintContext.prototype.constructor = PrintContext;
-
-ExprParser.PrintContext = PrintContext;
-
-PrintContext.prototype.expr = function () {
-    return this.getTypedRuleContext(ExprContext, 0);
-};
-
-PrintContext.prototype.NEWLINE = function () {
-    return this.getToken(ExprParser.NEWLINE, 0);
-};
-PrintContext.prototype.accept = function (visitor) {
-    if (visitor instanceof ExprVisitor) {
-        return visitor.visitPrint(this);
-    } else {
-        return visitor.visitChildren(this);
-    }
-};
-
-function BlankContext(parser, ctx) {
-    StatContext.call(this, parser);
-    StatContext.prototype.copyFrom.call(this, ctx);
-    return this;
-}
-
-BlankContext.prototype = Object.create(StatContext.prototype);
-BlankContext.prototype.constructor = BlankContext;
-
-ExprParser.BlankContext = BlankContext;
-
-BlankContext.prototype.NEWLINE = function () {
-    return this.getToken(ExprParser.NEWLINE, 0);
-};
-BlankContext.prototype.accept = function (visitor) {
-    if (visitor instanceof ExprVisitor) {
-        return visitor.visitBlank(this);
-    } else {
-        return visitor.visitChildren(this);
-    }
-};
-
-function AssignContext(parser, ctx) {
-    StatContext.call(this, parser);
-    StatContext.prototype.copyFrom.call(this, ctx);
-    return this;
-}
-
-AssignContext.prototype = Object.create(StatContext.prototype);
-AssignContext.prototype.constructor = AssignContext;
-
-ExprParser.AssignContext = AssignContext;
-
-AssignContext.prototype.ID = function () {
-    return this.getToken(ExprParser.ID, 0);
-};
-
-AssignContext.prototype.expr = function () {
-    return this.getTypedRuleContext(ExprContext, 0);
-};
-
-AssignContext.prototype.NEWLINE = function () {
-    return this.getToken(ExprParser.NEWLINE, 0);
-};
-AssignContext.prototype.accept = function (visitor) {
-    if (visitor instanceof ExprVisitor) {
-        return visitor.visitAssign(this);
-    } else {
-        return visitor.visitChildren(this);
-    }
-};
-
-ExprParser.StatContext = StatContext;
-
-ExprParser.prototype.stat = function () {
-
-    var localctx = new StatContext(this, this._ctx, this.state);
-    this.enterRule(localctx, 2, ExprParser.RULE_stat);
-    try {
-        this.state = 20;
-        this._errHandler.sync(this);
-        var la_ = this._interp.adaptivePredict(this._input, 1, this._ctx);
-        switch (la_) {
-            case 1:
-                localctx = new PrintContext(this, localctx);
-                this.enterOuterAlt(localctx, 1);
-                this.state = 11;
-                this.expr(0);
-                this.state = 12;
-                this.match(ExprParser.NEWLINE);
-                break;
-
-            case 2:
-                localctx = new AssignContext(this, localctx);
-                this.enterOuterAlt(localctx, 2);
-                this.state = 14;
-                this.match(ExprParser.ID);
-                this.state = 15;
-                this.match(ExprParser.T__0);
-                this.state = 16;
-                this.expr(0);
-                this.state = 17;
-                this.match(ExprParser.NEWLINE);
-                break;
-
-            case 3:
-                localctx = new BlankContext(this, localctx);
-                this.enterOuterAlt(localctx, 3);
-                this.state = 19;
-                this.match(ExprParser.NEWLINE);
-                break;
-
-        }
-    } catch (re) {
-        if (re instanceof antlr4.error.RecognitionException) {
-            localctx.exception = re;
-            this._errHandler.reportError(this, re);
-            this._errHandler.recover(this, re);
-        } else {
-            throw re;
-        }
-    } finally {
-        this.exitRule();
-    }
-    return localctx;
-};
-
-function ExprContext(parser, parent, invokingState) {
-    if (parent === undefined) {
-        parent = null;
-    }
-    if (invokingState === undefined || invokingState === null) {
-        invokingState = -1;
-    }
-    antlr4.ParserRuleContext.call(this, parent, invokingState);
-    this.parser = parser;
-    this.ruleIndex = ExprParser.RULE_expr;
-    return this;
-}
-
-ExprContext.prototype = Object.create(antlr4.ParserRuleContext.prototype);
-ExprContext.prototype.constructor = ExprContext;
-
-ExprContext.prototype.copyFrom = function (ctx) {
-    antlr4.ParserRuleContext.prototype.copyFrom.call(this, ctx);
-};
-
-function OpExprContext(parser, ctx) {
-    ExprContext.call(this, parser);
-    this.left = null; // ExprContext;
-    this.op = null; // Token;
-    this.right = null; // ExprContext;
-    ExprContext.prototype.copyFrom.call(this, ctx);
-    return this;
-}
-
-OpExprContext.prototype = Object.create(ExprContext.prototype);
-OpExprContext.prototype.constructor = OpExprContext;
-
-ExprParser.OpExprContext = OpExprContext;
-
-OpExprContext.prototype.expr = function (i) {
-    if (i === undefined) {
-        i = null;
-    }
-    if (i === null) {
-        return this.getTypedRuleContexts(ExprContext);
-    } else {
-        return this.getTypedRuleContext(ExprContext, i);
-    }
-};
-OpExprContext.prototype.accept = function (visitor) {
-    if (visitor instanceof ExprVisitor) {
-        return visitor.visitOpExpr(this);
-    } else {
-        return visitor.visitChildren(this);
-    }
-};
-
-function AtomExprContext(parser, ctx) {
-    ExprContext.call(this, parser);
-    ExprContext.prototype.copyFrom.call(this, ctx);
-    return this;
-}
-
-AtomExprContext.prototype = Object.create(ExprContext.prototype);
-AtomExprContext.prototype.constructor = AtomExprContext;
-
-ExprParser.AtomExprContext = AtomExprContext;
-
-AtomExprContext.prototype.INT = function () {
-    return this.getToken(ExprParser.INT, 0);
-};
-AtomExprContext.prototype.accept = function (visitor) {
-    if (visitor instanceof ExprVisitor) {
-        return visitor.visitAtomExpr(this);
-    } else {
-        return visitor.visitChildren(this);
-    }
-};
-
-function ParenExprContext(parser, ctx) {
-    ExprContext.call(this, parser);
-    ExprContext.prototype.copyFrom.call(this, ctx);
-    return this;
-}
-
-ParenExprContext.prototype = Object.create(ExprContext.prototype);
-ParenExprContext.prototype.constructor = ParenExprContext;
-
-ExprParser.ParenExprContext = ParenExprContext;
-
-ParenExprContext.prototype.expr = function () {
-    return this.getTypedRuleContext(ExprContext, 0);
-};
-ParenExprContext.prototype.accept = function (visitor) {
-    if (visitor instanceof ExprVisitor) {
-        return visitor.visitParenExpr(this);
-    } else {
-        return visitor.visitChildren(this);
-    }
-};
-
-function IdExprContext(parser, ctx) {
-    ExprContext.call(this, parser);
-    ExprContext.prototype.copyFrom.call(this, ctx);
-    return this;
-}
-
-IdExprContext.prototype = Object.create(ExprContext.prototype);
-IdExprContext.prototype.constructor = IdExprContext;
-
-ExprParser.IdExprContext = IdExprContext;
-
-IdExprContext.prototype.ID = function () {
-    return this.getToken(ExprParser.ID, 0);
-};
-IdExprContext.prototype.accept = function (visitor) {
-    if (visitor instanceof ExprVisitor) {
-        return visitor.visitIdExpr(this);
-    } else {
-        return visitor.visitChildren(this);
-    }
-};
-
-ExprParser.prototype.expr = function (_p) {
-    if (_p === undefined) {
-        _p = 0;
-    }
-    var _parentctx = this._ctx;
-    var _parentState = this.state;
-    var localctx = new ExprContext(this, this._ctx, _parentState);
-    var _prevctx = localctx;
-    var _startState = 4;
-    this.enterRecursionRule(localctx, 4, ExprParser.RULE_expr, _p);
-    var _la = 0; // Token type
-    try {
-        this.enterOuterAlt(localctx, 1);
-        this.state = 29;
-        this._errHandler.sync(this);
-        switch (this._input.LA(1)) {
-            case ExprParser.T__5:
-                localctx = new ParenExprContext(this, localctx);
-                this._ctx = localctx;
-                _prevctx = localctx;
-
-                this.state = 23;
-                this.match(ExprParser.T__5);
-                this.state = 24;
-                this.expr(0);
-                this.state = 25;
-                this.match(ExprParser.T__6);
-                break;
-            case ExprParser.INT:
-                localctx = new AtomExprContext(this, localctx);
-                this._ctx = localctx;
-                _prevctx = localctx;
-                this.state = 27;
-                this.match(ExprParser.INT);
-                break;
-            case ExprParser.ID:
-                localctx = new IdExprContext(this, localctx);
-                this._ctx = localctx;
-                _prevctx = localctx;
-                this.state = 28;
-                this.match(ExprParser.ID);
-                break;
-            default:
-                throw new antlr4.error.NoViableAltException(this);
-        }
-        this._ctx.stop = this._input.LT(-1);
-        this.state = 39;
-        this._errHandler.sync(this);
-        var _alt = this._interp.adaptivePredict(this._input, 4, this._ctx);
-        while (_alt != 2 && _alt != antlr4.atn.ATN.INVALID_ALT_NUMBER) {
-            if (_alt === 1) {
-                if (this._parseListeners !== null) {
-                    this.triggerExitRuleEvent();
-                }
-                _prevctx = localctx;
-                this.state = 37;
-                this._errHandler.sync(this);
-                var la_ = this._interp.adaptivePredict(this._input, 3, this._ctx);
-                switch (la_) {
-                    case 1:
-                        localctx = new OpExprContext(this, new ExprContext(this, _parentctx, _parentState));
-                        localctx.left = _prevctx;
-                        this.pushNewRecursionContext(localctx, _startState, ExprParser.RULE_expr);
-                        this.state = 31;
-                        if (!this.precpred(this._ctx, 5)) {
-                            throw new antlr4.error.FailedPredicateException(this, "this.precpred(this._ctx, 5)");
-                        }
-                        this.state = 32;
-                        localctx.op = this._input.LT(1);
-                        _la = this._input.LA(1);
-                        if (!(_la === ExprParser.T__1 || _la === ExprParser.T__2)) {
-                            localctx.op = this._errHandler.recoverInline(this);
-                        } else {
-                            this._errHandler.reportMatch(this);
-                            this.consume();
-                        }
-                        this.state = 33;
-                        localctx.right = this.expr(6);
-                        break;
-
-                    case 2:
-                        localctx = new OpExprContext(this, new ExprContext(this, _parentctx, _parentState));
-                        localctx.left = _prevctx;
-                        this.pushNewRecursionContext(localctx, _startState, ExprParser.RULE_expr);
-                        this.state = 34;
-                        if (!this.precpred(this._ctx, 4)) {
-                            throw new antlr4.error.FailedPredicateException(this, "this.precpred(this._ctx, 4)");
-                        }
-                        this.state = 35;
-                        localctx.op = this._input.LT(1);
-                        _la = this._input.LA(1);
-                        if (!(_la === ExprParser.T__3 || _la === ExprParser.T__4)) {
-                            localctx.op = this._errHandler.recoverInline(this);
-                        } else {
-                            this._errHandler.reportMatch(this);
-                            this.consume();
-                        }
-                        this.state = 36;
-                        localctx.right = this.expr(5);
-                        break;
-
-                }
-            }
-            this.state = 41;
-            this._errHandler.sync(this);
-            _alt = this._interp.adaptivePredict(this._input, 4, this._ctx);
-        }
-    } catch (error) {
-        if (error instanceof antlr4.error.RecognitionException) {
-            localctx.exception = error;
-            this._errHandler.reportError(this, error);
-            this._errHandler.recover(this, error);
-        } else {
-            throw error;
-        }
-    } finally {
-        this.unrollRecursionContexts(_parentctx);
-    }
-    return localctx;
-};
-
-ExprParser.prototype.sempred = function (localctx, ruleIndex, predIndex) {
-    switch (ruleIndex) {
-        case 2:
-            return this.expr_sempred(localctx, predIndex);
-        default:
-            throw "No predicate with index:" + ruleIndex;
-    }
-};
-
-ExprParser.prototype.expr_sempred = function (localctx, predIndex) {
-    switch (predIndex) {
-        case 0:
-            return this.precpred(this._ctx, 5);
-        case 1:
-            return this.precpred(this._ctx, 4);
-        default:
-            throw "No predicate with index:" + predIndex;
-    }
-};
-
-exports.ExprParser = ExprParser;
-
-/***/ }),
-/* 54 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-// Generated from lib/Expr.g4 by ANTLR 4.7
-// jshint ignore: start
-var antlr4 = __webpack_require__(18);
-
-// This class defines a complete generic visitor for a parse tree produced by ExprParser.
-
-function ExprVisitor() {
-  antlr4.tree.ParseTreeVisitor.call(this);
-  return this;
-}
-
-ExprVisitor.prototype = Object.create(antlr4.tree.ParseTreeVisitor.prototype);
-ExprVisitor.prototype.constructor = ExprVisitor;
-
-// Visit a parse tree produced by ExprParser#prog.
-ExprVisitor.prototype.visitProg = function (ctx) {
-  return this.visitChildren(ctx);
-};
-
-// Visit a parse tree produced by ExprParser#print.
-ExprVisitor.prototype.visitPrint = function (ctx) {
-  return this.visitChildren(ctx);
-};
-
-// Visit a parse tree produced by ExprParser#assign.
-ExprVisitor.prototype.visitAssign = function (ctx) {
-  return this.visitChildren(ctx);
-};
-
-// Visit a parse tree produced by ExprParser#blank.
-ExprVisitor.prototype.visitBlank = function (ctx) {
-  return this.visitChildren(ctx);
-};
-
-// Visit a parse tree produced by ExprParser#opExpr.
-ExprVisitor.prototype.visitOpExpr = function (ctx) {
-  return this.visitChildren(ctx);
-};
-
-// Visit a parse tree produced by ExprParser#atomExpr.
-ExprVisitor.prototype.visitAtomExpr = function (ctx) {
-  return this.visitChildren(ctx);
-};
-
-// Visit a parse tree produced by ExprParser#parenExpr.
-ExprVisitor.prototype.visitParenExpr = function (ctx) {
-  return this.visitChildren(ctx);
-};
-
-// Visit a parse tree produced by ExprParser#idExpr.
-ExprVisitor.prototype.visitIdExpr = function (ctx) {
-  return this.visitChildren(ctx);
-};
-
-exports.ExprVisitor = ExprVisitor;
-
-/***/ }),
-/* 55 */
+/* 68 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13193,17 +13812,17 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = run;
 
-var _InputStream = __webpack_require__(13);
+var _InputStream = __webpack_require__(12);
 
-var _CommonTokenStream = __webpack_require__(22);
+var _CommonTokenStream = __webpack_require__(18);
 
-var _ErrorStrategy = __webpack_require__(30);
+var _ErrorStrategy = __webpack_require__(21);
 
-var _ExprLexer = __webpack_require__(38);
+var _ExprLexer = __webpack_require__(28);
 
-var _ExprParser = __webpack_require__(53);
+var _ExprParser = __webpack_require__(36);
 
-var _EvalVisitor = __webpack_require__(56);
+var _EvalVisitor = __webpack_require__(69);
 
 var _EvalVisitor2 = _interopRequireDefault(_EvalVisitor);
 
@@ -13227,7 +13846,7 @@ function run(input) {
 }
 
 /***/ }),
-/* 56 */
+/* 69 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13239,7 +13858,7 @@ Object.defineProperty(exports, "__esModule", {
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _ExprVisitor2 = __webpack_require__(54);
+var _ExprVisitor2 = __webpack_require__(37);
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 

@@ -1,0 +1,22 @@
+{
+  "name": "antlr4-cal",
+  "description": "",
+  "main": "lib/index.js",
+  "authors": [
+    "snowcxt <snowcxt@gmail.com>"
+  ],
+  "license": "ISC",
+  "homepage": "https://github.com/snowcxt/antlr4-cal",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "antlr4-ace-ext": "^1.0.0",
+    "ace-builds": "^1.2.8",
+    "ace-worker": "^1.2.3"
+  }
+}

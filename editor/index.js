@@ -1,6 +1,7 @@
 import ace from 'ace';
 import './my-mode';
 import validate from '../lib/validate';
+import run from '../lib/run';
 
 var editor = ace.edit("editor");
 editor.setTheme("ace/theme/chrome");
@@ -25,3 +26,7 @@ editor.getSession().on('change', function () {
         markers.push(session.addMarker(new Range(error.line, error.column, error.line, error.column + error.length), "lint-mark-error", false));
     });
 });
+
+document.getElementById('btnRun').onclick = () => {
+    alert(run(editor.getValue()));
+};

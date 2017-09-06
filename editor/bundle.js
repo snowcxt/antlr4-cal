@@ -8026,6 +8026,10 @@ var _validate = __webpack_require__(35);
 
 var _validate2 = _interopRequireDefault(_validate);
 
+var _run = __webpack_require__(55);
+
+var _run2 = _interopRequireDefault(_run);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var editor = _ace2.default.edit("editor");
@@ -8055,6 +8059,10 @@ editor.getSession().on('change', function () {
         markers.push(session.addMarker(new Range(error.line, error.column, error.line, error.column + error.length), "lint-mark-error", false));
     });
 });
+
+document.getElementById('btnRun').onclick = function () {
+    alert((0, _run2.default)(editor.getValue()));
+};
 
 /***/ }),
 /* 33 */
@@ -13172,6 +13180,138 @@ ExprVisitor.prototype.visitIdExpr = function (ctx) {
 };
 
 exports.ExprVisitor = ExprVisitor;
+
+/***/ }),
+/* 55 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.default = run;
+
+var _InputStream = __webpack_require__(13);
+
+var _CommonTokenStream = __webpack_require__(22);
+
+var _ErrorStrategy = __webpack_require__(30);
+
+var _ExprLexer = __webpack_require__(38);
+
+var _ExprParser = __webpack_require__(53);
+
+var _EvalVisitor = __webpack_require__(56);
+
+var _EvalVisitor2 = _interopRequireDefault(_EvalVisitor);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function run(input) {
+    var chars = new _InputStream.InputStream(input);
+    var lexer = new _ExprLexer.ExprLexer(chars);
+    lexer.removeErrorListeners();
+    var tokens = new _CommonTokenStream.CommonTokenStream(lexer);
+    var parser = new _ExprParser.ExprParser(tokens);
+    parser._errHandler = new _ErrorStrategy.BailErrorStrategy();
+    try {
+        var tree = parser.prog();
+        var results = new _EvalVisitor2.default().visit(tree);
+        return results.pop();
+    } catch (ex) {
+        console.log('invalid input');
+        return false;
+    }
+}
+
+/***/ }),
+/* 56 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _ExprVisitor2 = __webpack_require__(54);
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var EvalVisitor = function (_ExprVisitor) {
+    _inherits(EvalVisitor, _ExprVisitor);
+
+    function EvalVisitor() {
+        _classCallCheck(this, EvalVisitor);
+
+        var _this = _possibleConstructorReturn(this, (EvalVisitor.__proto__ || Object.getPrototypeOf(EvalVisitor)).call(this));
+
+        _this.memory = {};
+        return _this;
+    }
+
+    _createClass(EvalVisitor, [{
+        key: 'visitAssign',
+        value: function visitAssign(ctx) {
+            var id = ctx.ID().getText();
+            var value = this.visit(ctx.expr());
+            this.memory[id] = value;
+            return value;
+        }
+    }, {
+        key: 'visitPrint',
+        value: function visitPrint(ctx) {
+            return this.visit(ctx.expr());
+        }
+    }, {
+        key: 'visitOpExpr',
+        value: function visitOpExpr(ctx) {
+            var left = this.visit(ctx.left);
+            var right = this.visit(ctx.right);
+            var op = ctx.op.text;
+            switch (op) {
+                case '*':
+                    return left * right;
+                case '/':
+                    return left / right;
+                case '+':
+                    return left + right;
+                case '-':
+                    return left - right;
+                default:
+                    throw "Unknown operator " + op;
+            }
+        }
+    }, {
+        key: 'visitAtomExpr',
+        value: function visitAtomExpr(ctx) {
+            return Number(ctx.getText());
+        }
+    }, {
+        key: 'visitParenExpr',
+        value: function visitParenExpr(ctx) {
+            return this.visit(ctx.expr());
+        }
+    }, {
+        key: 'visitIdExpr',
+        value: function visitIdExpr(ctx) {
+            return this.memory[ctx.getText()];
+        }
+    }]);
+
+    return EvalVisitor;
+}(_ExprVisitor2.ExprVisitor);
+
+exports.default = EvalVisitor;
 
 /***/ })
 /******/ ]);

@@ -1,7 +1,7 @@
 grammar Expr;
 prog  : stat+ ;
 stat  : expr NEWLINE                      #print
-      | ID '=' expr NEWLINE                #assign
+      | ID '=' expr NEWLINE               #assign
       | NEWLINE                           #blank
       ;
 expr  : left=expr op=('*'|'/') right=expr #opExpr
@@ -10,7 +10,7 @@ expr  : left=expr op=('*'|'/') right=expr #opExpr
       | INT                               #atomExpr
       | ID                                #idExpr
       ;
-NEWLINE : ';' ;
+NEWLINE : '\r'? '\n';
 INT     : [0-9]+ ;
 ID      : [a-zA-Z]+;
-WS      : [ \t\n\r]+ -> skip;
+WS      : [ \t]+ -> skip;

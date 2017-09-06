@@ -29,7 +29,7 @@ function validateInput() {
 }
 
 var debounced = debounce(validateInput, 500);
-editor.getSession().on('change', debounced);
+session.on('change', debounced);
 
 document.getElementById('btnRun').onclick = () => {
     alert(run(editor.getValue()));

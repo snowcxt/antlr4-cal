@@ -1,6 +1,6 @@
-var path = require('path');
 module.exports = {
     entry: './editor/index.js',
+    devtool: 'source-map',
     output: {
         path: __dirname,
         filename: 'bundle.js'
@@ -15,5 +15,8 @@ module.exports = {
     },
     externals: {
         "ace": true
+    },
+    node: {
+        fs: 'empty'
     }
 };

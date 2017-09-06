@@ -5,15 +5,15 @@ import validate from '../lib/validate';
 import run from '../lib/run';
 
 var editor = ace.edit("editor");
+var session = editor.getSession();
 editor.setTheme("ace/theme/chrome");
-editor.getSession().setMode("ace/mode/my-mode");
+session.setMode("ace/mode/my-mode");
 var Range = ace.require('ace/range').Range;
 
 var markers = [];
 
 function validateInput() {
     var errors = validate(editor.getValue());
-    var session = editor.getSession();
     markers.forEach(marker => session.removeMarker(marker));
     markers = [];
     session.setAnnotations(errors.map(error => ({

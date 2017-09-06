@@ -8776,15 +8776,15 @@ var _run2 = _interopRequireDefault(_run);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var editor = _ace2.default.edit("editor");
+var session = editor.getSession();
 editor.setTheme("ace/theme/chrome");
-editor.getSession().setMode("ace/mode/my-mode");
+session.setMode("ace/mode/my-mode");
 var Range = _ace2.default.require('ace/range').Range;
 
 var markers = [];
 
 function validateInput() {
     var errors = (0, _validate2.default)(editor.getValue());
-    var session = editor.getSession();
     markers.forEach(function (marker) {
         return session.removeMarker(marker);
     });

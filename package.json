@@ -8,6 +8,7 @@
     "start": "nodemon demo.js --exec babel-node",
     "build": "rimraf -rf dist && babel lib -d dist",
     "debug": "nodemon lib/index.js --inspect --debug-brk --exec babel-node",
+    "editor": "./node_modules/.bin/http-server editor",
     "test": "mocha --compilers js:babel-core/register"
   },
   "repository": {
@@ -28,6 +29,7 @@
     "babel-preset-es2015": "^6.24.1",
     "babel-preset-stage-2": "^6.24.1",
     "eslint": "^4.6.1",
+    "http-server": "^0.10.0",
     "mocha": "^3.5.0",
     "nodemon": "^1.11.0",
     "rimraf": "^2.6.1"

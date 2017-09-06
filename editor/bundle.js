@@ -9442,7 +9442,7 @@ var MyErrorListener = function (_ErrorListener) {
         key: 'syntaxError',
         value: function syntaxError(recognizer, offendingSymbol, line, column, text, e) {
             var length = 1,
-                col = column - 1,
+                col = column,
                 start;
             if (e && e.ctx && e.ctx.start) {
                 col = e.ctx.start.column;

@@ -1,4 +1,7 @@
 
+import ace from 'ace';
+import './my-mode';
+
 var editor = ace.edit("editor");
 editor.setTheme("ace/theme/chrome");
 editor.getSession().setMode("ace/mode/my-mode");

@@ -33,5 +33,5 @@ var debounced = debounce(validateInput, 500);
 session.on('change', debounced);
 
 document.getElementById('btnRun').onclick = () => {
-    console.log('results:', run(editor.getValue()));
+    run(editor.getValue()).then(val => alert('result: ' + val));
 };

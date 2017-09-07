@@ -3,7 +3,7 @@ import 'brace/theme/chrome';
 import debounce from 'lodash/debounce';
 import './my-mode';
 import validate from '../lib/validate';
-import run from '../lib/run';
+import run from '../lib/runAsync';
 
 var editor = ace.edit("editor");
 var session = editor.getSession();
@@ -33,5 +33,5 @@ var debounced = debounce(validateInput, 500);
 session.on('change', debounced);
 
 document.getElementById('btnRun').onclick = () => {
-    alert(run(editor.getValue()));
+    console.log('results:', run(editor.getValue()));
 };

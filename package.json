@@ -22,7 +22,9 @@
   },
   "homepage": "https://github.com/snowcxt/antlr4-cal#readme",
   "dependencies": {
-    "antlr4": "^4.7.0"
+    "antlr4": "^4.7.0",
+    "brace": "^0.10.0",
+    "lodash": "^4.17.4"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
@@ -30,7 +32,6 @@
     "babel-preset-es2015": "^6.24.1",
     "babel-preset-stage-2": "^6.24.1",
     "eslint": "^4.6.1",
-    "lodash": "^4.17.3",
     "mocha": "^3.5.0",
     "nodemon": "^1.11.0",
     "rimraf": "^2.6.1",

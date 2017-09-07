@@ -13,9 +13,6 @@ module.exports = {
             }
         ]
     },
-    externals: {
-        "ace": true
-    },
     node: {
         fs: 'empty'
     }

@@ -1,4 +1,5 @@
-import ace from 'ace';
+import ace from 'brace';
+import 'brace/theme/chrome';
 import debounce from 'lodash/debounce';
 import './my-mode';
 import validate from '../lib/validate';
@@ -8,7 +9,7 @@ var editor = ace.edit("editor");
 var session = editor.getSession();
 editor.setTheme("ace/theme/chrome");
 session.setMode("ace/mode/my-mode");
-var Range = ace.require('ace/range').Range;
+var Range = ace.acequire('ace/range').Range;
 
 var markers = [];
 

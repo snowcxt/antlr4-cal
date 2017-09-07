@@ -2,6 +2,10 @@ import assert from 'assert';
 import { run } from '../lib';
 
 describe("arithmetic", function () {
+    it("empty", function () {
+        assert.equal(null, run(''));
+    });
+
     it("simple", function () {
         assert.equal(3, run('1+2'));
     });
@@ -18,7 +22,7 @@ describe("arithmetic", function () {
 
 describe("assign", function () {
     it("1 variable", function () {
-        assert.equal(1, run('a=1\na'));
+        assert.equal(1, run('a=1\na\n\n'));
     });
     it("2 variables", function () {
         assert.equal(-1, run('a=1\nb=2\na-b'));

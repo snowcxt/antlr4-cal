@@ -60,7 +60,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 38);
+/******/ 	return __webpack_require__(__webpack_require__.s = 40);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -3693,8 +3693,8 @@ exports.PredPrediction = PredPrediction;
 //
 
 var Token = __webpack_require__(1).Token;
-__webpack_require__(25);
-__webpack_require__(26);
+__webpack_require__(27);
+__webpack_require__(28);
 
 // Vacuum all input from a string and then treat it like a buffer.
 
@@ -3937,7 +3937,7 @@ exports.ProxyErrorListener = ProxyErrorListener;
 //  uses simplified match() and error recovery mechanisms in the interest of speed.
 
 var Token = __webpack_require__(1).Token;
-var Recognizer = __webpack_require__(27).Recognizer;
+var Recognizer = __webpack_require__(29).Recognizer;
 var CommonTokenFactory = __webpack_require__(53).CommonTokenFactory;
 var RecognitionException = __webpack_require__(3).RecognitionException;
 var LexerNoViableAltException = __webpack_require__(3).LexerNoViableAltException;
@@ -4577,7 +4577,7 @@ RuleContext.prototype.accept = function (visitor) {
 
 //need to manage circular dependencies, so export now
 exports.RuleContext = RuleContext;
-var Trees = __webpack_require__(29).Trees;
+var Trees = __webpack_require__(31).Trees;
 
 // Print out a whole tree, not just a node, in LISP format
 // (root child1 .. childN). Print just a node if this is a leaf.
@@ -4821,9 +4821,9 @@ exports.CommonTokenStream = CommonTokenStream;
  * can be found in the LICENSE.txt file in the project root.
  */
 exports.atn = __webpack_require__(54);
-exports.codepointat = __webpack_require__(25);
+exports.codepointat = __webpack_require__(27);
 exports.dfa = __webpack_require__(60);
-exports.fromcodepoint = __webpack_require__(26);
+exports.fromcodepoint = __webpack_require__(28);
 exports.tree = __webpack_require__(62);
 exports.error = __webpack_require__(63);
 exports.Token = __webpack_require__(1).Token;
@@ -5868,7 +5868,7 @@ module.exports = isObject;
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
-var freeGlobal = __webpack_require__(42);
+var freeGlobal = __webpack_require__(44);
 
 /** Detect free variable `self`. */
 var freeSelf = (typeof self === 'undefined' ? 'undefined' : _typeof(self)) == 'object' && self && self.Object === Object && self;
@@ -5885,6 +5885,40 @@ module.exports = root;
 "use strict";
 
 
+var _Symbol = __webpack_require__(25),
+    getRawTag = __webpack_require__(48),
+    objectToString = __webpack_require__(49);
+
+/** `Object#toString` result references. */
+var nullTag = '[object Null]',
+    undefinedTag = '[object Undefined]';
+
+/** Built-in value references. */
+var symToStringTag = _Symbol ? _Symbol.toStringTag : undefined;
+
+/**
+ * The base implementation of `getTag` without fallbacks for buggy environments.
+ *
+ * @private
+ * @param {*} value The value to query.
+ * @returns {string} Returns the `toStringTag`.
+ */
+function baseGetTag(value) {
+    if (value == null) {
+        return value === undefined ? undefinedTag : nullTag;
+    }
+    return symToStringTag && symToStringTag in Object(value) ? getRawTag(value) : objectToString(value);
+}
+
+module.exports = baseGetTag;
+
+/***/ }),
+/* 25 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
 var root = __webpack_require__(23);
 
 /** Built-in value references. */
@@ -5893,7 +5927,46 @@ var _Symbol = root.Symbol;
 module.exports = _Symbol;
 
 /***/ }),
-/* 25 */
+/* 26 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
+/**
+ * Checks if `value` is object-like. A value is object-like if it's not `null`
+ * and has a `typeof` result of "object".
+ *
+ * @static
+ * @memberOf _
+ * @since 4.0.0
+ * @category Lang
+ * @param {*} value The value to check.
+ * @returns {boolean} Returns `true` if `value` is object-like, else `false`.
+ * @example
+ *
+ * _.isObjectLike({});
+ * // => true
+ *
+ * _.isObjectLike([1, 2, 3]);
+ * // => true
+ *
+ * _.isObjectLike(_.noop);
+ * // => false
+ *
+ * _.isObjectLike(null);
+ * // => false
+ */
+function isObjectLike(value) {
+  return value != null && (typeof value === 'undefined' ? 'undefined' : _typeof(value)) == 'object';
+}
+
+module.exports = isObjectLike;
+
+/***/ }),
+/* 27 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -5958,7 +6031,7 @@ if (!String.prototype.codePointAt) {
 }
 
 /***/ }),
-/* 26 */
+/* 28 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6029,7 +6102,7 @@ if (!String.fromCodePoint) {
 }
 
 /***/ }),
-/* 27 */
+/* 29 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6184,7 +6257,7 @@ Object.defineProperty(Recognizer.prototype, "state", {
 exports.Recognizer = Recognizer;
 
 /***/ }),
-/* 28 */
+/* 30 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6239,7 +6312,7 @@ ExprLexer.prototype.grammarFileName = "Expr.g4";
 exports.ExprLexer = ExprLexer;
 
 /***/ }),
-/* 29 */
+/* 31 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6383,7 +6456,7 @@ Trees.descendants = function (t) {
 exports.Trees = Trees;
 
 /***/ }),
-/* 30 */
+/* 32 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6427,8 +6500,8 @@ var PredicateTransition = Transitions.PredicateTransition;
 var PrecedencePredicateTransition = Transitions.PrecedencePredicateTransition;
 var IntervalSet = __webpack_require__(2).IntervalSet;
 var Interval = __webpack_require__(2).Interval;
-var ATNDeserializationOptions = __webpack_require__(31).ATNDeserializationOptions;
-var LexerActions = __webpack_require__(32);
+var ATNDeserializationOptions = __webpack_require__(33).ATNDeserializationOptions;
+var LexerActions = __webpack_require__(34);
 var LexerActionType = LexerActions.LexerActionType;
 var LexerSkipAction = LexerActions.LexerSkipAction;
 var LexerChannelAction = LexerActions.LexerChannelAction;
@@ -7101,7 +7174,7 @@ ATNDeserializer.prototype.lexerActionFactory = function (type, data1, data2) {
 exports.ATNDeserializer = ATNDeserializer;
 
 /***/ }),
-/* 31 */
+/* 33 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -7134,7 +7207,7 @@ ATNDeserializationOptions.defaultOptions.readOnly = true;
 exports.ATNDeserializationOptions = ATNDeserializationOptions;
 
 /***/ }),
-/* 32 */
+/* 34 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -7501,7 +7574,7 @@ exports.LexerPopModeAction = LexerPopModeAction;
 exports.LexerModeAction = LexerModeAction;
 
 /***/ }),
-/* 33 */
+/* 35 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -7559,7 +7632,7 @@ ATNSimulator.prototype.getCachedContext = function (context) {
 exports.ATNSimulator = ATNSimulator;
 
 /***/ }),
-/* 34 */
+/* 36 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -8132,14 +8205,14 @@ PredictionMode.getSingleViableAlt = function (altsets) {
 exports.PredictionMode = PredictionMode;
 
 /***/ }),
-/* 35 */
+/* 37 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
 /***/ }),
-/* 36 */
+/* 38 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -8148,7 +8221,7 @@ exports.PredictionMode = PredictionMode;
 // Generated from lib/Expr.g4 by ANTLR 4.7
 // jshint ignore: start
 var antlr4 = __webpack_require__(19);
-var ExprVisitor = __webpack_require__(37).ExprVisitor;
+var ExprVisitor = __webpack_require__(39).ExprVisitor;
 
 var grammarFileName = "Expr.g4";
 
@@ -8686,7 +8759,7 @@ ExprParser.prototype.expr_sempred = function (localctx, predIndex) {
 exports.ExprParser = ExprParser;
 
 /***/ }),
-/* 37 */
+/* 39 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -8749,17 +8822,17 @@ ExprVisitor.prototype.visitIdExpr = function (ctx) {
 exports.ExprVisitor = ExprVisitor;
 
 /***/ }),
-/* 38 */
+/* 40 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var _ace = __webpack_require__(39);
+var _ace = __webpack_require__(41);
 
 var _ace2 = _interopRequireDefault(_ace);
 
-var _debounce = __webpack_require__(40);
+var _debounce = __webpack_require__(42);
 
 var _debounce2 = _interopRequireDefault(_debounce);
 
@@ -8811,21 +8884,21 @@ document.getElementById('btnRun').onclick = function () {
 };
 
 /***/ }),
-/* 39 */
+/* 41 */
 /***/ (function(module, exports) {
 
 module.exports = ace;
 
 /***/ }),
-/* 40 */
+/* 42 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
 var isObject = __webpack_require__(22),
-    now = __webpack_require__(41),
-    toNumber = __webpack_require__(44);
+    now = __webpack_require__(43),
+    toNumber = __webpack_require__(46);
 
 /** Error message constants. */
 var FUNC_ERROR_TEXT = 'Expected a function';
@@ -9012,7 +9085,7 @@ function debounce(func, wait, options) {
 module.exports = debounce;
 
 /***/ }),
-/* 41 */
+/* 43 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -9043,7 +9116,7 @@ var now = function now() {
 module.exports = now;
 
 /***/ }),
-/* 42 */
+/* 44 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -9055,10 +9128,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 var freeGlobal = (typeof global === 'undefined' ? 'undefined' : _typeof(global)) == 'object' && global && global.Object === Object && global;
 
 module.exports = freeGlobal;
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(43)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(45)))
 
 /***/ }),
-/* 43 */
+/* 45 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -9088,14 +9161,14 @@ try {
 module.exports = g;
 
 /***/ }),
-/* 44 */
+/* 46 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
 var isObject = __webpack_require__(22),
-    isSymbol = __webpack_require__(45);
+    isSymbol = __webpack_require__(47);
 
 /** Used as references for various `Number` constants. */
 var NAN = 0 / 0;
@@ -9160,7 +9233,7 @@ function toNumber(value) {
 module.exports = toNumber;
 
 /***/ }),
-/* 45 */
+/* 47 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -9168,8 +9241,8 @@ module.exports = toNumber;
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
-var baseGetTag = __webpack_require__(46),
-    isObjectLike = __webpack_require__(49);
+var baseGetTag = __webpack_require__(24),
+    isObjectLike = __webpack_require__(26);
 
 /** `Object#toString` result references. */
 var symbolTag = '[object Symbol]';
@@ -9198,47 +9271,13 @@ function isSymbol(value) {
 module.exports = isSymbol;
 
 /***/ }),
-/* 46 */
+/* 48 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var _Symbol = __webpack_require__(24),
-    getRawTag = __webpack_require__(47),
-    objectToString = __webpack_require__(48);
-
-/** `Object#toString` result references. */
-var nullTag = '[object Null]',
-    undefinedTag = '[object Undefined]';
-
-/** Built-in value references. */
-var symToStringTag = _Symbol ? _Symbol.toStringTag : undefined;
-
-/**
- * The base implementation of `getTag` without fallbacks for buggy environments.
- *
- * @private
- * @param {*} value The value to query.
- * @returns {string} Returns the `toStringTag`.
- */
-function baseGetTag(value) {
-    if (value == null) {
-        return value === undefined ? undefinedTag : nullTag;
-    }
-    return symToStringTag && symToStringTag in Object(value) ? getRawTag(value) : objectToString(value);
-}
-
-module.exports = baseGetTag;
-
-/***/ }),
-/* 47 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var _Symbol = __webpack_require__(24);
+var _Symbol = __webpack_require__(25);
 
 /** Used for built-in method references. */
 var objectProto = Object.prototype;
@@ -9286,7 +9325,7 @@ function getRawTag(value) {
 module.exports = getRawTag;
 
 /***/ }),
-/* 48 */
+/* 49 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -9314,45 +9353,6 @@ function objectToString(value) {
 }
 
 module.exports = objectToString;
-
-/***/ }),
-/* 49 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
-
-/**
- * Checks if `value` is object-like. A value is object-like if it's not `null`
- * and has a `typeof` result of "object".
- *
- * @static
- * @memberOf _
- * @since 4.0.0
- * @category Lang
- * @param {*} value The value to check.
- * @returns {boolean} Returns `true` if `value` is object-like, else `false`.
- * @example
- *
- * _.isObjectLike({});
- * // => true
- *
- * _.isObjectLike([1, 2, 3]);
- * // => true
- *
- * _.isObjectLike(_.noop);
- * // => false
- *
- * _.isObjectLike(null);
- * // => false
- */
-function isObjectLike(value) {
-  return value != null && (typeof value === 'undefined' ? 'undefined' : _typeof(value)) == 'object';
-}
-
-module.exports = isObjectLike;
 
 /***/ }),
 /* 50 */
@@ -9416,9 +9416,9 @@ var _CommonTokenStream = __webpack_require__(18);
 
 var _ErrorListener2 = __webpack_require__(13);
 
-var _ExprLexer = __webpack_require__(28);
+var _ExprLexer = __webpack_require__(30);
 
-var _ExprParser = __webpack_require__(36);
+var _ExprParser = __webpack_require__(38);
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -9954,10 +9954,10 @@ exports.CommonTokenFactory = CommonTokenFactory;
  */
 
 exports.ATN = __webpack_require__(8).ATN;
-exports.ATNDeserializer = __webpack_require__(30).ATNDeserializer;
+exports.ATNDeserializer = __webpack_require__(32).ATNDeserializer;
 exports.LexerATNSimulator = __webpack_require__(57).LexerATNSimulator;
 exports.ParserATNSimulator = __webpack_require__(59).ParserATNSimulator;
-exports.PredictionMode = __webpack_require__(34).PredictionMode;
+exports.PredictionMode = __webpack_require__(36).PredictionMode;
 
 /***/ }),
 /* 55 */
@@ -10218,7 +10218,7 @@ exports.ATNType = ATNType;
 var Token = __webpack_require__(1).Token;
 var Lexer = __webpack_require__(14).Lexer;
 var ATN = __webpack_require__(8).ATN;
-var ATNSimulator = __webpack_require__(33).ATNSimulator;
+var ATNSimulator = __webpack_require__(35).ATNSimulator;
 var DFAState = __webpack_require__(11).DFAState;
 var ATNConfigSet = __webpack_require__(9).ATNConfigSet;
 var OrderedATNConfigSet = __webpack_require__(9).OrderedATNConfigSet;
@@ -10839,7 +10839,7 @@ exports.LexerATNSimulator = LexerATNSimulator;
 // not cause bloating of the {@link DFA} created for the lexer.</p>
 
 var hashStuff = __webpack_require__(0).hashStuff;
-var LexerIndexedCustomAction = __webpack_require__(32).LexerIndexedCustomAction;
+var LexerIndexedCustomAction = __webpack_require__(34).LexerIndexedCustomAction;
 
 function LexerActionExecutor(lexerActions) {
 	this.lexerActions = lexerActions === null ? [] : lexerActions;
@@ -11241,8 +11241,8 @@ var ATNConfigSet = __webpack_require__(9).ATNConfigSet;
 var Token = __webpack_require__(1).Token;
 var DFAState = __webpack_require__(11).DFAState;
 var PredPrediction = __webpack_require__(11).PredPrediction;
-var ATNSimulator = __webpack_require__(33).ATNSimulator;
-var PredictionMode = __webpack_require__(34).PredictionMode;
+var ATNSimulator = __webpack_require__(35).ATNSimulator;
+var PredictionMode = __webpack_require__(36).PredictionMode;
 var RuleContext = __webpack_require__(16).RuleContext;
 var ParserRuleContext = __webpack_require__(20).ParserRuleContext;
 var SemanticContext = __webpack_require__(10).SemanticContext;
@@ -12875,7 +12875,7 @@ exports.DFA = DFA;
  */
 
 var Tree = __webpack_require__(5);
-exports.Trees = __webpack_require__(29).Trees;
+exports.Trees = __webpack_require__(31).Trees;
 exports.RuleNode = Tree.RuleNode;
 exports.ParseTreeListener = Tree.ParseTreeListener;
 exports.ParseTreeVisitor = Tree.ParseTreeVisitor;
@@ -13024,7 +13024,7 @@ exports.DiagnosticErrorListener = DiagnosticErrorListener;
 var InputStream = __webpack_require__(12).InputStream;
 
 var isNodeJs = typeof window === 'undefined' && typeof importScripts === 'undefined';
-var fs = isNodeJs ? __webpack_require__(35) : null;
+var fs = isNodeJs ? __webpack_require__(37) : null;
 
 // Utility functions to create InputStreams from various sources.
 //
@@ -13106,7 +13106,7 @@ exports.CharStreams = CharStreams;
 //
 var InputStream = __webpack_require__(12).InputStream;
 var isNodeJs = typeof window === 'undefined' && typeof importScripts === 'undefined';
-var fs = isNodeJs ? __webpack_require__(35) : null;
+var fs = isNodeJs ? __webpack_require__(37) : null;
 
 function FileStream(fileName, decodeToUnicodeCodePoints) {
 	var data = fs.readFileSync(fileName, "utf8");
@@ -13134,10 +13134,10 @@ exports.FileStream = FileStream;
 
 var Token = __webpack_require__(1).Token;
 var ParseTreeListener = __webpack_require__(5).ParseTreeListener;
-var Recognizer = __webpack_require__(27).Recognizer;
+var Recognizer = __webpack_require__(29).Recognizer;
 var DefaultErrorStrategy = __webpack_require__(21).DefaultErrorStrategy;
-var ATNDeserializer = __webpack_require__(30).ATNDeserializer;
-var ATNDeserializationOptions = __webpack_require__(31).ATNDeserializationOptions;
+var ATNDeserializer = __webpack_require__(32).ATNDeserializer;
+var ATNDeserializationOptions = __webpack_require__(33).ATNDeserializationOptions;
 var TerminalNode = __webpack_require__(5).TerminalNode;
 var ErrorNode = __webpack_require__(5).ErrorNode;
 
@@ -13812,17 +13812,21 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = run;
 
+var _isNumber = __webpack_require__(69);
+
+var _isNumber2 = _interopRequireDefault(_isNumber);
+
 var _InputStream = __webpack_require__(12);
 
 var _CommonTokenStream = __webpack_require__(18);
 
 var _ErrorStrategy = __webpack_require__(21);
 
-var _ExprLexer = __webpack_require__(28);
+var _ExprLexer = __webpack_require__(30);
 
-var _ExprParser = __webpack_require__(36);
+var _ExprParser = __webpack_require__(38);
 
-var _EvalVisitor = __webpack_require__(69);
+var _EvalVisitor = __webpack_require__(70);
 
 var _EvalVisitor2 = _interopRequireDefault(_EvalVisitor);
 
@@ -13838,7 +13842,14 @@ function run(input) {
     try {
         var tree = parser.prog();
         var results = new _EvalVisitor2.default().visit(tree);
-        return results.pop();
+        while (results.length > 0) {
+            var val = results.pop();
+            if ((0, _isNumber2.default)(val)) {
+                return val;
+            }
+        }
+
+        return null;
     } catch (ex) {
         console.error(ex);
         return false;
@@ -13852,13 +13863,58 @@ function run(input) {
 "use strict";
 
 
+var baseGetTag = __webpack_require__(24),
+    isObjectLike = __webpack_require__(26);
+
+/** `Object#toString` result references. */
+var numberTag = '[object Number]';
+
+/**
+ * Checks if `value` is classified as a `Number` primitive or object.
+ *
+ * **Note:** To exclude `Infinity`, `-Infinity`, and `NaN`, which are
+ * classified as numbers, use the `_.isFinite` method.
+ *
+ * @static
+ * @memberOf _
+ * @since 0.1.0
+ * @category Lang
+ * @param {*} value The value to check.
+ * @returns {boolean} Returns `true` if `value` is a number, else `false`.
+ * @example
+ *
+ * _.isNumber(3);
+ * // => true
+ *
+ * _.isNumber(Number.MIN_VALUE);
+ * // => true
+ *
+ * _.isNumber(Infinity);
+ * // => true
+ *
+ * _.isNumber('3');
+ * // => false
+ */
+function isNumber(value) {
+    return typeof value == 'number' || isObjectLike(value) && baseGetTag(value) == numberTag;
+}
+
+module.exports = isNumber;
+
+/***/ }),
+/* 70 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _ExprVisitor2 = __webpack_require__(37);
+var _ExprVisitor2 = __webpack_require__(39);
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
